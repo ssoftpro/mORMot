@@ -16,19 +16,6 @@ namespace js {
     extern bool gCanUseExtraThreads;
 }
 
-JS_PUBLIC_API(SMInterface*) SM_GetInterface()
-{
-    static SMInterface interface = {
-        /*version*/ (MOZJS_MAJOR_VERSION << 16) + 1,
-
-        /*GlobalObjectTraceHook*/ &JS_GlobalObjectTraceHook,
-
-        /*ReportErrorASCII*/ &JS_ReportErrorASCII,
-        /*ReportErrorNumberUC(*/ &JS_ReportErrorNumberUC
-    };
-    return &interface;
-}
-
 JS_PUBLIC_API(bool) SM_Initialize(void)
 {
     return JS_Init();
