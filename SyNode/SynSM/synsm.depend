@@ -534,13 +534,10 @@
 	"js/RootingAPI.h"
 	"js/Value.h"
 
-1578844481 source:/home/softpro/Sources/mORMot/SyNode/SynSM/synsm.cpp
+1578856422 source:/home/softpro/Sources/mORMot/SyNode/SynSM/synsm.cpp
 	"stdafx.h"
 	"synsm.h"
-	<jsapi.h>
-	<jsfriendapi.h>
 	<js/Date.h>
-	<js/Initialization.h>
 	<mozilla/Assertions.h>
 
 1577368814 /home/softpro/Sources/mORMot/SyNode/SynSM/include/stdafx.h
@@ -550,9 +547,10 @@
 1577368814 /home/softpro/Sources/mORMot/SyNode/SynSM/include/targetver.h
 	<SDKDDKVer.h>
 
-1578845405 /home/softpro/Sources/mORMot/SyNode/SynSM/include/synsm.h
+1578856801 /home/softpro/Sources/mORMot/SyNode/SynSM/include/synsm.h
 	<jsapi.h>
 	<jsfriendapi.h>
+	<js/Initialization.h>
 
 1576328875 /home/softpro/Sources/gecko-inst/debug/include/jsapi.h
 	"mozilla/AlreadyAddRefed.h"
