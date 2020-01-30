@@ -276,7 +276,7 @@ begin
       Result.asJSString := cx.NewJSString(tmp);
     end;
     tkClass: begin
-       new(FInst);
+       new(FInst); // TODO: Check for probable memory leek
        obj := PI.GetObjProp(Instance^.instance);
        if obj <> nil then
          Result := FInst.CreateForObj(cx, obj, TSMSimpleRTTIProtoObject, Instance.Proto)
@@ -364,7 +364,7 @@ begin
       end else
         FRTTIPropsCache[idx].DeterministicIndex := -1;
 
-      FJSProps[idx].flags := JSPROP_ENUMERATE or JSPROP_PERMANENT or JSPROP_SHARED;
+      FJSProps[idx].flags := JSPROP_ENUMERATE or JSPROP_PERMANENT{ or JSPROP_SHARED};
       FJSProps[idx].Name := PCChar(RTTIPropsCache[idx].jsName);
   //    FJSProps[idx].tinyid := idx;
       FJSProps[idx].setter.native.info := nil;

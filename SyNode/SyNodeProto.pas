@@ -257,25 +257,24 @@ const
 // Magic constant for TSMObjectRecord
   SMObjectRecordMagic: Word = 43857;
   jsdef_classOpts: JSClassOps = (
-    addProperty:        nil;
-    delProperty:        nil;
-    getProperty:        nil;
-    setProperty:        nil;
-    enumerate:          nil;
-    resolve:            nil;
-    mayResolve:         nil;
-    finalize:           SMCustomObjectDestroy; // call then JS object GC}
-    call:               nil;
-    hasInstance:        nil;
-    construct:          SMCustomObjectConstruct;
-    trace:              nil;
+    addProperty:  nil;
+    delProperty:  nil;
+    enumerate:    nil;
+    newEnumerate: nil;
+    resolve:      nil;
+    mayResolve:   nil;
+    finalize:     SMCustomObjectDestroy; // call then JS object GC}
+    call:         nil;
+    hasInstance:  nil;
+    construct:    SMCustomObjectConstruct;
+    trace:        nil;
   );
   jsdef_class: JSClass = (
     name: '';
     flags: uint32(JSCLASS_HAS_PRIVATE) or JSCLASS_FOREGROUND_FINALIZE;
     cOps: @jsdef_classOpts;
     reserved: (nil, nil, nil)
-    );
+  );
 // create object var obj = new TMyObject();
 function SMCustomObjectConstruct(cx: PJSContext; argc: uintN; var vp: JSArgRec): Boolean; cdecl;
 var
@@ -697,7 +696,7 @@ begin
   FRTTIPropsCache[idx].isReadOnly := not Assigned(aSetter);
   FRTTIPropsCache[idx].DeterministicIndex := -1;
 
-  FJSProps[idx].flags := JSPROP_ENUMERATE or JSPROP_PERMANENT or JSPROP_SHARED;
+  FJSProps[idx].flags := JSPROP_ENUMERATE or JSPROP_PERMANENT{ or JSPROP_SHARED};
   FJSProps[idx].Name := PCChar(RTTIPropsCache[idx].jsName);
   FJSProps[idx].setter.native.info := nil;
   FJSProps[idx].setter.native.op := aSetter;

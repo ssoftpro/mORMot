@@ -534,11 +534,12 @@
 	"js/RootingAPI.h"
 	"js/Value.h"
 
-1578856422 source:/home/softpro/Sources/mORMot/SyNode/SynSM/synsm.cpp
+1579545294 source:/home/softpro/Sources/mORMot/SyNode/SynSM/synsm.cpp
 	"stdafx.h"
 	"synsm.h"
-	<js/Date.h>
 	<mozilla/Assertions.h>
+	<js/SourceText.h>
+	<js/CharacterEncoding.h>
 
 1577368814 /home/softpro/Sources/mORMot/SyNode/SynSM/include/stdafx.h
 	"targetver.h"
@@ -547,46 +548,62 @@
 1577368814 /home/softpro/Sources/mORMot/SyNode/SynSM/include/targetver.h
 	<SDKDDKVer.h>
 
-1578856801 /home/softpro/Sources/mORMot/SyNode/SynSM/include/synsm.h
+1580041525 /home/softpro/Sources/mORMot/SyNode/SynSM/include/synsm.h
 	<jsapi.h>
 	<jsfriendapi.h>
 	<js/Initialization.h>
+	<js/ArrayBuffer.h>
+	<js/SharedArrayBuffer.h>
+	<js/Date.h>
+	<js/CompilationAndEvaluation.h>
+	<js/ContextOptions.h>
+	<js/Warnings.h>
+	<js/JSON.h>
 
-1576328875 /home/softpro/Sources/gecko-inst/debug/include/jsapi.h
+1578916138 /home/softpro/Sources/gecko-inst/debug/include/jsapi.h
 	"mozilla/AlreadyAddRefed.h"
 	"mozilla/FloatingPoint.h"
 	"mozilla/MemoryReporting.h"
 	"mozilla/Range.h"
 	"mozilla/RangedPtr.h"
-	"mozilla/RefCounted.h"
 	"mozilla/RefPtr.h"
+	"mozilla/Utf8.h"
 	"mozilla/Variant.h"
 	<stdarg.h>
 	<stddef.h>
 	<stdint.h>
 	<stdio.h>
-	"jsalloc.h"
 	"jspubtd.h"
+	"js/AllocPolicy.h"
 	"js/CallArgs.h"
 	"js/CharacterEncoding.h"
 	"js/Class.h"
+	"js/CompileOptions.h"
+	"js/ErrorReport.h"
 	"js/GCVector.h"
 	"js/HashTable.h"
 	"js/Id.h"
+	"js/OffThreadScriptCompilation.h"
 	"js/Principals.h"
+	"js/PropertyDescriptor.h"
+	"js/PropertySpec.h"
 	"js/Realm.h"
+	"js/RealmOptions.h"
+	"js/RefCounted.h"
 	"js/RootingAPI.h"
 	"js/TracingAPI.h"
+	"js/Transcoding.h"
+	"js/UniquePtr.h"
 	"js/Utility.h"
 	"js/Value.h"
 	"js/Vector.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/AlreadyAddRefed.h
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozilla/AlreadyAddRefed.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Move.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Assertions.h
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Assertions.h
 	"mozilla/Attributes.h"
 	"mozilla/Compiler.h"
 	"mozilla/Likely.h"
@@ -601,46 +618,51 @@
 	<android/log.h>
 	"mozilla/TypeTraits.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Attributes.h
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Attributes.h
 	"mozilla/Compiler.h"
 	<sal.h>
-	"mozilla/Compiler.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Compiler.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Compiler.h
 	<cstddef>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Likely.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Likely.h
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/MacroArgs.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/MacroArgs.h
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/StaticAnalysisFunctions.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/StaticAnalysisFunctions.h
 	<stdbool.h>
 
-1577370571 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Types.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Types.h
 	<stddef.h>
 	<stdint.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/TypeTraits.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/TypeTraits.h
 	"mozilla/Types.h"
 	<wchar.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Move.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Move.h
 	"mozilla/TypeTraits.h"
+	<utility>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/FloatingPoint.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/FloatingPoint.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Casting.h"
 	"mozilla/MathAlgorithms.h"
+	"mozilla/MemoryChecking.h"
 	"mozilla/Types.h"
+	"mozilla/TypeTraits.h"
+	<limits>
 	<stdint.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Casting.h
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Casting.h
 	"mozilla/Assertions.h"
 	"mozilla/TypeTraits.h"
+	<cstring>
 	<limits.h>
+	<type_traits>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/MathAlgorithms.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/MathAlgorithms.h
 	"mozilla/Assertions.h"
 	"mozilla/TypeTraits.h"
 	<cmath>
@@ -651,43 +673,47 @@
 1547201625 /home/softpro/Sources/gecko-inst/debug/include/mozilla/MemoryReporting.h
 	<stddef.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Range.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Range.h
 	"mozilla/RangedPtr.h"
 	"mozilla/TypeTraits.h"
+	"mozilla/Span.h"
 	<stddef.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/RangedPtr.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/RangedPtr.h
 	"mozilla/ArrayUtils.h"
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	<stdint.h>
+	<cstddef>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/ArrayUtils.h
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozilla/ArrayUtils.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
+	<algorithm>
 	<stddef.h>
 	"mozilla/Alignment.h"
 	"mozilla/Array.h"
 	"mozilla/EnumeratedArray.h"
 	"mozilla/TypeTraits.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Alignment.h
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Alignment.h
 	"mozilla/Attributes.h"
 	<stddef.h>
 	<stdint.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Array.h
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Array.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Move.h"
 	"mozilla/ReverseIterator.h"
+	<ostream>
 	<stddef.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/ReverseIterator.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/ReverseIterator.h
 	"mozilla/Attributes.h"
 	"mozilla/TypeTraits.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/EnumeratedArray.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/EnumeratedArray.h
 	"mozilla/Array.h"
 	"mozilla/Move.h"
 
@@ -701,48 +727,53 @@
 	"mozilla/TypeTraits.h"
 	"nsXPCOM.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Atomics.h
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Atomics.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Compiler.h"
+	"mozilla/RecordReplay.h"
 	"mozilla/TypeTraits.h"
-	<stdint.h>
 	<atomic>
+	<stdint.h>
 
 1547201625 /home/softpro/Sources/gecko-inst/debug/include/mozilla/RefCountType.h
 	<stdint.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/RefPtr.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/RefPtr.h
 	"mozilla/AlreadyAddRefed.h"
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
+	"mozilla/DbgMacro.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Variant.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Variant.h
 	<new>
 	<stdint.h>
-	"mozilla/Alignment.h"
 	"mozilla/Assertions.h"
-	"mozilla/Move.h"
+	"mozilla/FunctionTypeTraits.h"
+	"mozilla/HashFunctions.h"
+	"mozilla/OperatorNewExtensions.h"
+	"mozilla/TemplateLib.h"
 	"mozilla/TypeTraits.h"
+	<utility>
 
 1575821818 /home/softpro/Sources/gecko-inst/debug/include/jsalloc.h
 	"js/TypeDecls.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/TypeDecls.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/TypeDecls.h
 	<stddef.h>
 	<stdint.h>
 	"js-config.h"
+	"jstypes.h"
 
-1577371529 /home/softpro/Sources/gecko-inst/debug/include/js-config.h
+1578916700 /home/softpro/Sources/gecko-inst/debug/include/js-config.h
 
-1577370535 /home/softpro/Sources/gecko-inst/debug/include/js/Utility.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Utility.h
 	"mozilla/Assertions.h"
 	"mozilla/Atomics.h"
 	"mozilla/Attributes.h"
 	"mozilla/Compiler.h"
 	"mozilla/Move.h"
-	"mozilla/Scoped.h"
 	"mozilla/TemplateLib.h"
 	"mozilla/UniquePtr.h"
 	<stdlib.h>
@@ -750,6 +781,7 @@
 	<execinfo.h>
 	<stdio.h>
 	"jstypes.h"
+	"mozmemory.h"
 	"jscustomallocator.h"
 	<new>
 
@@ -759,17 +791,17 @@
 	"mozilla/GuardObjects.h"
 	"mozilla/Move.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/GuardObjects.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/GuardObjects.h
 	"mozilla/Assertions.h"
 	"mozilla/Move.h"
 	"mozilla/Types.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/TemplateLib.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/TemplateLib.h
 	<limits.h>
 	<stddef.h>
 	"mozilla/TypeTraits.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/UniquePtr.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/UniquePtr.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Compiler.h"
@@ -777,25 +809,23 @@
 	"mozilla/Pair.h"
 	"mozilla/TypeTraits.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Pair.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Pair.h
 	"mozilla/Attributes.h"
 	"mozilla/Move.h"
 	"mozilla/TypeTraits.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/jstypes.h
+1578916372 /home/softpro/Sources/gecko-inst/debug/include/jstypes.h
 	"mozilla/Attributes.h"
 	"mozilla/Casting.h"
 	"mozilla/Types.h"
 	"js-config.h"
-	"jsversion.h"
-	"jscpucfg.h"
 
 1575821818 /home/softpro/Sources/gecko-inst/debug/include/jsversion.h
 
 1575821818 /home/softpro/Sources/gecko-inst/debug/include/jscpucfg.h
 	"mozilla/EndianUtils.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/EndianUtils.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/EndianUtils.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Compiler.h"
@@ -805,40 +835,38 @@
 	<string.h>
 	<stdlib.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/DebugOnly.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/DebugOnly.h
 	"mozilla/Attributes.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/jspubtd.h
-	"mozilla/Assertions.h"
-	"mozilla/EnumeratedArray.h"
-	"mozilla/LinkedList.h"
-	"mozilla/PodOperations.h"
-	"jsprototypes.h"
+1578916138 /home/softpro/Sources/gecko-inst/debug/include/jspubtd.h
 	"jstypes.h"
+	"js/ProtoKey.h"
+	"js/Result.h"
 	"js/TraceKind.h"
 	"js/TypeDecls.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/LinkedList.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/LinkedList.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/MemoryReporting.h"
 	"mozilla/Move.h"
 	"mozilla/RefPtr.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/PodOperations.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/PodOperations.h
 	"mozilla/Array.h"
 	"mozilla/ArrayUtils.h"
 	"mozilla/Attributes.h"
+	<algorithm>
 	<stdint.h>
 	<string.h>
 
 1575821818 /home/softpro/Sources/gecko-inst/debug/include/jsprototypes.h
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/TraceKind.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/TraceKind.h
 	"mozilla/UniquePtr.h"
 	"js/TypeDecls.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/CallArgs.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/CallArgs.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/TypeTraits.h"
@@ -846,7 +874,7 @@
 	"js/RootingAPI.h"
 	"js/Value.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/RootingAPI.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/RootingAPI.h
 	"mozilla/Attributes.h"
 	"mozilla/DebugOnly.h"
 	"mozilla/GuardObjects.h"
@@ -856,22 +884,25 @@
 	<type_traits>
 	"jspubtd.h"
 	"js/GCAnnotations.h"
-	"js/GCAPI.h"
 	"js/GCPolicyAPI.h"
 	"js/HeapAPI.h"
+	"js/ProfilingStack.h"
+	"js/Realm.h"
 	"js/TypeDecls.h"
 	"js/UniquePtr.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/GCAnnotations.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/GCAnnotations.h
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/GCAPI.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/GCAPI.h
+	"mozilla/TimeStamp.h"
 	"mozilla/Vector.h"
 	"js/GCAnnotations.h"
-	"js/HeapAPI.h"
+	"js/TypeDecls.h"
 	"js/UniquePtr.h"
+	"js/Utility.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Vector.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Vector.h
 	"mozilla/Alignment.h"
 	"mozilla/AllocPolicy.h"
 	"mozilla/ArrayUtils.h"
@@ -886,76 +917,73 @@
 	"mozilla/TypeTraits.h"
 	<new>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/AllocPolicy.h
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozilla/AllocPolicy.h
 	"mozilla/Attributes.h"
+	"mozilla/Assertions.h"
 	"mozilla/TemplateLib.h"
 	<stddef.h>
 	<stdlib.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/OperatorNewExtensions.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/OperatorNewExtensions.h
 	"mozilla/Assertions.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/ReentrancyGuard.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/ReentrancyGuard.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/GuardObjects.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/HeapAPI.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/HeapAPI.h
 	<limits.h>
 	"jspubtd.h"
 	"js/TraceKind.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/UniquePtr.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/UniquePtr.h
 	"mozilla/UniquePtr.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/GCPolicyAPI.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/GCPolicyAPI.h
+	"mozilla/Maybe.h"
 	"mozilla/UniquePtr.h"
 	"js/TraceKind.h"
 	"js/TracingAPI.h"
+	"js/TypeDecls.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/TracingAPI.h
-	"jsalloc.h"
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/TracingAPI.h
+	"js/AllocPolicy.h"
 	"js/HashTable.h"
 	"js/HeapAPI.h"
 	"js/TraceKind.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/HashTable.h
-	"mozilla/Alignment.h"
-	"mozilla/Assertions.h"
-	"mozilla/Attributes.h"
-	"mozilla/Casting.h"
-	"mozilla/HashFunctions.h"
-	"mozilla/MemoryReporting.h"
-	"mozilla/Move.h"
-	"mozilla/Opaque.h"
-	"mozilla/PodOperations.h"
-	"mozilla/ReentrancyGuard.h"
-	"mozilla/TemplateLib.h"
-	"mozilla/TypeTraits.h"
-	"mozilla/UniquePtr.h"
-	"js/Utility.h"
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/HashTable.h
+	"mozilla/HashTable.h"
+	"jstypes.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/HashFunctions.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/HashFunctions.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Char16.h"
 	"mozilla/MathAlgorithms.h"
 	"mozilla/Types.h"
+	"mozilla/WrappingOperations.h"
 	<stdint.h>
+	<type_traits>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Char16.h
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Char16.h
 	<cstdint>
+	"mozilla/Attributes.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Opaque.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Opaque.h
 	"mozilla/TypeTraits.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/Value.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Value.h
 	"mozilla/Attributes.h"
 	"mozilla/Casting.h"
+	"mozilla/Compiler.h"
+	"mozilla/EndianUtils.h"
 	"mozilla/FloatingPoint.h"
 	"mozilla/Likely.h"
+	"mozilla/Maybe.h"
 	<limits>
 	"js-config.h"
 	"jstypes.h"
@@ -963,39 +991,41 @@
 	"js/RootingAPI.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/CharacterEncoding.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/CharacterEncoding.h
 	"mozilla/Range.h"
 	"js/TypeDecls.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/Class.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Class.h
+	"mozilla/Attributes.h"
 	"jstypes.h"
 	"js/CallArgs.h"
 	"js/Id.h"
 	"js/TypeDecls.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/Id.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Id.h
+	"mozilla/Maybe.h"
 	"jstypes.h"
 	"js/HeapAPI.h"
 	"js/RootingAPI.h"
 	"js/TypeDecls.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/GCVector.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/GCVector.h
 	"mozilla/Vector.h"
 	"js/GCPolicyAPI.h"
 	"js/RootingAPI.h"
 	"js/TracingAPI.h"
 	"js/Vector.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/Vector.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Vector.h
 	"mozilla/Vector.h"
+	"js/TypeDecls.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/Principals.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Principals.h
 	"mozilla/Atomics.h"
 	<stdint.h>
 	"jspubtd.h"
-	"js/StructuredClone.h"
 
 1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/StructuredClone.h
 	"mozilla/Attributes.h"
@@ -1018,99 +1048,121 @@
 	"mozilla/Vector.h"
 	<string.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Maybe.h
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Maybe.h
 	"mozilla/Alignment.h"
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
+	"mozilla/MemoryChecking.h"
 	"mozilla/Move.h"
+	"mozilla/OperatorNewExtensions.h"
+	"mozilla/Poison.h"
 	"mozilla/TypeTraits.h"
 	<new>
+	<ostream>
 	<type_traits>
 
 1575821822 /home/softpro/Sources/gecko-inst/debug/include/mozilla/ScopeExit.h
 	"mozilla/GuardObjects.h"
 	"mozilla/Move.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/Realm.h
-	"jstypes.h"
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Realm.h
+	"jspubtd.h"
+	"js/GCPolicyAPI.h"
+	"js/TypeDecls.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/jsfriendapi.h
+1578916138 /home/softpro/Sources/gecko-inst/debug/include/jsfriendapi.h
 	"mozilla/Atomics.h"
 	"mozilla/Casting.h"
 	"mozilla/Maybe.h"
 	"mozilla/MemoryReporting.h"
 	"mozilla/UniquePtr.h"
-	"jsapi.h"
-	"jsbytecode.h"
 	"jspubtd.h"
 	"js/CallArgs.h"
 	"js/CallNonGenericMethod.h"
+	"js/CharacterEncoding.h"
 	"js/Class.h"
+	"js/ErrorReport.h"
+	"js/HeapAPI.h"
+	"js/StableStringChars.h"
+	"js/TypeDecls.h"
 	"js/Utility.h"
 	"js.msg"
 
 1575821818 /home/softpro/Sources/gecko-inst/debug/include/jsbytecode.h
 	<stdint.h>
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/CallNonGenericMethod.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/CallNonGenericMethod.h
 	"jstypes.h"
 	"js/CallArgs.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js.msg
+1578916138 /home/softpro/Sources/gecko-inst/debug/include/js.msg
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/Date.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Date.h
 	"mozilla/FloatingPoint.h"
 	"mozilla/MathAlgorithms.h"
 	"js/Conversions.h"
+	"js/RootingAPI.h"
 	"js/Value.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/Conversions.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Conversions.h
 	"mozilla/Casting.h"
+	"mozilla/Compiler.h"
 	"mozilla/FloatingPoint.h"
+	"mozilla/MathAlgorithms.h"
 	"mozilla/TypeTraits.h"
+	"mozilla/WrappingOperations.h"
 	<math.h>
 	"jspubtd.h"
 	"js/RootingAPI.h"
 	"js/Value.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/debug/include/js/Initialization.h
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Initialization.h
 	"jstypes.h"
 
-1576328875 /home/softpro/Sources/gecko-inst/release/include/jsapi.h
+1578916138 /home/softpro/Sources/gecko-inst/release/include/jsapi.h
 	"mozilla/AlreadyAddRefed.h"
 	"mozilla/FloatingPoint.h"
 	"mozilla/MemoryReporting.h"
 	"mozilla/Range.h"
 	"mozilla/RangedPtr.h"
-	"mozilla/RefCounted.h"
 	"mozilla/RefPtr.h"
+	"mozilla/Utf8.h"
 	"mozilla/Variant.h"
 	<stdarg.h>
 	<stddef.h>
 	<stdint.h>
 	<stdio.h>
-	"jsalloc.h"
 	"jspubtd.h"
+	"js/AllocPolicy.h"
 	"js/CallArgs.h"
 	"js/CharacterEncoding.h"
 	"js/Class.h"
+	"js/CompileOptions.h"
+	"js/ErrorReport.h"
 	"js/GCVector.h"
 	"js/HashTable.h"
 	"js/Id.h"
+	"js/OffThreadScriptCompilation.h"
 	"js/Principals.h"
+	"js/PropertyDescriptor.h"
+	"js/PropertySpec.h"
 	"js/Realm.h"
+	"js/RealmOptions.h"
+	"js/RefCounted.h"
 	"js/RootingAPI.h"
 	"js/TracingAPI.h"
+	"js/Transcoding.h"
+	"js/UniquePtr.h"
 	"js/Utility.h"
 	"js/Value.h"
 	"js/Vector.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/AlreadyAddRefed.h
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozilla/AlreadyAddRefed.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Move.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Assertions.h
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozilla/Assertions.h
 	"mozilla/Attributes.h"
 	"mozilla/Compiler.h"
 	"mozilla/Likely.h"
@@ -1125,46 +1177,51 @@
 	<android/log.h>
 	"mozilla/TypeTraits.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Attributes.h
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozilla/Attributes.h
 	"mozilla/Compiler.h"
 	<sal.h>
-	"mozilla/Compiler.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Compiler.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Compiler.h
 	<cstddef>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Likely.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Likely.h
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/MacroArgs.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/MacroArgs.h
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/StaticAnalysisFunctions.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/StaticAnalysisFunctions.h
 	<stdbool.h>
 
-1577370571 /home/softpro/Sources/gecko-inst/release/include/mozilla/Types.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Types.h
 	<stddef.h>
 	<stdint.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/TypeTraits.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/TypeTraits.h
 	"mozilla/Types.h"
 	<wchar.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Move.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Move.h
 	"mozilla/TypeTraits.h"
+	<utility>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/FloatingPoint.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/FloatingPoint.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Casting.h"
 	"mozilla/MathAlgorithms.h"
+	"mozilla/MemoryChecking.h"
 	"mozilla/Types.h"
+	"mozilla/TypeTraits.h"
+	<limits>
 	<stdint.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Casting.h
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozilla/Casting.h
 	"mozilla/Assertions.h"
 	"mozilla/TypeTraits.h"
+	<cstring>
 	<limits.h>
+	<type_traits>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/MathAlgorithms.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/MathAlgorithms.h
 	"mozilla/Assertions.h"
 	"mozilla/TypeTraits.h"
 	<cmath>
@@ -1175,43 +1232,47 @@
 1547201625 /home/softpro/Sources/gecko-inst/release/include/mozilla/MemoryReporting.h
 	<stddef.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Range.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Range.h
 	"mozilla/RangedPtr.h"
 	"mozilla/TypeTraits.h"
+	"mozilla/Span.h"
 	<stddef.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/RangedPtr.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/RangedPtr.h
 	"mozilla/ArrayUtils.h"
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	<stdint.h>
+	<cstddef>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/ArrayUtils.h
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozilla/ArrayUtils.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
+	<algorithm>
 	<stddef.h>
 	"mozilla/Alignment.h"
 	"mozilla/Array.h"
 	"mozilla/EnumeratedArray.h"
 	"mozilla/TypeTraits.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Alignment.h
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozilla/Alignment.h
 	"mozilla/Attributes.h"
 	<stddef.h>
 	<stdint.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Array.h
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozilla/Array.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Move.h"
 	"mozilla/ReverseIterator.h"
+	<ostream>
 	<stddef.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/ReverseIterator.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/ReverseIterator.h
 	"mozilla/Attributes.h"
 	"mozilla/TypeTraits.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/EnumeratedArray.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/EnumeratedArray.h
 	"mozilla/Array.h"
 	"mozilla/Move.h"
 
@@ -1225,48 +1286,53 @@
 	"mozilla/TypeTraits.h"
 	"nsXPCOM.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Atomics.h
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozilla/Atomics.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Compiler.h"
+	"mozilla/RecordReplay.h"
 	"mozilla/TypeTraits.h"
-	<stdint.h>
 	<atomic>
+	<stdint.h>
 
 1547201625 /home/softpro/Sources/gecko-inst/release/include/mozilla/RefCountType.h
 	<stdint.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/RefPtr.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/RefPtr.h
 	"mozilla/AlreadyAddRefed.h"
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
+	"mozilla/DbgMacro.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Variant.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Variant.h
 	<new>
 	<stdint.h>
-	"mozilla/Alignment.h"
 	"mozilla/Assertions.h"
-	"mozilla/Move.h"
+	"mozilla/FunctionTypeTraits.h"
+	"mozilla/HashFunctions.h"
+	"mozilla/OperatorNewExtensions.h"
+	"mozilla/TemplateLib.h"
 	"mozilla/TypeTraits.h"
+	<utility>
 
 1575821818 /home/softpro/Sources/gecko-inst/release/include/jsalloc.h
 	"js/TypeDecls.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/TypeDecls.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/TypeDecls.h
 	<stddef.h>
 	<stdint.h>
 	"js-config.h"
+	"jstypes.h"
 
-1577370647 /home/softpro/Sources/gecko-inst/release/include/js-config.h
+1579343492 /home/softpro/Sources/gecko-inst/release/include/js-config.h
 
-1577370535 /home/softpro/Sources/gecko-inst/release/include/js/Utility.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Utility.h
 	"mozilla/Assertions.h"
 	"mozilla/Atomics.h"
 	"mozilla/Attributes.h"
 	"mozilla/Compiler.h"
 	"mozilla/Move.h"
-	"mozilla/Scoped.h"
 	"mozilla/TemplateLib.h"
 	"mozilla/UniquePtr.h"
 	<stdlib.h>
@@ -1274,6 +1340,7 @@
 	<execinfo.h>
 	<stdio.h>
 	"jstypes.h"
+	"mozmemory.h"
 	"jscustomallocator.h"
 	<new>
 
@@ -1283,17 +1350,17 @@
 	"mozilla/GuardObjects.h"
 	"mozilla/Move.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/GuardObjects.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/GuardObjects.h
 	"mozilla/Assertions.h"
 	"mozilla/Move.h"
 	"mozilla/Types.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/TemplateLib.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/TemplateLib.h
 	<limits.h>
 	<stddef.h>
 	"mozilla/TypeTraits.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/UniquePtr.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/UniquePtr.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Compiler.h"
@@ -1301,25 +1368,23 @@
 	"mozilla/Pair.h"
 	"mozilla/TypeTraits.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Pair.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Pair.h
 	"mozilla/Attributes.h"
 	"mozilla/Move.h"
 	"mozilla/TypeTraits.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/jstypes.h
+1578916372 /home/softpro/Sources/gecko-inst/release/include/jstypes.h
 	"mozilla/Attributes.h"
 	"mozilla/Casting.h"
 	"mozilla/Types.h"
 	"js-config.h"
-	"jsversion.h"
-	"jscpucfg.h"
 
 1575821818 /home/softpro/Sources/gecko-inst/release/include/jsversion.h
 
 1575821818 /home/softpro/Sources/gecko-inst/release/include/jscpucfg.h
 	"mozilla/EndianUtils.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/EndianUtils.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/EndianUtils.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Compiler.h"
@@ -1329,40 +1394,38 @@
 	<string.h>
 	<stdlib.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/DebugOnly.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/DebugOnly.h
 	"mozilla/Attributes.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/jspubtd.h
-	"mozilla/Assertions.h"
-	"mozilla/EnumeratedArray.h"
-	"mozilla/LinkedList.h"
-	"mozilla/PodOperations.h"
-	"jsprototypes.h"
+1578916138 /home/softpro/Sources/gecko-inst/release/include/jspubtd.h
 	"jstypes.h"
+	"js/ProtoKey.h"
+	"js/Result.h"
 	"js/TraceKind.h"
 	"js/TypeDecls.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/LinkedList.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/LinkedList.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/MemoryReporting.h"
 	"mozilla/Move.h"
 	"mozilla/RefPtr.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/PodOperations.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/PodOperations.h
 	"mozilla/Array.h"
 	"mozilla/ArrayUtils.h"
 	"mozilla/Attributes.h"
+	<algorithm>
 	<stdint.h>
 	<string.h>
 
 1575821818 /home/softpro/Sources/gecko-inst/release/include/jsprototypes.h
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/TraceKind.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/TraceKind.h
 	"mozilla/UniquePtr.h"
 	"js/TypeDecls.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/CallArgs.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/CallArgs.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/TypeTraits.h"
@@ -1370,7 +1433,7 @@
 	"js/RootingAPI.h"
 	"js/Value.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/RootingAPI.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/RootingAPI.h
 	"mozilla/Attributes.h"
 	"mozilla/DebugOnly.h"
 	"mozilla/GuardObjects.h"
@@ -1380,22 +1443,25 @@
 	<type_traits>
 	"jspubtd.h"
 	"js/GCAnnotations.h"
-	"js/GCAPI.h"
 	"js/GCPolicyAPI.h"
 	"js/HeapAPI.h"
+	"js/ProfilingStack.h"
+	"js/Realm.h"
 	"js/TypeDecls.h"
 	"js/UniquePtr.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/GCAnnotations.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/GCAnnotations.h
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/GCAPI.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/GCAPI.h
+	"mozilla/TimeStamp.h"
 	"mozilla/Vector.h"
 	"js/GCAnnotations.h"
-	"js/HeapAPI.h"
+	"js/TypeDecls.h"
 	"js/UniquePtr.h"
+	"js/Utility.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Vector.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Vector.h
 	"mozilla/Alignment.h"
 	"mozilla/AllocPolicy.h"
 	"mozilla/ArrayUtils.h"
@@ -1410,76 +1476,73 @@
 	"mozilla/TypeTraits.h"
 	<new>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/AllocPolicy.h
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozilla/AllocPolicy.h
 	"mozilla/Attributes.h"
+	"mozilla/Assertions.h"
 	"mozilla/TemplateLib.h"
 	<stddef.h>
 	<stdlib.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/OperatorNewExtensions.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/OperatorNewExtensions.h
 	"mozilla/Assertions.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/ReentrancyGuard.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/ReentrancyGuard.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/GuardObjects.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/HeapAPI.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/HeapAPI.h
 	<limits.h>
 	"jspubtd.h"
 	"js/TraceKind.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/UniquePtr.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/UniquePtr.h
 	"mozilla/UniquePtr.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/GCPolicyAPI.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/GCPolicyAPI.h
+	"mozilla/Maybe.h"
 	"mozilla/UniquePtr.h"
 	"js/TraceKind.h"
 	"js/TracingAPI.h"
+	"js/TypeDecls.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/TracingAPI.h
-	"jsalloc.h"
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/TracingAPI.h
+	"js/AllocPolicy.h"
 	"js/HashTable.h"
 	"js/HeapAPI.h"
 	"js/TraceKind.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/HashTable.h
-	"mozilla/Alignment.h"
-	"mozilla/Assertions.h"
-	"mozilla/Attributes.h"
-	"mozilla/Casting.h"
-	"mozilla/HashFunctions.h"
-	"mozilla/MemoryReporting.h"
-	"mozilla/Move.h"
-	"mozilla/Opaque.h"
-	"mozilla/PodOperations.h"
-	"mozilla/ReentrancyGuard.h"
-	"mozilla/TemplateLib.h"
-	"mozilla/TypeTraits.h"
-	"mozilla/UniquePtr.h"
-	"js/Utility.h"
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/HashTable.h
+	"mozilla/HashTable.h"
+	"jstypes.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/HashFunctions.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/HashFunctions.h
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
 	"mozilla/Char16.h"
 	"mozilla/MathAlgorithms.h"
 	"mozilla/Types.h"
+	"mozilla/WrappingOperations.h"
 	<stdint.h>
+	<type_traits>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Char16.h
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozilla/Char16.h
 	<cstdint>
+	"mozilla/Attributes.h"
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Opaque.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Opaque.h
 	"mozilla/TypeTraits.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/Value.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Value.h
 	"mozilla/Attributes.h"
 	"mozilla/Casting.h"
+	"mozilla/Compiler.h"
+	"mozilla/EndianUtils.h"
 	"mozilla/FloatingPoint.h"
 	"mozilla/Likely.h"
+	"mozilla/Maybe.h"
 	<limits>
 	"js-config.h"
 	"jstypes.h"
@@ -1487,39 +1550,41 @@
 	"js/RootingAPI.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/CharacterEncoding.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/CharacterEncoding.h
 	"mozilla/Range.h"
 	"js/TypeDecls.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/Class.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Class.h
+	"mozilla/Attributes.h"
 	"jstypes.h"
 	"js/CallArgs.h"
 	"js/Id.h"
 	"js/TypeDecls.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/Id.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Id.h
+	"mozilla/Maybe.h"
 	"jstypes.h"
 	"js/HeapAPI.h"
 	"js/RootingAPI.h"
 	"js/TypeDecls.h"
 	"js/Utility.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/GCVector.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/GCVector.h
 	"mozilla/Vector.h"
 	"js/GCPolicyAPI.h"
 	"js/RootingAPI.h"
 	"js/TracingAPI.h"
 	"js/Vector.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/Vector.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Vector.h
 	"mozilla/Vector.h"
+	"js/TypeDecls.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/Principals.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Principals.h
 	"mozilla/Atomics.h"
 	<stdint.h>
 	"jspubtd.h"
-	"js/StructuredClone.h"
 
 1575821818 /home/softpro/Sources/gecko-inst/release/include/js/StructuredClone.h
 	"mozilla/Attributes.h"
@@ -1542,61 +1607,1415 @@
 	"mozilla/Vector.h"
 	<string.h>
 
-1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/Maybe.h
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Maybe.h
 	"mozilla/Alignment.h"
 	"mozilla/Assertions.h"
 	"mozilla/Attributes.h"
+	"mozilla/MemoryChecking.h"
 	"mozilla/Move.h"
+	"mozilla/OperatorNewExtensions.h"
+	"mozilla/Poison.h"
 	"mozilla/TypeTraits.h"
 	<new>
+	<ostream>
 	<type_traits>
 
 1575821822 /home/softpro/Sources/gecko-inst/release/include/mozilla/ScopeExit.h
 	"mozilla/GuardObjects.h"
 	"mozilla/Move.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/Realm.h
-	"jstypes.h"
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Realm.h
+	"jspubtd.h"
+	"js/GCPolicyAPI.h"
+	"js/TypeDecls.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/jsfriendapi.h
+1578916138 /home/softpro/Sources/gecko-inst/release/include/jsfriendapi.h
 	"mozilla/Atomics.h"
 	"mozilla/Casting.h"
 	"mozilla/Maybe.h"
 	"mozilla/MemoryReporting.h"
 	"mozilla/UniquePtr.h"
-	"jsapi.h"
-	"jsbytecode.h"
 	"jspubtd.h"
 	"js/CallArgs.h"
 	"js/CallNonGenericMethod.h"
+	"js/CharacterEncoding.h"
 	"js/Class.h"
+	"js/ErrorReport.h"
+	"js/HeapAPI.h"
+	"js/StableStringChars.h"
+	"js/TypeDecls.h"
 	"js/Utility.h"
 	"js.msg"
 
 1575821818 /home/softpro/Sources/gecko-inst/release/include/jsbytecode.h
 	<stdint.h>
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/CallNonGenericMethod.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/CallNonGenericMethod.h
 	"jstypes.h"
 	"js/CallArgs.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js.msg
+1578916138 /home/softpro/Sources/gecko-inst/release/include/js.msg
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/Date.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Date.h
 	"mozilla/FloatingPoint.h"
 	"mozilla/MathAlgorithms.h"
 	"js/Conversions.h"
+	"js/RootingAPI.h"
 	"js/Value.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/Conversions.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Conversions.h
 	"mozilla/Casting.h"
+	"mozilla/Compiler.h"
 	"mozilla/FloatingPoint.h"
+	"mozilla/MathAlgorithms.h"
 	"mozilla/TypeTraits.h"
+	"mozilla/WrappingOperations.h"
 	<math.h>
 	"jspubtd.h"
 	"js/RootingAPI.h"
 	"js/Value.h"
 
-1575821818 /home/softpro/Sources/gecko-inst/release/include/js/Initialization.h
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Initialization.h
 	"jstypes.h"
+
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/MemoryChecking.h
+	"valgrind/memcheck.h"
+	<stddef.h>
+	"mozilla/Attributes.h"
+	"mozilla/Types.h"
+	<stddef.h>
+	"mozilla/Types.h"
+
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Span.h
+	"mozilla/Array.h"
+	"mozilla/Assertions.h"
+	"mozilla/Casting.h"
+	"mozilla/IntegerTypeTraits.h"
+	"mozilla/Move.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/UniquePtr.h"
+	<algorithm>
+	<array>
+	<cstring>
+	<iterator>
+
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/IntegerTypeTraits.h
+	"mozilla/TypeTraits.h"
+	<stdint.h>
+
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/DbgMacro.h
+	"mozilla/MacroForEach.h"
+	"mozilla/Span.h"
+	<stdio.h>
+	<sstream>
+	<android/log.h>
+
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/MacroForEach.h
+	"mozilla/MacroArgs.h"
+
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Utf8.h
+	"mozilla/Casting.h"
+	"mozilla/Likely.h"
+	"mozilla/Maybe.h"
+	"mozilla/TextUtils.h"
+	"mozilla/Types.h"
+	<limits.h>
+	<stddef.h>
+	<stdint.h>
+
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Poison.h
+	"mozilla/Assertions.h"
+	"mozilla/Types.h"
+	<stdint.h>
+	<string.h>
+
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/TextUtils.h
+	"mozilla/Assertions.h"
+	"mozilla/TypeTraits.h"
+
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/FunctionTypeTraits.h
+	<tuple>
+
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/WrappingOperations.h
+	"mozilla/Attributes.h"
+	"mozilla/TypeTraits.h"
+	<limits.h>
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/ProtoKey.h
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Result.h
+	"mozilla/Result.h"
+
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/Result.h
+	"mozilla/Alignment.h"
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Types.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/Variant.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/AllocPolicy.h
+	"js/TypeDecls.h"
+	"js/Utility.h"
+
+1578916152 /home/softpro/Sources/gecko-inst/debug/include/mozilla/RecordReplay.h
+	"mozilla/Attributes.h"
+	"mozilla/GuardObjects.h"
+	"mozilla/TemplateLib.h"
+	"mozilla/Types.h"
+	"mozilla/Utf8.h"
+	<functional>
+	<stdarg.h>
+
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozmemory.h
+	"mozmemory_wrap.h"
+	"mozilla/Attributes.h"
+	"mozilla/Types.h"
+	"mozjemalloc_types.h"
+	"malloc_decls.h"
+	"malloc_decls.h"
+
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozmemory_wrap.h
+	"mozilla/Types.h"
+
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/mozjemalloc_types.h
+	<crtdefs.h>
+	<stddef.h>
+	<stdbool.h>
+
+1578916151 /home/softpro/Sources/gecko-inst/debug/include/malloc_decls.h
+	"mozjemalloc_types.h"
+
+1578916373 /home/softpro/Sources/gecko-inst/debug/include/mozilla/HashTable.h
+	"mozilla/AllocPolicy.h"
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Casting.h"
+	"mozilla/HashFunctions.h"
+	"mozilla/MathAlgorithms.h"
+	"mozilla/Maybe.h"
+	"mozilla/MemoryChecking.h"
+	"mozilla/MemoryReporting.h"
+	"mozilla/Move.h"
+	"mozilla/Opaque.h"
+	"mozilla/OperatorNewExtensions.h"
+	"mozilla/PodOperations.h"
+	"mozilla/ReentrancyGuard.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/UniquePtr.h"
+
+1578916372 /home/softpro/Sources/gecko-inst/debug/include/js/ProfilingStack.h
+	<algorithm>
+	<stdint.h>
+	"jstypes.h"
+	"js/ProfilingCategory.h"
+	"js/TypeDecls.h"
+	"js/Utility.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/ProfilingCategory.h
+	"jstypes.h"
+
+1578916154 /home/softpro/Sources/gecko-inst/debug/include/mozilla/TimeStamp.h
+	<stdint.h>
+	<algorithm>
+	<ostream>
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/FloatingPoint.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/Types.h"
+	"TimeStamp_windows.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/CompileOptions.h
+	"mozilla/Attributes.h"
+	"mozilla/MemoryReporting.h"
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/ErrorReport.h
+	"mozilla/Assertions.h"
+	<iterator>
+	<stddef.h>
+	<stdint.h>
+	<string.h>
+	"jstypes.h"
+	"js/AllocPolicy.h"
+	"js/CharacterEncoding.h"
+	"js/UniquePtr.h"
+	"js/Vector.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/OffThreadScriptCompilation.h
+	"mozilla/Range.h"
+	"mozilla/Vector.h"
+	<stddef.h>
+	"jstypes.h"
+	"js/CompileOptions.h"
+	"js/GCVector.h"
+	"js/Transcoding.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Transcoding.h
+	"mozilla/Range.h"
+	"mozilla/Vector.h"
+	<stddef.h>
+	<stdint.h>
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/PropertyDescriptor.h
+	"mozilla/Assertions.h"
+	<stdint.h>
+	"jstypes.h"
+	"js/Class.h"
+	"js/RootingAPI.h"
+	"js/Value.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/PropertySpec.h
+	"mozilla/Assertions.h"
+	<stddef.h>
+	<stdint.h>
+	<type_traits>
+	"jstypes.h"
+	"js/CallArgs.h"
+	"js/PropertyDescriptor.h"
+	"js/RootingAPI.h"
+	"js/Symbol.h"
+	"js/Value.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Symbol.h
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/RealmOptions.h
+	"mozilla/Assertions.h"
+	"jstypes.h"
+	"js/Class.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/RefCounted.h
+	"mozilla/Atomics.h"
+	"mozilla/RefCountType.h"
+	"js/Utility.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/StableStringChars.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Maybe.h"
+	"mozilla/Range.h"
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/HeapAPI.h"
+	"js/RootingAPI.h"
+	"js/TypeDecls.h"
+	"js/Vector.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/ArrayBuffer.h
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/GCAPI.h"
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/SharedArrayBuffer.h
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/GCAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/CompilationAndEvaluation.h
+	"mozilla/Utf8.h"
+	<stddef.h>
+	<stdio.h>
+	"jstypes.h"
+	"js/CompileOptions.h"
+	"js/RootingAPI.h"
+	"js/Value.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/ContextOptions.h
+	"jstypes.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/Warnings.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"jstypes.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/JSON.h
+	<stdint.h>
+	"jstypes.h"
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/debug/include/js/SourceText.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Likely.h"
+	"mozilla/Utf8.h"
+	<stddef.h>
+	<stdint.h>
+	<type_traits>
+	"js/UniquePtr.h"
+	"js/Utility.h"
+
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/MemoryChecking.h
+	"valgrind/memcheck.h"
+	<stddef.h>
+	"mozilla/Attributes.h"
+	"mozilla/Types.h"
+	<stddef.h>
+	"mozilla/Types.h"
+
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Span.h
+	"mozilla/Array.h"
+	"mozilla/Assertions.h"
+	"mozilla/Casting.h"
+	"mozilla/IntegerTypeTraits.h"
+	"mozilla/Move.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/UniquePtr.h"
+	<algorithm>
+	<array>
+	<cstring>
+	<iterator>
+
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/IntegerTypeTraits.h
+	"mozilla/TypeTraits.h"
+	<stdint.h>
+
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/DbgMacro.h
+	"mozilla/MacroForEach.h"
+	"mozilla/Span.h"
+	<stdio.h>
+	<sstream>
+	<android/log.h>
+
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/MacroForEach.h
+	"mozilla/MacroArgs.h"
+
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Utf8.h
+	"mozilla/Casting.h"
+	"mozilla/Likely.h"
+	"mozilla/Maybe.h"
+	"mozilla/TextUtils.h"
+	"mozilla/Types.h"
+	<limits.h>
+	<stddef.h>
+	<stdint.h>
+
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Poison.h
+	"mozilla/Assertions.h"
+	"mozilla/Types.h"
+	<stdint.h>
+	<string.h>
+
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/TextUtils.h
+	"mozilla/Assertions.h"
+	"mozilla/TypeTraits.h"
+
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/FunctionTypeTraits.h
+	<tuple>
+
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/WrappingOperations.h
+	"mozilla/Attributes.h"
+	"mozilla/TypeTraits.h"
+	<limits.h>
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/ProtoKey.h
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Result.h
+	"mozilla/Result.h"
+
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/Result.h
+	"mozilla/Alignment.h"
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Types.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/Variant.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/AllocPolicy.h
+	"js/TypeDecls.h"
+	"js/Utility.h"
+
+1578916152 /home/softpro/Sources/gecko-inst/release/include/mozilla/RecordReplay.h
+	"mozilla/Attributes.h"
+	"mozilla/GuardObjects.h"
+	"mozilla/TemplateLib.h"
+	"mozilla/Types.h"
+	"mozilla/Utf8.h"
+	<functional>
+	<stdarg.h>
+
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozmemory.h
+	"mozmemory_wrap.h"
+	"mozilla/Attributes.h"
+	"mozilla/Types.h"
+	"mozjemalloc_types.h"
+	"malloc_decls.h"
+	"malloc_decls.h"
+
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozmemory_wrap.h
+	"mozilla/Types.h"
+
+1578916151 /home/softpro/Sources/gecko-inst/release/include/mozjemalloc_types.h
+	<crtdefs.h>
+	<stddef.h>
+	<stdbool.h>
+
+1578916151 /home/softpro/Sources/gecko-inst/release/include/malloc_decls.h
+	"mozjemalloc_types.h"
+
+1578916373 /home/softpro/Sources/gecko-inst/release/include/mozilla/HashTable.h
+	"mozilla/AllocPolicy.h"
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Casting.h"
+	"mozilla/HashFunctions.h"
+	"mozilla/MathAlgorithms.h"
+	"mozilla/Maybe.h"
+	"mozilla/MemoryChecking.h"
+	"mozilla/MemoryReporting.h"
+	"mozilla/Move.h"
+	"mozilla/Opaque.h"
+	"mozilla/OperatorNewExtensions.h"
+	"mozilla/PodOperations.h"
+	"mozilla/ReentrancyGuard.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/UniquePtr.h"
+
+1578916372 /home/softpro/Sources/gecko-inst/release/include/js/ProfilingStack.h
+	<algorithm>
+	<stdint.h>
+	"jstypes.h"
+	"js/ProfilingCategory.h"
+	"js/TypeDecls.h"
+	"js/Utility.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/ProfilingCategory.h
+	"jstypes.h"
+
+1578916154 /home/softpro/Sources/gecko-inst/release/include/mozilla/TimeStamp.h
+	<stdint.h>
+	<algorithm>
+	<ostream>
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/FloatingPoint.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/Types.h"
+	"TimeStamp_windows.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/CompileOptions.h
+	"mozilla/Attributes.h"
+	"mozilla/MemoryReporting.h"
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/ErrorReport.h
+	"mozilla/Assertions.h"
+	<iterator>
+	<stddef.h>
+	<stdint.h>
+	<string.h>
+	"jstypes.h"
+	"js/AllocPolicy.h"
+	"js/CharacterEncoding.h"
+	"js/UniquePtr.h"
+	"js/Vector.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/OffThreadScriptCompilation.h
+	"mozilla/Range.h"
+	"mozilla/Vector.h"
+	<stddef.h>
+	"jstypes.h"
+	"js/CompileOptions.h"
+	"js/GCVector.h"
+	"js/Transcoding.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Transcoding.h
+	"mozilla/Range.h"
+	"mozilla/Vector.h"
+	<stddef.h>
+	<stdint.h>
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/PropertyDescriptor.h
+	"mozilla/Assertions.h"
+	<stdint.h>
+	"jstypes.h"
+	"js/Class.h"
+	"js/RootingAPI.h"
+	"js/Value.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/PropertySpec.h
+	"mozilla/Assertions.h"
+	<stddef.h>
+	<stdint.h>
+	<type_traits>
+	"jstypes.h"
+	"js/CallArgs.h"
+	"js/PropertyDescriptor.h"
+	"js/RootingAPI.h"
+	"js/Symbol.h"
+	"js/Value.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Symbol.h
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/RealmOptions.h
+	"mozilla/Assertions.h"
+	"jstypes.h"
+	"js/Class.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/RefCounted.h
+	"mozilla/Atomics.h"
+	"mozilla/RefCountType.h"
+	"js/Utility.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/StableStringChars.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Maybe.h"
+	"mozilla/Range.h"
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/HeapAPI.h"
+	"js/RootingAPI.h"
+	"js/TypeDecls.h"
+	"js/Vector.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/ArrayBuffer.h
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/GCAPI.h"
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/SharedArrayBuffer.h
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/GCAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/CompilationAndEvaluation.h
+	"mozilla/Utf8.h"
+	<stddef.h>
+	<stdio.h>
+	"jstypes.h"
+	"js/CompileOptions.h"
+	"js/RootingAPI.h"
+	"js/Value.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/ContextOptions.h
+	"jstypes.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/Warnings.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"jstypes.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/JSON.h
+	<stdint.h>
+	"jstypes.h"
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-inst/release/include/js/SourceText.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Likely.h"
+	"mozilla/Utf8.h"
+	<stddef.h>
+	<stdint.h>
+	<type_traits>
+	"js/UniquePtr.h"
+	"js/Utility.h"
+
+1578916138 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/jsapi.h
+	"mozilla/AlreadyAddRefed.h"
+	"mozilla/FloatingPoint.h"
+	"mozilla/MemoryReporting.h"
+	"mozilla/Range.h"
+	"mozilla/RangedPtr.h"
+	"mozilla/RefPtr.h"
+	"mozilla/Utf8.h"
+	"mozilla/Variant.h"
+	<stdarg.h>
+	<stddef.h>
+	<stdint.h>
+	<stdio.h>
+	"jspubtd.h"
+	"js/AllocPolicy.h"
+	"js/CallArgs.h"
+	"js/CharacterEncoding.h"
+	"js/Class.h"
+	"js/CompileOptions.h"
+	"js/ErrorReport.h"
+	"js/GCVector.h"
+	"js/HashTable.h"
+	"js/Id.h"
+	"js/OffThreadScriptCompilation.h"
+	"js/Principals.h"
+	"js/PropertyDescriptor.h"
+	"js/PropertySpec.h"
+	"js/Realm.h"
+	"js/RealmOptions.h"
+	"js/RefCounted.h"
+	"js/RootingAPI.h"
+	"js/TracingAPI.h"
+	"js/Transcoding.h"
+	"js/UniquePtr.h"
+	"js/Utility.h"
+	"js/Value.h"
+	"js/Vector.h"
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/AlreadyAddRefed.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Move.h"
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Assertions.h
+	"mozilla/Attributes.h"
+	"mozilla/Compiler.h"
+	"mozilla/Likely.h"
+	"mozilla/MacroArgs.h"
+	"mozilla/StaticAnalysisFunctions.h"
+	"mozilla/Types.h"
+	"nsTraceRefcnt.h"
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	<signal.h>
+	<android/log.h>
+	"mozilla/TypeTraits.h"
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Attributes.h
+	"mozilla/Compiler.h"
+	<sal.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Compiler.h
+	<cstddef>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Likely.h
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/MacroArgs.h
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/StaticAnalysisFunctions.h
+	<stdbool.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Types.h
+	<stddef.h>
+	<stdint.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/TypeTraits.h
+	"mozilla/Types.h"
+	<wchar.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Move.h
+	"mozilla/TypeTraits.h"
+	<utility>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/FloatingPoint.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Casting.h"
+	"mozilla/MathAlgorithms.h"
+	"mozilla/MemoryChecking.h"
+	"mozilla/Types.h"
+	"mozilla/TypeTraits.h"
+	<limits>
+	<stdint.h>
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Casting.h
+	"mozilla/Assertions.h"
+	"mozilla/TypeTraits.h"
+	<cstring>
+	<limits.h>
+	<type_traits>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/MathAlgorithms.h
+	"mozilla/Assertions.h"
+	"mozilla/TypeTraits.h"
+	<cmath>
+	<limits.h>
+	<stdint.h>
+	<intrin.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/MemoryChecking.h
+	"valgrind/memcheck.h"
+	<stddef.h>
+	"mozilla/Attributes.h"
+	"mozilla/Types.h"
+	<stddef.h>
+	"mozilla/Types.h"
+
+1547201625 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/MemoryReporting.h
+	<stddef.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Range.h
+	"mozilla/RangedPtr.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/Span.h"
+	<stddef.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/RangedPtr.h
+	"mozilla/ArrayUtils.h"
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	<stdint.h>
+	<cstddef>
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/ArrayUtils.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	<algorithm>
+	<stddef.h>
+	"mozilla/Alignment.h"
+	"mozilla/Array.h"
+	"mozilla/EnumeratedArray.h"
+	"mozilla/TypeTraits.h"
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Alignment.h
+	"mozilla/Attributes.h"
+	<stddef.h>
+	<stdint.h>
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Array.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Move.h"
+	"mozilla/ReverseIterator.h"
+	<ostream>
+	<stddef.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/ReverseIterator.h
+	"mozilla/Attributes.h"
+	"mozilla/TypeTraits.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/EnumeratedArray.h
+	"mozilla/Array.h"
+	"mozilla/Move.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Span.h
+	"mozilla/Array.h"
+	"mozilla/Assertions.h"
+	"mozilla/Casting.h"
+	"mozilla/IntegerTypeTraits.h"
+	"mozilla/Move.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/UniquePtr.h"
+	<algorithm>
+	<array>
+	<cstring>
+	<iterator>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/IntegerTypeTraits.h
+	"mozilla/TypeTraits.h"
+	<stdint.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/UniquePtr.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Compiler.h"
+	"mozilla/Move.h"
+	"mozilla/Pair.h"
+	"mozilla/TypeTraits.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Pair.h
+	"mozilla/Attributes.h"
+	"mozilla/Move.h"
+	"mozilla/TypeTraits.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/RefPtr.h
+	"mozilla/AlreadyAddRefed.h"
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/DbgMacro.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/DbgMacro.h
+	"mozilla/MacroForEach.h"
+	"mozilla/Span.h"
+	<stdio.h>
+	<sstream>
+	<android/log.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/MacroForEach.h
+	"mozilla/MacroArgs.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Utf8.h
+	"mozilla/Casting.h"
+	"mozilla/Likely.h"
+	"mozilla/Maybe.h"
+	"mozilla/TextUtils.h"
+	"mozilla/Types.h"
+	<limits.h>
+	<stddef.h>
+	<stdint.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Maybe.h
+	"mozilla/Alignment.h"
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/MemoryChecking.h"
+	"mozilla/Move.h"
+	"mozilla/OperatorNewExtensions.h"
+	"mozilla/Poison.h"
+	"mozilla/TypeTraits.h"
+	<new>
+	<ostream>
+	<type_traits>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/OperatorNewExtensions.h
+	"mozilla/Assertions.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Poison.h
+	"mozilla/Assertions.h"
+	"mozilla/Types.h"
+	<stdint.h>
+	<string.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/TextUtils.h
+	"mozilla/Assertions.h"
+	"mozilla/TypeTraits.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Variant.h
+	<new>
+	<stdint.h>
+	"mozilla/Assertions.h"
+	"mozilla/FunctionTypeTraits.h"
+	"mozilla/HashFunctions.h"
+	"mozilla/OperatorNewExtensions.h"
+	"mozilla/TemplateLib.h"
+	"mozilla/TypeTraits.h"
+	<utility>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/FunctionTypeTraits.h
+	<tuple>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/HashFunctions.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Char16.h"
+	"mozilla/MathAlgorithms.h"
+	"mozilla/Types.h"
+	"mozilla/WrappingOperations.h"
+	<stdint.h>
+	<type_traits>
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Char16.h
+	<cstdint>
+	"mozilla/Attributes.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/WrappingOperations.h
+	"mozilla/Attributes.h"
+	"mozilla/TypeTraits.h"
+	<limits.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/TemplateLib.h
+	<limits.h>
+	<stddef.h>
+	"mozilla/TypeTraits.h"
+
+1578916138 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/jspubtd.h
+	"jstypes.h"
+	"js/ProtoKey.h"
+	"js/Result.h"
+	"js/TraceKind.h"
+	"js/TypeDecls.h"
+
+1578916372 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/jstypes.h
+	"mozilla/Attributes.h"
+	"mozilla/Casting.h"
+	"mozilla/Types.h"
+	"js-config.h"
+
+1579378921 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js-config.h
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/ProtoKey.h
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Result.h
+	"mozilla/Result.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Result.h
+	"mozilla/Alignment.h"
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Types.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/Variant.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/TraceKind.h
+	"mozilla/UniquePtr.h"
+	"js/TypeDecls.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/TypeDecls.h
+	<stddef.h>
+	<stdint.h>
+	"js-config.h"
+	"jstypes.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/AllocPolicy.h
+	"js/TypeDecls.h"
+	"js/Utility.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Utility.h
+	"mozilla/Assertions.h"
+	"mozilla/Atomics.h"
+	"mozilla/Attributes.h"
+	"mozilla/Compiler.h"
+	"mozilla/Move.h"
+	"mozilla/TemplateLib.h"
+	"mozilla/UniquePtr.h"
+	<stdlib.h>
+	<string.h>
+	<execinfo.h>
+	<stdio.h>
+	"jstypes.h"
+	"mozmemory.h"
+	"jscustomallocator.h"
+	<new>
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Atomics.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Compiler.h"
+	"mozilla/RecordReplay.h"
+	"mozilla/TypeTraits.h"
+	<atomic>
+	<stdint.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/RecordReplay.h
+	"mozilla/Attributes.h"
+	"mozilla/GuardObjects.h"
+	"mozilla/TemplateLib.h"
+	"mozilla/Types.h"
+	"mozilla/Utf8.h"
+	<functional>
+	<stdarg.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/GuardObjects.h
+	"mozilla/Assertions.h"
+	"mozilla/Move.h"
+	"mozilla/Types.h"
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozmemory.h
+	"mozmemory_wrap.h"
+	"mozilla/Attributes.h"
+	"mozilla/Types.h"
+	"mozjemalloc_types.h"
+	"malloc_decls.h"
+	"malloc_decls.h"
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozmemory_wrap.h
+	"mozilla/Types.h"
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozjemalloc_types.h
+	<crtdefs.h>
+	<stddef.h>
+	<stdbool.h>
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/malloc_decls.h
+	"mozjemalloc_types.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/CallArgs.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/TypeTraits.h"
+	"jstypes.h"
+	"js/RootingAPI.h"
+	"js/Value.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/RootingAPI.h
+	"mozilla/Attributes.h"
+	"mozilla/DebugOnly.h"
+	"mozilla/GuardObjects.h"
+	"mozilla/LinkedList.h"
+	"mozilla/Move.h"
+	"mozilla/TypeTraits.h"
+	<type_traits>
+	"jspubtd.h"
+	"js/GCAnnotations.h"
+	"js/GCPolicyAPI.h"
+	"js/HeapAPI.h"
+	"js/ProfilingStack.h"
+	"js/Realm.h"
+	"js/TypeDecls.h"
+	"js/UniquePtr.h"
+	"js/Utility.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/DebugOnly.h
+	"mozilla/Attributes.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/LinkedList.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/MemoryReporting.h"
+	"mozilla/Move.h"
+	"mozilla/RefPtr.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/GCAnnotations.h
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/GCPolicyAPI.h
+	"mozilla/Maybe.h"
+	"mozilla/UniquePtr.h"
+	"js/TraceKind.h"
+	"js/TracingAPI.h"
+	"js/TypeDecls.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/TracingAPI.h
+	"js/AllocPolicy.h"
+	"js/HashTable.h"
+	"js/HeapAPI.h"
+	"js/TraceKind.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/HashTable.h
+	"mozilla/HashTable.h"
+	"jstypes.h"
+
+1578916373 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/HashTable.h
+	"mozilla/AllocPolicy.h"
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Casting.h"
+	"mozilla/HashFunctions.h"
+	"mozilla/MathAlgorithms.h"
+	"mozilla/Maybe.h"
+	"mozilla/MemoryChecking.h"
+	"mozilla/MemoryReporting.h"
+	"mozilla/Move.h"
+	"mozilla/Opaque.h"
+	"mozilla/OperatorNewExtensions.h"
+	"mozilla/PodOperations.h"
+	"mozilla/ReentrancyGuard.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/UniquePtr.h"
+
+1578916151 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/AllocPolicy.h
+	"mozilla/Attributes.h"
+	"mozilla/Assertions.h"
+	"mozilla/TemplateLib.h"
+	<stddef.h>
+	<stdlib.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Opaque.h
+	"mozilla/TypeTraits.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/PodOperations.h
+	"mozilla/Array.h"
+	"mozilla/ArrayUtils.h"
+	"mozilla/Attributes.h"
+	<algorithm>
+	<stdint.h>
+	<string.h>
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/ReentrancyGuard.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/GuardObjects.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/HeapAPI.h
+	<limits.h>
+	"jspubtd.h"
+	"js/TraceKind.h"
+	"js/Utility.h"
+
+1578916372 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/ProfilingStack.h
+	<algorithm>
+	<stdint.h>
+	"jstypes.h"
+	"js/ProfilingCategory.h"
+	"js/TypeDecls.h"
+	"js/Utility.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/ProfilingCategory.h
+	"jstypes.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Realm.h
+	"jspubtd.h"
+	"js/GCPolicyAPI.h"
+	"js/TypeDecls.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/UniquePtr.h
+	"mozilla/UniquePtr.h"
+	"js/Utility.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Value.h
+	"mozilla/Attributes.h"
+	"mozilla/Casting.h"
+	"mozilla/Compiler.h"
+	"mozilla/EndianUtils.h"
+	"mozilla/FloatingPoint.h"
+	"mozilla/Likely.h"
+	"mozilla/Maybe.h"
+	<limits>
+	"js-config.h"
+	"jstypes.h"
+	"js/GCAPI.h"
+	"js/RootingAPI.h"
+	"js/Utility.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/EndianUtils.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Compiler.h"
+	"mozilla/DebugOnly.h"
+	"mozilla/TypeTraits.h"
+	<stdint.h>
+	<string.h>
+	<stdlib.h>
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/GCAPI.h
+	"mozilla/TimeStamp.h"
+	"mozilla/Vector.h"
+	"js/GCAnnotations.h"
+	"js/TypeDecls.h"
+	"js/UniquePtr.h"
+	"js/Utility.h"
+
+1578916154 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/TimeStamp.h
+	<stdint.h>
+	<algorithm>
+	<ostream>
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/FloatingPoint.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/Types.h"
+	"TimeStamp_windows.h"
+
+1578916152 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/Vector.h
+	"mozilla/Alignment.h"
+	"mozilla/AllocPolicy.h"
+	"mozilla/ArrayUtils.h"
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/MathAlgorithms.h"
+	"mozilla/MemoryReporting.h"
+	"mozilla/Move.h"
+	"mozilla/OperatorNewExtensions.h"
+	"mozilla/ReentrancyGuard.h"
+	"mozilla/TemplateLib.h"
+	"mozilla/TypeTraits.h"
+	<new>
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/CharacterEncoding.h
+	"mozilla/Range.h"
+	"js/TypeDecls.h"
+	"js/Utility.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Class.h
+	"mozilla/Attributes.h"
+	"jstypes.h"
+	"js/CallArgs.h"
+	"js/Id.h"
+	"js/TypeDecls.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Id.h
+	"mozilla/Maybe.h"
+	"jstypes.h"
+	"js/HeapAPI.h"
+	"js/RootingAPI.h"
+	"js/TypeDecls.h"
+	"js/Utility.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/CompileOptions.h
+	"mozilla/Attributes.h"
+	"mozilla/MemoryReporting.h"
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/ErrorReport.h
+	"mozilla/Assertions.h"
+	<iterator>
+	<stddef.h>
+	<stdint.h>
+	<string.h>
+	"jstypes.h"
+	"js/AllocPolicy.h"
+	"js/CharacterEncoding.h"
+	"js/UniquePtr.h"
+	"js/Vector.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Vector.h
+	"mozilla/Vector.h"
+	"js/TypeDecls.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/GCVector.h
+	"mozilla/Vector.h"
+	"js/GCPolicyAPI.h"
+	"js/RootingAPI.h"
+	"js/TracingAPI.h"
+	"js/Vector.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/OffThreadScriptCompilation.h
+	"mozilla/Range.h"
+	"mozilla/Vector.h"
+	<stddef.h>
+	"jstypes.h"
+	"js/CompileOptions.h"
+	"js/GCVector.h"
+	"js/Transcoding.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Transcoding.h
+	"mozilla/Range.h"
+	"mozilla/Vector.h"
+	<stddef.h>
+	<stdint.h>
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Principals.h
+	"mozilla/Atomics.h"
+	<stdint.h>
+	"jspubtd.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/PropertyDescriptor.h
+	"mozilla/Assertions.h"
+	<stdint.h>
+	"jstypes.h"
+	"js/Class.h"
+	"js/RootingAPI.h"
+	"js/Value.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/PropertySpec.h
+	"mozilla/Assertions.h"
+	<stddef.h>
+	<stdint.h>
+	<type_traits>
+	"jstypes.h"
+	"js/CallArgs.h"
+	"js/PropertyDescriptor.h"
+	"js/RootingAPI.h"
+	"js/Symbol.h"
+	"js/Value.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Symbol.h
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/RealmOptions.h
+	"mozilla/Assertions.h"
+	"jstypes.h"
+	"js/Class.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/RefCounted.h
+	"mozilla/Atomics.h"
+	"mozilla/RefCountType.h"
+	"js/Utility.h"
+
+1547201625 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/mozilla/RefCountType.h
+	<stdint.h>
+
+1578916138 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/jsfriendapi.h
+	"mozilla/Atomics.h"
+	"mozilla/Casting.h"
+	"mozilla/Maybe.h"
+	"mozilla/MemoryReporting.h"
+	"mozilla/UniquePtr.h"
+	"jspubtd.h"
+	"js/CallArgs.h"
+	"js/CallNonGenericMethod.h"
+	"js/CharacterEncoding.h"
+	"js/Class.h"
+	"js/ErrorReport.h"
+	"js/HeapAPI.h"
+	"js/StableStringChars.h"
+	"js/TypeDecls.h"
+	"js/Utility.h"
+	"js.msg"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/CallNonGenericMethod.h
+	"jstypes.h"
+	"js/CallArgs.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/StableStringChars.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Maybe.h"
+	"mozilla/Range.h"
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/HeapAPI.h"
+	"js/RootingAPI.h"
+	"js/TypeDecls.h"
+	"js/Vector.h"
+
+1578916138 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js.msg
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Initialization.h
+	"jstypes.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/ArrayBuffer.h
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/GCAPI.h"
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/SharedArrayBuffer.h
+	<stddef.h>
+	<stdint.h>
+	"jstypes.h"
+	"js/GCAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Date.h
+	"mozilla/FloatingPoint.h"
+	"mozilla/MathAlgorithms.h"
+	"js/Conversions.h"
+	"js/RootingAPI.h"
+	"js/Value.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Conversions.h
+	"mozilla/Casting.h"
+	"mozilla/Compiler.h"
+	"mozilla/FloatingPoint.h"
+	"mozilla/MathAlgorithms.h"
+	"mozilla/TypeTraits.h"
+	"mozilla/WrappingOperations.h"
+	<math.h>
+	"jspubtd.h"
+	"js/RootingAPI.h"
+	"js/Value.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/CompilationAndEvaluation.h
+	"mozilla/Utf8.h"
+	<stddef.h>
+	<stdio.h>
+	"jstypes.h"
+	"js/CompileOptions.h"
+	"js/RootingAPI.h"
+	"js/Value.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/ContextOptions.h
+	"jstypes.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/Warnings.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"jstypes.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/JSON.h
+	<stdint.h>
+	"jstypes.h"
+	"js/RootingAPI.h"
+
+1578916136 /home/softpro/Sources/gecko-dev/js/src/_DBG.OBJ/dist/include/js/SourceText.h
+	"mozilla/Assertions.h"
+	"mozilla/Attributes.h"
+	"mozilla/Likely.h"
+	"mozilla/Utf8.h"
+	<stddef.h>
+	<stdint.h>
+	<type_traits>
+	"js/UniquePtr.h"
+	"js/Utility.h"
 

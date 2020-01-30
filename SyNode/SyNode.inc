@@ -62,6 +62,10 @@
 {.$DEFINE WITHASSERT}
 // ensure *TO_JSVAL() macros will check explicitly for the target type
 
+{.$DEFINE JS_HAS_CTYPES}
+// ctypes feature is deprecated and should not be used (https://developer.mozilla.org/en-US/docs/Mozilla/js-ctypes)
+// SpiderMonkey should be compiled with --enable-ctypes in order to enable this feature
+
 {$DEFINE CORE_MODULES_IN_RES} // core_modules is compiled into resources
 
 // define this in case SyNodeNewProto unit isused

@@ -1,4 +1,4 @@
-/// SpiderMonkey 45/52 *.h header port to Delphi
+/// SpiderMonkey *.h header port to Delphi
 // - this unit is a part of the freeware Synopse framework,
 // licensed under a MPL/GPL/LGPL tri-license; version 1.18
 unit SpiderMonkey;
@@ -223,79 +223,91 @@ type
   );
 /// Dense index into cached prototypes and class atoms for standard objects.
   JSProtoKey = (
-  JSProto_Null = 0,
-  JSProto_Object,
-  JSProto_Function,
-  JSProto_Array,
-  JSProto_Boolean,
-  JSProto_JSON,
-  JSProto_Date,
-  JSProto_Math,
-  JSProto_Number,
-  JSProto_String,
-  JSProto_RegExp,
-  JSProto_Error,
-  JSProto_InternalError,
-  JSProto_EvalError,
-  JSProto_RangeError,
-  JSProto_ReferenceError,
-  JSProto_SyntaxError,
-  JSProto_TypeError,
-  JSProto_URIError,
-  JSProto_DebuggeeWouldRun,
-  JSProto_CompileError,
-  JSProto_RuntimeError,
-  JSProto_Iterator,
-  JSProto_StopIteration,
-  JSProto_ArrayBuffer,
-  JSProto_Int8Array,
-  JSProto_Uint8Array,
-  JSProto_Int16Array,
-  JSProto_Uint16Array,
-  JSProto_Int32Array,
-  JSProto_Uint32Array,
-  JSProto_Float32Array,
-  JSProto_Float64Array,
-  JSProto_Uint8ClampedArray,
-  JSProto_Proxy,
-  JSProto_WeakMap,
-  JSProto_Map,
-  JSProto_Set,
-  JSProto_DataView,
-  JSProto_Symbol,
-  JSProto_SharedArrayBuffer,
-  JSProto_Intl,
-  JSProto_TypedObject,
-  JSProto_Reflect,
-  JSProto_SIMD,
-  JSProto_WeakSet,
-  JSProto_TypedArray,
-  JSProto_Atomics,
-  JSProto_SavedFrame,
-  JSProto_WebAssembly,
-  JSProto_WasmModule,
-  JSProto_WasmInstance,
-  JSProto_WasmMemory,
-  JSProto_WasmTable,
-  JSProto_Promise,
-  JSProto_LIMIT
+    JSProto_Null = 0,
+    JSProto_Object,
+    JSProto_Function,
+    JSProto_Array,
+    JSProto_Boolean,
+    JSProto_JSON,
+    JSProto_Date,
+    JSProto_Math,
+    JSProto_Number,
+    JSProto_String,
+    JSProto_RegExp,
+    JSProto_Error,
+    JSProto_InternalError,
+    JSProto_EvalError,
+    JSProto_RangeError,
+    JSProto_ReferenceError,
+    JSProto_SyntaxError,
+    JSProto_TypeError,
+    JSProto_URIError,
+    JSProto_DebuggeeWouldRun,
+    JSProto_CompileError,
+    JSProto_LinkError,
+    JSProto_RuntimeError,
+    JSProto_ArrayBuffer,
+    JSProto_Int8Array,
+    JSProto_Uint8Array,
+    JSProto_Int16Array,
+    JSProto_Uint16Array,
+    JSProto_Int32Array,
+    JSProto_Uint32Array,
+    JSProto_Float32Array,
+    JSProto_Float64Array,
+    JSProto_Uint8ClampedArray,
+    JSProto_BigInt64Array,
+    JSProto_BigUint64Array,
+    JSProto_BigInt,
+    JSProto_Proxy,
+    JSProto_WeakMap,
+    JSProto_Map,
+    JSProto_Set,
+    JSProto_DataView,
+    JSProto_Symbol,
+    JSProto_SharedArrayBuffer,
+    JSProto_Intl,
+    JSProto_TypedObject,
+    JSProto_Reflect,
+    JSProto_WeakSet,
+    JSProto_TypedArray,
+    JSProto_Atomics,
+    JSProto_SavedFrame,
+    JSProto_Promise,
+    JSProto_ReadableStream,
+    JSProto_ReadableStreamDefaultReader,
+    JSProto_ReadableStreamDefaultController,
+    JSProto_ReadableByteStreamController,
+    JSProto_WritableStream,
+    JSProto_WritableStreamDefaultWriter,
+    JSProto_WritableStreamDefaultController,
+    JSProto_ByteLengthQueuingStrategy,
+    JSProto_CountQueuingStrategy,
+    JSProto_WebAssembly,
+    JSProto_WasmModule,
+    JSProto_WasmInstance,
+    JSProto_WasmMemory,
+    JSProto_WasmTable,
+    JSProto_WasmGlobal,
+    JSProto_LIMIT
   );
 {$Z1}
 /// Type of JSValue
   JSValueType = (
-    JSVAL_TYPE_DOUBLE   = $00,
-    JSVAL_TYPE_INT32    = $01,
-    JSVAL_TYPE_UNDEFINED= $02,
-    JSVAL_TYPE_BOOLEAN  = $03,
-    JSVAL_TYPE_MAGIC    = $04,
-    JSVAL_TYPE_STRING   = $05,
-    JSVAL_TYPE_SYMBOL   = $06,
-    JSVAL_TYPE_PRIVATE_GCTHING = $07,
-    JSVAL_TYPE_NULL     = $08,
-    JSVAL_TYPE_OBJECT   = $0C,
-    // These never appear in a jsval; they are only provided as an out-of-band value.
-    JSVAL_TYPE_UNKNOWN  = $20,
-    JSVAL_TYPE_MISSING  = $21
+    JSVAL_TYPE_DOUBLE          = $00,
+    JSVAL_TYPE_INT32           = $01,
+    JSVAL_TYPE_BOOLEAN         = $02,
+    JSVAL_TYPE_UNDEFINED       = $03,
+    JSVAL_TYPE_NULL            = $04,
+    JSVAL_TYPE_MAGIC           = $05,
+    JSVAL_TYPE_STRING          = $06,
+    JSVAL_TYPE_SYMBOL          = $07,
+    JSVAL_TYPE_PRIVATE_GCTHING = $08,
+    JSVAL_TYPE_BIGINT          = $09,
+    JSVAL_TYPE_OBJECT          = $0c,
+
+    // This type never appears in a Value; it's only an out-of-band value.
+    JSVAL_TYPE_UNKNOWN         = $20
   );
 
 {$ifndef CPU64}
@@ -392,10 +404,11 @@ const
 type
 // pointers
   JSFreeOp = pointer;
+  PJSRuntime = ^JSRuntime;
   PJSContextOptions = ^JSContextOptions;
   PJSContext = ^JSContext;
-  PJSCompartment = ^JSCompartment;
-  PJS_CompartmentOptions = ^JS_CompartmentOptions;
+  PJSRealm = ^JSRealm;
+  PJS_RealmOptions = ^JS_RealmOptions;
   PJSObject = ^JSObject;
   PJSFunction = PJSObject;
   PJSString = ^JSString;
@@ -411,7 +424,7 @@ type
   PJSErrorFormatString = ^JSErrorFormatString;
   PJSAtomState = JSUnknown;
   PJSPrincipals = JSUnknown;
-  PJSAutoCheckCannotGC = JSUnknown;
+  PJSAutoRequireNoGC = JSUnknown;
   PJSStringFinalizer = ^JSStringFinalizer;
 
 // jsid
@@ -694,6 +707,19 @@ type
 // The old-style JSClass.enumerate op should define all lazy properties not
 // yet reflected in obj.
   JSEnumerateOp = function(cx: PJSContext; var obj: PJSObject): Boolean; cdecl;
+// The type of ObjectOps::enumerate. This callback overrides a portion of
+// SpiderMonkey's default [[Enumerate]] internal method. When an ordinary object
+// is enumerated, that object and each object on its prototype chain is tested
+// for an enumerate op, and those ops are called in order. The properties each
+// op adds to the 'properties' vector are added to the set of values the for-in
+// loop will iterate over. All of this is nonstandard.
+//
+// An object is "enumerated" when it's the target of a for-in loop or
+// JS_Enumerate(). The callback's job is to populate 'properties' with the
+// object's property keys. If `enumerableOnly` is true, the callback should only
+// add enumerable properties.
+JSNewEnumerateOp = function (cx: PJSContext; obj: PJSObject;
+  var properties: TjsidVector; enumerableOnly: Boolean): Boolean;
 // Resolve a lazy property named by id in obj by defining it directly in obj.
 // Lazy properties are those reflected from some peer native property space
 // (e.g., the DOM attributes for a given node reflected as obj) on demand.
@@ -731,6 +757,11 @@ type
 // JS_IsGCMarkingTracer and apply a special code like emptying caches or
 // marking its native structures.
   JSTraceOp = JSUnknown;
+
+  { JSRuntime }
+
+  JSRuntime = object
+  end;
 
 /// Options of context
   JSContextOptions = object
@@ -777,7 +808,7 @@ type
     function GetArrayBufferViewBuffer(var obj: PJSObject): PJSObject; overload;{$ifdef HASINLINE}inline;{$endif}
   public
     /// Initializes the JavaScript context.
-    class function CreateNew(maxbytes: uint32; maxNurseryBytes: uint32 = 16 * (1 SHL 20); parentContext: PJSContext = nil): PJSContext;
+    class function CreateNew(maxbytes: uint32; maxNurseryBytes: uint32 = 16 * (1 SHL 20); parentRuntime: PJSRuntime = nil): PJSContext;
     /// Performs garbage collection in the JS memory pool.
     procedure GC; {$ifdef HASINLINE}inline;{$endif}
     /// Returns the empty string as a JSString object.
@@ -823,16 +854,16 @@ type
     /// Enter a different compartment on the given context, so that objects in that
     // compartment can be accessed.
     // - NB: This API is infallible; a NULL return value does not indicate error
-    function EnterCompartment(target: PJSObject): PJSCompartment;{$ifdef HASINLINE}inline;{$endif}
+    function EnterRealm(target: PJSObject): PJSRealm;{$ifdef HASINLINE}inline;{$endif}
     /// Leave a the compartment, returning to the compartment active before the
     // corresponding JS_EnterCompartment.
-    procedure LeaveCompartment(oldCompartment: PJSCompartment);{$ifdef HASINLINE}inline;{$endif}
+    procedure LeaveRealm(oldRealm: PJSRealm);{$ifdef HASINLINE}inline;{$endif}
     /// indicates to the JS engine that the calling thread is entering a region
     // of code that may call into the JSAPI but does not block
-    procedure BeginRequest; {$ifdef HASINLINE}inline;{$endif}
+    procedure BeginRequest; deprecated; {$ifdef HASINLINE}inline;{$endif}
     /// indicates to the JS engine that the calling thread is leaving a region
     // of code that may call into the JSAPI but does not block
-    procedure EndRequest; {$ifdef HASINLINE}inline;{$endif}
+    procedure EndRequest; deprecated; {$ifdef HASINLINE}inline;{$endif}
     /// Create Compile Options
     function NewCompileOptions: PJSCompileOptions;
     /// Free Compile Options
@@ -845,13 +876,15 @@ type
     // functions and constants associated with the standard classes (e.g. isNaN
     // for Number).
     // - NB: This sets cx's global object to obj if it was null.
-    function InitStandardClasses(var obj: PJSObject): boolean;
+    function InitRealmStandardClasses({var obj: PJSObject}): boolean;
     /// Add 'Reflect.parse', a SpiderMonkey extension, to the Reflect object on the
     // given global.
     function InitReflectParse(var obj: PJSObject): boolean;
+{$IFDEF JS_HAS_CTYPES}
     /// Initialize the 'ctypes' object on a global variable 'obj'. The 'ctypes'
     // object will be sealed.
     function InitCTypesClass(var obj: PJSObject): boolean;
+{$ENDIF}
     /// Initialize the 'Debugger' object on a global variable 'obj'. The 'ctypes'
     // object will be sealed.
     function DefineDebuggerObject(var obj: PJSObject): boolean;
@@ -965,6 +998,9 @@ type
     /// Compile and execute a script in the scope of the current global of cx.
     function EvaluateScript(opts: PJSCompileOptions;
        bytes: PCChar; length: size_t;
+       out rval: jsval): Boolean; {$ifdef HASINLINE}inline;{$endif}
+     function EvaluateUTF8Script(opts: PJSCompileOptions;
+       utf8chars: PUTF8Char; length: size_t;
        out rval: jsval): Boolean; {$ifdef HASINLINE}inline;{$endif}
     function EvaluateUCScript(opts: PJSCompileOptions;
        chars: PCChar16; length: size_t;
@@ -1163,17 +1199,18 @@ type
     function NewArrayBuffer(nbytes: uint32): PJSObject;{$ifdef HASINLINE}inline;{$endif}
 
     /// Indicates whether or not a script or function is currently executing in a given context.
-    property IsRunning: boolean read GetIsRunning;
+    property IsRunning: boolean read GetIsRunning; deprecated;
     /// Destroy a JSContext.
     procedure Destroy;
   end;
 
-  /// JavaScript execution compartment
+  /// JavaScript execution realm
   // - this object does not store anything, but just provide some helper methods
-  JSCompartment = object
+  JSRealm = object
   end;
-  /// options of compartment
-  JS_CompartmentOptions = record
+
+  /// options of realm
+  JS_RealmOptions = record
     version: JSVersion;
     invisibleToDebugger: Boolean;
     mergeable: Boolean;
@@ -1212,7 +1249,7 @@ type
     // pass such a test: it is a typed array or a wrapper of a typed array, and the
     // unwrapping will succeed
     // - Prefer the type-specific versions when possible
-    function GetArrayBufferViewData(out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Pointer;{$ifdef HASINLINE}inline;{$endif}
+    function GetArrayBufferViewData(out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Pointer;{$ifdef HASINLINE}inline;{$endif}
   public
     /// get a jsval corresponding to this object
     function ToJSValue: jsval; {$ifdef HASINLINE}inline;{$endif}
@@ -1232,7 +1269,7 @@ type
     /// is object is Date object
     function isDate(cx: PJSContext): Boolean; {$ifdef HASINLINE}inline;{$endif}
     /// is object is Function object
-    function isFunction(cx: PJSContext): Boolean; {$ifdef HASINLINE}inline;{$endif}
+    function isFunction: Boolean; {$ifdef HASINLINE}inline;{$endif}
     /// is object is Array object
     function isArray(cx: PJSContext): Boolean; {$ifdef HASINLINE}inline;{$endif}
 
@@ -1346,7 +1383,7 @@ type
     //function methods
     function GetFunctionId: PJSString; {$ifdef HASINLINE}inline;{$endif}
     property FunctionId: PJSString read GetFunctionId;
-    function DecompileFunction(cx: PJSContext; PrettyPrint: Boolean = true): PJSString;
+//    function DecompileFunction(cx: PJSContext{; PrettyPrint: Boolean = true}): PJSString;
 
     //arrayBuffer methods
 
@@ -1481,7 +1518,7 @@ type
     // - obj must have passed a JS_IsArrayBufferObject test, or somehow be known
     // that it would pass such a test: it is an ArrayBuffer or a wrapper of an
     // ArrayBuffer, and the unwrapping will succeed.
-    function GetArrayBufferData(out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Puint8Vector; overload;{$ifdef HASINLINE}inline;{$endif}
+    function GetArrayBufferData(out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Puint8Vector; overload;{$ifdef HASINLINE}inline;{$endif}
     function GetArrayBufferData: Puint8Vector; overload;{$ifdef HASINLINE}inline;{$endif}
 
     /// Check whether the obj is ArrayBufferObject and memory mapped. Note that this
@@ -1517,7 +1554,7 @@ type
     // - obj must have passed a JS_Is*Array test, or somehow be known that it would
     // pass such a test: it is a typed array or a wrapper of a typed array, and the
     // unwrapping will succeed
-    function GetInt8ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Pint8Vector;{$ifdef HASINLINE}inline;{$endif}
+    function GetInt8ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Pint8Vector;{$ifdef HASINLINE}inline;{$endif}
 
     /// Return a pointer to the start of the data referenced by a typed 8 bit unsigned integer array
     // - The data is still owned by the typed array, and should not be modified on
@@ -1525,7 +1562,7 @@ type
     // - obj must have passed a JS_Is*Array test, or somehow be known that it would
     // pass such a test: it is a typed array or a wrapper of a typed array, and the
     // unwrapping will succeed
-    function GetUint8ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Puint8Vector; overload;{$ifdef HASINLINE}inline;{$endif}
+    function GetUint8ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Puint8Vector; overload;{$ifdef HASINLINE}inline;{$endif}
     function GetUInt8ArrayData: Puint8Vector; overload;{$ifdef HASINLINE}inline;{$endif}
 
     /// Return a pointer to the start of the data referenced by a typed 8 bit unsigned integer array
@@ -1534,7 +1571,7 @@ type
     // - obj must have passed a JS_Is*Array test, or somehow be known that it would
     // pass such a test: it is a typed array or a wrapper of a typed array, and the
     // unwrapping will succeed
-    function GetUint8ClampedArrayData(out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Puint8Vector;{$ifdef HASINLINE}inline;{$endif}
+    function GetUint8ClampedArrayData(out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Puint8Vector;{$ifdef HASINLINE}inline;{$endif}
 
     /// Return a pointer to the start of the data referenced by a typed 16 bit signed integer array
     // - The data is still owned by the typed array, and should not be modified on
@@ -1542,7 +1579,7 @@ type
     // - obj must have passed a JS_Is*Array test, or somehow be known that it would
     // pass such a test: it is a typed array or a wrapper of a typed array, and the
     // unwrapping will succeed
-    function GetInt16ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Pint16Vector;{$ifdef HASINLINE}inline;{$endif}
+    function GetInt16ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Pint16Vector;{$ifdef HASINLINE}inline;{$endif}
 
     /// Return a pointer to the start of the data referenced by a typed 16 bit unsigned integer array
     // - The data is still owned by the typed array, and should not be modified on
@@ -1550,7 +1587,7 @@ type
     // - obj must have passed a JS_Is*Array test, or somehow be known that it would
     // pass such a test: it is a typed array or a wrapper of a typed array, and the
     // unwrapping will succeed
-    function GetUint16ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Puint16Vector;{$ifdef HASINLINE}inline;{$endif}
+    function GetUint16ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Puint16Vector;{$ifdef HASINLINE}inline;{$endif}
 
     /// Return a pointer to the start of the data referenced by a typed 32 bit signed integer array
     // - The data is still owned by the typed array, and should not be modified on
@@ -1558,7 +1595,7 @@ type
     // - obj must have passed a JS_Is*Array test, or somehow be known that it would
     // pass such a test: it is a typed array or a wrapper of a typed array, and the
     // unwrapping will succeed
-    function GetInt32ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Pint32Vector;{$ifdef HASINLINE}inline;{$endif}
+    function GetInt32ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Pint32Vector;{$ifdef HASINLINE}inline;{$endif}
 
     /// Return a pointer to the start of the data referenced by a typed 32 bit unsigned integer array
     // - The data is still owned by the typed array, and should not be modified on
@@ -1566,7 +1603,7 @@ type
     // - obj must have passed a JS_Is*Array test, or somehow be known that it would
     // pass such a test: it is a typed array or a wrapper of a typed array, and the
     // unwrapping will succeed
-    function GetUint32ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Puint32Vector;{$ifdef HASINLINE}inline;{$endif}
+    function GetUint32ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Puint32Vector;{$ifdef HASINLINE}inline;{$endif}
 
     /// Return a pointer to the start of the data referenced by a typed 32 bit float (single) array
     // - The data is still owned by the typed array, and should not be modified on
@@ -1574,7 +1611,7 @@ type
     // - obj must have passed a JS_Is*Array test, or somehow be known that it would
     // pass such a test: it is a typed array or a wrapper of a typed array, and the
     // unwrapping will succeed
-    function GetFloat32ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Pfloat32Vector;{$ifdef HASINLINE}inline;{$endif}
+    function GetFloat32ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Pfloat32Vector;{$ifdef HASINLINE}inline;{$endif}
 
     /// Return a pointer to the start of the data referenced by a typed 64 bit float (double) array
     // - The data is still owned by the typed array, and should not be modified on
@@ -1582,7 +1619,7 @@ type
     // - obj must have passed a JS_Is*Array test, or somehow be known that it would
     // pass such a test: it is a typed array or a wrapper of a typed array, and the
     // unwrapping will succeed
-    function GetFloat64ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Pfloat64Vector;{$ifdef HASINLINE}inline;{$endif}
+    function GetFloat64ArrayData(out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Pfloat64Vector;{$ifdef HASINLINE}inline;{$endif}
 
     /// Return a pointer to the start of the data referenced by any typed array
     // and it's length. For ArrayBufferView return a pointer and length of slice.
@@ -1626,18 +1663,17 @@ type
   end;
 
   JSClassOps = record
-    addProperty:        JSAddPropertyOp;
-    delProperty:        JSDeletePropertyOp;
-    getProperty:        JSGetterOp;
-    setProperty:        JSSetterOp;
-    enumerate:          JSEnumerateOp;
-    resolve:            JSResolveOp;
-    mayResolve:         JSMayResolveOp;
-    finalize:           JSFinalizeOp;
-    call:               JSNative;
-    hasInstance:        JSHasInstanceOp;
-    construct:          JSNative;
-    trace:              JSTraceOp;
+    addProperty: JSAddPropertyOp;
+    delProperty: JSDeletePropertyOp;
+    enumerate: JSEnumerateOp;
+    newEnumerate: JSNewEnumerateOp;
+    resolve: JSResolveOp;
+    mayResolve: JSMayResolveOp;
+    finalize: JSFinalizeOp;
+    call: JSNative;
+    hasInstance: JSHasInstanceOp;
+    construct: JSNative;
+    trace: JSTraceOp;
   end;
   PJSClassOps = ^JSClassOps;
 
@@ -1650,7 +1686,7 @@ type
 
   { JSCompileOptions }
   JSCompileOptions = object
-    procedure SetFileLineAndUtf8(const f: PChar; l: cardinal; isUtf8: boolean);
+    procedure SetFileAndLine(const f: PChar; l: cardinal);
   end;
 
   // internal alignment of JSCompileOptions is a HACK and depends on C++ pragma
@@ -1830,66 +1866,38 @@ const
 //     a uint8_t to store the relevant information. Proceed with caution if
 //     trying to reorder or change the the first byte worth of flags.
 
-  JSPROP_ENUMERATE        = $01; // property is visible to for/in loop
-  JSPROP_READONLY         = $02; // not settable: assignment is no-op.
-                                  //  This flag is only valid when neither
-                                  //  JSPROP_GETTER nor JSPROP_SETTER is
-                                  //  set.
-  JSPROP_PERMANENT        = $04; // property cannot be deleted
-  JSPROP_PROPOP_ACCESSORS = $08; // Passed to JS_Define(UC)Property* and
-                                  //  JS_DefineElement if getters/setters
-                                  //  are JSPropertyOp/JSStrictPropertyOp
-  JSPROP_GETTER           = $10; // property holds getter function
-  JSPROP_SETTER           = $20; // property holds setter function
-  JSPROP_SHARED           = $40; // don't allocate a value slot for this
-                                  // property; don't copy the property on
-                                  // set of the same-named property in an
-                                  // object that delegates to a prototype
-                                  // containing this property
-  JSPROP_INTERNAL_USE_BIT= $80; // name is actually (int) index
-  JSPROP_DEFINE_LATE     = $100; // Don't define property when initially creating
-                                  // the constructor. Some objects like Function/Object
-                                  // have self-hosted functions that can only be defined
-                                  // after the initialization is already finished.
-  JSFUN_STUB_GSOPS       = $200; // use JS_PropertyStub getter/setter
-                                  // instead of defaulting to class gsops
-                                  // for property holding function
+  JSPROP_ENUMERATE        =    $01; // The property is visible in for/in loops.
+  JSPROP_READONLY         =    $02; // The property is non-writable.  This flag is only valid when neither
+                                    // JSPROP_GETTER nor JSPROP_SETTER is set.
+  JSPROP_PERMANENT        =    $04; // The property is non-configurable: it can't be deleted, and if it's an
+                                    // accessor descriptor, its getter and setter can't be changed.
+  // (0x08 is unused; add to JSPROP_FLAGS_MASK if ever defined)
+  JSPROP_GETTER           =    $10; // The property has a getter function.
+  JSPROP_SETTER           =    $20; // The property has a setter function.
+  // (0x40 is unused; add to JSPROP_FLAGS_MASK if ever defined)
+  JSPROP_INTERNAL_USE_BIT =    $80; // A bit for internal JS engine use only.
+  // (0x1000 is unused; add to JSPROP_FLAGS_MASK if ever defined) */
+  JSPROP_RESOLVING        =  $2000; // Resolve hooks and enumerate hooks must pass this flag when calling
+                                    // JS_Define* APIs to reify lazily-defined properties.
+                                    //
+                                    // JSPROP_RESOLVING is used only with property-defining APIs. It tells the
+                                    // engine to skip the resolve hook when performing the lookup at the beginning
+                                    // of property definition. This keeps the resolve hook from accidentally
+                                    // triggering itself: unchecked recursion.
+                                    //
+                                    // For enumerate hooks, triggering the resolve hook would be merely silly, not
+                                    // fatal, except in some cases involving non-configurable properties.
+  JSPROP_IGNORE_ENUMERATE =  $4000; // When redefining an existing property, ignore the value of the
+                                    // JSPROP_ENUMERATE flag.  This flag is ignored in other situations.
+  JSPROP_IGNORE_READONLY  =  $8000; // When redefining an existing property, ignore the value of the JSPROP_READONLY
+                                    // flag.  This flag is ignored in other situations.
+  JSPROP_IGNORE_PERMANENT = $10000; // When redefining an existing property, ignore the value of the
+                                    // JSPROP_PERMANENT flag.  This flag is ignored in other situations.
+  JSPROP_IGNORE_VALUE     = $20000; // When redefining an existing property, ignore the Value in the descriptor.
+                                    // This flag is ignored in other situations.
 
-  JSFUN_CONSTRUCTOR      = $400; // native that can be called as a ctor
   /// enumerable read-only property attributes
   JSPROPS_STATIC_RO      = JSPROP_ENUMERATE or JSPROP_READONLY or JSPROP_PERMANENT;
-
-  JSFUN_HAS_REST = $1000; // function has ...rest parameter.
-
-  JSPROP_REDEFINE_NONCONFIGURABLE = $1000; // If set, will allow redefining a
-                                           // non-configurable property, but
-                                           // only on a non-DOM global.  This
-                                           // is a temporary hack that will
-                                           // need to go away in bug
-                                           // 1105518
-
-// Resolve hooks and enumerate hooks must pass this flag when calling
-// JS_Define* APIs to reify lazily-defined properties.
-// JSPROP_RESOLVING is used only with property-defining APIs. It tells the
-// engine to skip the resolve hook when performing the lookup at the beginning
-// of property definition. This keeps the resolve hook from accidentally
-// triggering itself: unchecked recursion.
-// For enumerate hooks, triggering the resolve hook would be merely silly, not
-// fatal, except in some cases involving non-configurable properties.
-  JSPROP_RESOLVING        = $2000;
-
-  JSPROP_IGNORE_ENUMERATE = $4000;  // ignore the value in JSPROP_ENUMERATE.
-                                    // This flag only valid when defining over
-                                    // an existing property.
-  JSPROP_IGNORE_READONLY  = $8000;  // ignore the value in JSPROP_READONLY.
-                                    // This flag only valid when defining over
-                                    // an existing property.
-  JSPROP_IGNORE_PERMANENT = $10000; // ignore the value in JSPROP_PERMANENT.
-                                    // This flag only valid when defining over
-                                    // an existing property.
-  JSPROP_IGNORE_VALUE     = $20000; // ignore the Value in the descriptor. Nothing was
-                                    // specified when passed to Object.defineProperty
-                                    // from script.
 
 type
   /// available options for JS Objects Properties
@@ -2046,12 +2054,13 @@ var JS_Now: TJS_Now external SpiderMonkeyLib name 'SM_Now';
 
 /// Returns the empty string as a JSString object.
 type TJS_GetEmptyString = function (cx: PJSContext): PJSString; cdecl;
-var JS_GetEmptyString: TJS_GetEmptyString external SpiderMonkeyLib name 'SM_GetEmptyString';
+var JS_GetEmptyString: TJS_GetEmptyString
+  external SpiderMonkeyLib name 'SM_GetEmptyString';
 
 /// Determines the JS data type of a JS value.
 type TJS_TypeOfValue = function (cx: PJSContext; var v: jsval): JSType; cdecl;
 var JS_TypeOfValue: TJS_TypeOfValue external SpiderMonkeyLib name 'SM_TypeOfValue';
-
+{
 /// indicates to the JS engine that the calling thread is entering a region
 // of code that may call into the JSAPI but does not block
 type TJS_BeginRequest = procedure (cx: PJSContext); cdecl;
@@ -2061,31 +2070,35 @@ var JS_BeginRequest: TJS_BeginRequest external SpiderMonkeyLib name 'SM_BeginReq
 // of code that may call into the JSAPI but does not block
 type TJS_EndRequest = procedure (cx: PJSContext); cdecl;
 var JS_EndRequest: TJS_EndRequest external SpiderMonkeyLib name 'SM_EndRequest';
-
+}
 /// Create a new JSContext
 type TJS_NewContext = function (maxbytes: uint32;
   maxNurseryBytes: uint32 = 16 * (1 SHL 20);
-  parentContext: PJSContext = nil): PJSContext; cdecl;
+  parentRuntime: PJSRuntime = nil): PJSContext; cdecl;
 var JS_NewContext: TJS_NewContext external SpiderMonkeyLib name 'SM_NewContext';
 
 type TInitSelfHostedCode = function (cx: PJSContext): boolean; cdecl;
-var InitSelfHostedCode: TInitSelfHostedCode external SpiderMonkeyLib name 'SM_InitSelfHostedCode';
+var InitSelfHostedCode: TInitSelfHostedCode
+  external SpiderMonkeyLib name 'SM_InitSelfHostedCode';
 
 /// Destroy a JSContext.
 type TJS_DestroyContext = procedure (cx: PJSContext); cdecl;
-var JS_DestroyContext: TJS_DestroyContext external SpiderMonkeyLib name 'SM_DestroyContext';
+var JS_DestroyContext: TJS_DestroyContext
+  external SpiderMonkeyLib name 'SM_DestroyContext';
 
 /// Read access a JSContext field for application-specific data.
 // Memory management for this private data is the application's responsibility.
 // The JavaScript engine itself never uses it.
 type TJS_GetContextPrivate = function (cx: PJSContext): Pointer; cdecl;
-var JS_GetContextPrivate: TJS_GetContextPrivate external SpiderMonkeyLib name 'SM_GetContextPrivate';
+var JS_GetContextPrivate: TJS_GetContextPrivate
+  external SpiderMonkeyLib name 'SM_GetContextPrivate';
 
 /// Write access a JSContext field for application-specific data.
 // Memory management for this private data is the application's responsibility.
 // The JavaScript engine itself never uses it.
 type TJS_SetContextPrivate = procedure (cx: PJSContext; data: Pointer); cdecl;
-var JS_SetContextPrivate: TJS_SetContextPrivate external SpiderMonkeyLib name 'SM_SetContextPrivate';
+var JS_SetContextPrivate: TJS_SetContextPrivate
+  external SpiderMonkeyLib name 'SM_SetContextPrivate';
 
 /// This function makes a cross-compartment wrapper for the given JS object.
 // Details see here http://stackoverflow.com/questions/18730477/what-does-js-wrapobject-do
@@ -2095,42 +2108,48 @@ var JS_WrapObject: TJS_WrapObject external SpiderMonkeyLib name 'SM_WrapObject';
 /// Enter a different compartment on the given context, so that objects in that
 // compartment can be accessed.
 // - NB: This API is infallible; a NULL return value does not indicate error
-type TJS_EnterCompartment = function (cx: PJSContext; target: PJSObject): PJSCompartment; cdecl;
-var JS_EnterCompartment: TJS_EnterCompartment external SpiderMonkeyLib name 'SM_EnterCompartment';
+type TJS_EnterRealm = function (cx: PJSContext; target: PJSObject): PJSRealm; cdecl;
+var JS_EnterRealm: TJS_EnterRealm external SpiderMonkeyLib name 'SM_EnterRealm';
 
 /// Leave a the compartment, returning to the compartment active before the
 // corresponding JS_EnterCompartment.
-type TJS_LeaveCompartment = procedure (cx: PJSContext; oldCompartment: PJSCompartment); cdecl;
-var JS_LeaveCompartment: TJS_LeaveCompartment external SpiderMonkeyLib name 'SM_LeaveCompartment';
+type TJS_LeaveRealm = procedure (cx: PJSContext; oldRealm: PJSRealm); cdecl;
+var JS_LeaveRealm: TJS_LeaveRealm external SpiderMonkeyLib name 'SM_LeaveRealm';
 
 /// Initialize standard JS class constructors, prototypes, and any top-level
 // functions and constants associated with the standard classes (e.g. isNaN
 // for Number).
 // - NB: This sets cx's global object to obj if it was null.
-type TJS_InitStandardClasses = function (cx: PJSContext; var obj: PJSObject): boolean; cdecl;
-var JS_InitStandardClasses: TJS_InitStandardClasses external SpiderMonkeyLib name 'SM_InitStandardClasses';
+type TJS_InitRealmStandardClasses = function (cx: PJSContext{; var obj: PJSObject}): boolean; cdecl;
+var JS_InitRealmStandardClasses: TJS_InitRealmStandardClasses
+  external SpiderMonkeyLib name 'SM_InitRealmStandardClasses';
 
 ///Return the global object for the active function on the context.
 type TJS_CurrentGlobalOrNull = function (cx: PJSContext):PJSObject; cdecl;
-var JS_CurrentGlobalOrNull: TJS_CurrentGlobalOrNull external SpiderMonkeyLib name 'SM_CurrentGlobalOrNull';
+var JS_CurrentGlobalOrNull: TJS_CurrentGlobalOrNull
+  external SpiderMonkeyLib name 'SM_CurrentGlobalOrNull';
 
 /// Add 'Reflect.parse', a SpiderMonkey extension, to the Reflect object on the
 // given global.
 type TJS_InitReflectParse = function (cx: PJSContext; var obj: PJSObject): boolean; cdecl;
-var JS_InitReflectParse: TJS_InitReflectParse external SpiderMonkeyLib name 'SM_InitReflectParse';
-
+var JS_InitReflectParse: TJS_InitReflectParse external
+  SpiderMonkeyLib name 'SM_InitReflectParse';
+{$IFDEF JS_HAS_CTYPES}
 /// Initialize the 'ctypes' object on a global variable 'obj'. The 'ctypes'
 // object will be sealed.
 type TJS_InitCTypesClass = function (cx: PJSContext; var obj: PJSObject): boolean; cdecl;
-var JS_InitCTypesClass: TJS_InitCTypesClass external SpiderMonkeyLib name 'SM_InitCTypesClass';
-
+var JS_InitCTypesClass: TJS_InitCTypesClass
+  external SpiderMonkeyLib name 'SM_InitCTypesClass';
+{$ENDIF}
 /// Initialize the 'Debugger' object on a global variable 'obj'. The 'ctypes'
 // object will be sealed.
 type TJS_DefineDebuggerObject = function (cx: PJSContext; var obj: PJSObject): boolean; cdecl;
-var JS_DefineDebuggerObject: TJS_DefineDebuggerObject external SpiderMonkeyLib name 'SM_DefineDebuggerObject';
+var JS_DefineDebuggerObject: TJS_DefineDebuggerObject
+  external SpiderMonkeyLib name 'SM_DefineDebuggerObject';
 
 /// Performs garbage collection in the JS memory pool.
-type TJS_GC = procedure (cx: PJSContext); cdecl;
+type TJS_GC = procedure (cx: PJSContext;
+  reason: Integer { enum class JS::GCReason } = 0 {JS::GCReason::API}); cdecl;
 var JS_GC: TJS_GC external SpiderMonkeyLib name 'SM_GC';
 
 /// Offer the JavaScript engine an opportunity to perform garbage collection if needed.
@@ -2146,8 +2165,10 @@ type TJS_GetGCParameter = function (cx: PJSContext; key: JSGCParamKey): uint32; 
 var JS_GetGCParameter: TJS_GetGCParameter external SpiderMonkeyLib name 'SM_GetGCParameter';
 
 ///Adjust performance parameters related to garbage collection based on available memory(in megabytes).
-type TJS_SetGCParametersBasedOnAvailableMemory = procedure (cx: PJSContext; availMem: uint32); cdecl;
-var JS_SetGCParametersBasedOnAvailableMemory: TJS_SetGCParametersBasedOnAvailableMemory external SpiderMonkeyLib name 'SM_SetGCParametersBasedOnAvailableMemory';
+type TJS_SetGCParametersBasedOnAvailableMemory = procedure (cx: PJSContext;
+  availMem: uint32); cdecl;
+var JS_SetGCParametersBasedOnAvailableMemory: TJS_SetGCParametersBasedOnAvailableMemory
+  external SpiderMonkeyLib name 'SM_SetGCParametersBasedOnAvailableMemory';
 
 /// Creates a new JSString whose characters are stored in external memory, i.e.,
 //  memory allocated by the application, not the JavaScript engine
@@ -2163,7 +2184,8 @@ var JS_SetGCParametersBasedOnAvailableMemory: TJS_SetGCParametersBasedOnAvailabl
 //  - The text buffer array does not need to be zero-terminated.
 type TJS_NewExternalString = function (cx: PJSContext; chars: PCChar16; length: size_t;
   fin: PJSStringFinalizer): PJSString; cdecl;
-var JS_NewExternalString: TJS_NewExternalString external SpiderMonkeyLib name 'SM_NewExternalString';
+var JS_NewExternalString: TJS_NewExternalString
+  external SpiderMonkeyLib name 'SM_NewExternalString';
 
 /// Set the size of the native stack that should not be exceed. To disable
 // stack size checking pass 0.
@@ -2180,7 +2202,8 @@ var JS_NewExternalString: TJS_NewExternalString external SpiderMonkeyLib name 'S
 // and before any code is executed and/or interrupts requested.
 type TJS_SetNativeStackQuota = procedure (cx: PJSContext; systemCodeStackSize: size_t;
   trustedScriptStackSize: size_t = 0; untrustedScriptStackSize: size_t = 0); cdecl;
-var JS_SetNativeStackQuota: TJS_SetNativeStackQuota external SpiderMonkeyLib name 'SM_SetNativeStackQuota';
+var JS_SetNativeStackQuota: TJS_SetNativeStackQuota
+  external SpiderMonkeyLib name 'SM_SetNativeStackQuota';
 
 /// Convert a JS::Value to type jsid.
 type TJS_ValueToId = function (cx: PJSContext; var v: jsval; out id: jsid): Boolean; cdecl;
@@ -2191,7 +2214,8 @@ type TJS_IdToValue = function (cx: PJSContext; id: jsid; out v: jsval): Boolean;
 var JS_IdToValue: TJS_IdToValue external SpiderMonkeyLib name 'SM_IdToValue';
 
 type TJS_ValueToSource = function (cx: PJSContext; var v: jsval): PJSString; cdecl;
-var JS_ValueToSource: TJS_ValueToSource external SpiderMonkeyLib name 'SM_ValueToSource';
+var JS_ValueToSource: TJS_ValueToSource
+  external SpiderMonkeyLib name 'SM_ValueToSource';
 
 /// Make a JSClass accessible to JavaScript code by creating its prototype,
 // constructor, properties, and functions.
@@ -2220,18 +2244,21 @@ var JS_SetPrivate: TJS_SetPrivate external SpiderMonkeyLib name 'SM_SetPrivate';
 
 /// Retrieves the constructor for an object.
 type TJS_GetConstructor = function (cx: PJSContext; var proto: PJSObject): PJSObject; cdecl;
-var JS_GetConstructor: TJS_GetConstructor external SpiderMonkeyLib name 'SM_GetConstructor';
+var JS_GetConstructor: TJS_GetConstructor
+  external SpiderMonkeyLib name 'SM_GetConstructor';
 
 /// Retrieve the private data associated with an object, if that object is an
 // instance of a specified class.
 type TJS_GetInstancePrivate = function (cx: PJSContext; var obj: PJSObject;
   clasp: PJSClass; args: JSUnknown): Pointer; cdecl;
-var JS_GetInstancePrivate: TJS_GetInstancePrivate external SpiderMonkeyLib name 'SM_GetInstancePrivate';
+var JS_GetInstancePrivate: TJS_GetInstancePrivate
+  external SpiderMonkeyLib name 'SM_GetInstancePrivate';
 
 /// Create a new JavaScript object for use as a global object.
 type TJS_NewGlobalObject = function (cx: PJSContext; clasp: PJSClass; principals: PJSPrincipals;
-  hookOption: OnNewGlobalHookOption; options: PJS_CompartmentOptions): PJSObject; cdecl;
-var JS_NewGlobalObject: TJS_NewGlobalObject external SpiderMonkeyLib name 'SM_NewGlobalObject';
+  hookOption: OnNewGlobalHookOption; options: PJS_RealmOptions): PJSObject; cdecl;
+var JS_NewGlobalObject: TJS_NewGlobalObject
+  external SpiderMonkeyLib name 'SM_NewGlobalObject';
 
 /// Spidermonkey does not have a good way of keeping track of what compartments should be marked on
 /// their own. We can mark the roots unconditionally, but marking GC things only relevant in live
@@ -2240,7 +2267,8 @@ var JS_NewGlobalObject: TJS_NewGlobalObject external SpiderMonkeyLib name 'SM_Ne
 ///
 /// It is still possible to specify custom trace hooks for global object classes. They can be
 /// provided via the CompartmentOptions passed to JS_NewGlobalObject.
-type TJS_GlobalObjectTraceHook = procedure (trc: Pointer{ JSTracer }; global: PJSObject); cdecl;
+type TJS_GlobalObjectTraceHook = procedure (trc: Pointer{ JSTracer };
+  global: PJSObject); cdecl;
 var JS_GlobalObjectTraceHook: TJS_GlobalObjectTraceHook
   external SpiderMonkeyLib name 'SM_GlobalObjectTraceHook';
 
@@ -2253,13 +2281,15 @@ var JS_NewObject: TJS_NewObject external SpiderMonkeyLib name 'SM_NewObject';
 // proto. If proto is nullptr, the JS object will have `null` as [[Prototype]].
 type TJS_NewObjectWithGivenProto = function (cx: PJSContext; clasp: PJSClass;
   var proto: PJSObject): PJSObject; cdecl;
-var JS_NewObjectWithGivenProto: TJS_NewObjectWithGivenProto external SpiderMonkeyLib name 'SM_NewObjectWithGivenProto';
+var JS_NewObjectWithGivenProto: TJS_NewObjectWithGivenProto
+  external SpiderMonkeyLib name 'SM_NewObjectWithGivenProto';
 
 /// Get the prototype of obj, storing it in result.
 // - Implements: ES6 [[GetPrototypeOf]] internal method.
 type TJS_GetPrototype = function (cx: PJSContext; var obj: PJSObject;
   out result: PJSObject):Boolean; cdecl;
-var JS_GetPrototype: TJS_GetPrototype external SpiderMonkeyLib name 'SM_GetPrototype';
+var JS_GetPrototype: TJS_GetPrototype
+  external SpiderMonkeyLib name 'SM_GetPrototype';
 
 /// Change the prototype of obj.
 // - Implements: ES6 [[SetPrototypeOf]] internal method.
@@ -2271,58 +2301,82 @@ var JS_GetPrototype: TJS_GetPrototype external SpiderMonkeyLib name 'SM_GetProto
 // It's better to create the object with the right prototype from the start.
 type TJS_SetPrototype = function (cx: PJSContext; var obj: PJSObject;
   var proto: PJSObject):Boolean; cdecl;
-var JS_SetPrototype: TJS_SetPrototype external SpiderMonkeyLib name 'SM_SetPrototype';
+var JS_SetPrototype: TJS_SetPrototype
+  external SpiderMonkeyLib name 'SM_SetPrototype';
 
 /// Create a new property on an object.
 // Name indentifies by ID
 type TJS_DefinePropertyById = function (cx: PJSContext; var obj: PJSObject;
-  var id: jsid; var value: jsval; attrs: uint32; getter: JSNative;
-  setter: JSNative): boolean; cdecl;
-var JS_DefinePropertyById: TJS_DefinePropertyById external SpiderMonkeyLib name 'SM_DefinePropertyById';
+  var id: jsid; var value: jsval; attrs: uint32): boolean; cdecl;
+var JS_DefinePropertyById: TJS_DefinePropertyById
+  external SpiderMonkeyLib name 'SM_DefinePropertyById';
+
+type TJS_DefinePropertyByIdNative = function (cx: PJSContext; var obj: PJSObject;
+  var id: jsid; getter: JSNative; setter: JSNative; attrs: uint32): boolean; cdecl;
+var JS_DefinePropertyByIdNative: TJS_DefinePropertyByIdNative
+  external SpiderMonkeyLib name 'SM_DefinePropertyByIdNative';
 
 /// Create a new property on an object.
 // Name indentifies by ansi string
 type TJS_DefineProperty = function (cx: PJSContext; var obj: PJSObject;
-  const name: PCChar; var value: jsval; attrs: uint32; getter: JSNative;
-  setter: JSNative): boolean; cdecl;
-var JS_DefineProperty: TJS_DefineProperty external SpiderMonkeyLib name 'SM_DefineProperty';
+  const name: PCChar; var value: jsval; attrs: uint32): boolean; cdecl;
+var JS_DefineProperty: TJS_DefineProperty
+  external SpiderMonkeyLib name 'SM_DefineProperty';
+
+type TJS_DefinePropertyNative = function (cx: PJSContext; var obj: PJSObject;
+  const name: PCChar; getter: JSNative; setter: JSNative;
+  attrs: uint32): boolean; cdecl;
+var JS_DefinePropertyNative: TJS_DefinePropertyNative
+  external SpiderMonkeyLib name 'SM_DefinePropertyNative';
 
 /// Create a new property on an object.
 // Name indentifies by unicode string
 type TJS_DefineUCProperty = function (cx: PJSContext; var obj: PJSObject;
-  const name: PCChar16; namelen: size_t; var value: jsval; attrs: uint32;
-  getter: JSNative; setter: JSNative): Boolean; cdecl;
-var JS_DefineUCProperty: TJS_DefineUCProperty external SpiderMonkeyLib name 'SM_DefineUCProperty';
+  const name: PCChar16; namelen: size_t; var value: jsval;
+  attrs: uint32): Boolean; cdecl;
+var JS_DefineUCProperty: TJS_DefineUCProperty
+  external SpiderMonkeyLib name 'SM_DefineUCProperty';
+
+type TJS_DefineUCPropertyNative = function (cx: PJSContext; var obj: PJSObject;
+  const name: PCChar16; namelen: size_t; getter: JSNative; setter: JSNative;
+  attrs: uint32): Boolean; cdecl;
+var JS_DefineUCPropertyNative: TJS_DefineUCPropertyNative
+  external SpiderMonkeyLib name 'SM_DefineUCPropertyNative';
 
 /// Determine whether a JavaScript object has a specified property.
 // Name indentifies by ansi string
 type TJS_HasProperty = function (cx: PJSContext; var obj: PJSObject;
   const name: PCChar; var found: Boolean): Boolean; cdecl;
-var JS_HasProperty: TJS_HasProperty external SpiderMonkeyLib name 'SM_HasProperty';
+var JS_HasProperty: TJS_HasProperty
+  external SpiderMonkeyLib name 'SM_HasProperty';
 
 /// Determine whether a JavaScript object has a specified property.
 // Name indentifies by unicode string
 type TJS_HasUCProperty = function (cx: PJSContext; var obj: PJSObject;
   const name: PCChar16; namelen: size_t; var found: Boolean): Boolean; cdecl;
-var JS_HasUCProperty: TJS_HasUCProperty external SpiderMonkeyLib name 'SM_HasUCProperty';
+var JS_HasUCProperty: TJS_HasUCProperty
+  external SpiderMonkeyLib name 'SM_HasUCProperty';
 
 /// Find a specified property and retrieve its value.
 // Name indentifies by ID
 type TJS_GetPropertyById = function (cx: PJSContext; var obj: PJSObject;
   var id: jsid; out vp: jsval): boolean; cdecl;
-var JS_GetPropertyById: TJS_GetPropertyById external SpiderMonkeyLib name 'SM_GetPropertyById';
+var JS_GetPropertyById: TJS_GetPropertyById
+  external SpiderMonkeyLib name 'SM_GetPropertyById';
 
 /// Find a specified property and retrieve its value.
 // Name indentifies by ansi string
 type TJS_GetProperty = function (cx: PJSContext; var obj: PJSObject;
   const name: PCChar; out vp: jsval): boolean; cdecl;
-var JS_GetProperty: TJS_GetProperty external SpiderMonkeyLib name 'SM_GetProperty';
+var JS_GetProperty: TJS_GetProperty
+  external SpiderMonkeyLib name 'SM_GetProperty';
 
 /// Find a specified property and retrieve its value.
 // Name indentifies by unicode string
 type TJS_GetUCProperty = function (cx: PJSContext; var obj: PJSObject;
   const name: PCChar16; namelen: size_t; out vp: jsval): boolean; cdecl;
-var JS_GetUCProperty: TJS_GetUCProperty external SpiderMonkeyLib name 'SM_GetUCProperty';
+var JS_GetUCProperty: TJS_GetUCProperty
+  external SpiderMonkeyLib name 'SM_GetUCProperty';
 
 /// Find a specified numeric property of an object and return its current value.
 type TJS_GetElement = function (cx: PJSContext; var obj: PJSObject; index: uint32;
@@ -2339,7 +2393,8 @@ var JS_SetProperty: TJS_SetProperty external SpiderMonkeyLib name 'SM_SetPropert
 // Name indentifies by unicode string
 type TJS_SetUCProperty = function (cx: PJSContext; var obj: PJSObject;
   const name: PCChar16; namelen: size_t; var vp: jsval): boolean; cdecl;
-var JS_SetUCProperty: TJS_SetUCProperty external SpiderMonkeyLib name 'SM_SetUCProperty';
+var JS_SetUCProperty: TJS_SetUCProperty
+  external SpiderMonkeyLib name 'SM_SetUCProperty';
 
 /// Assign a value to a numeric property of an object.
 type TJS_SetElement = function (cx: PJSContext; var obj: PJSObject; index: uint32;
@@ -2350,12 +2405,14 @@ var JS_SetElement: TJS_SetElement external SpiderMonkeyLib name 'SM_SetElement';
 // Name indentifies by ID
 type TJS_DeletePropertyById = function (cx: PJSContext; var obj: PJSObject;
   var id: jsid; out res: JS_ObjectOpResult): Boolean; cdecl;
-var JS_DeletePropertyById: tJS_DeletePropertyById external SpiderMonkeyLib name 'SM_DeletePropertyById';
+var JS_DeletePropertyById: tJS_DeletePropertyById
+  external SpiderMonkeyLib name 'SM_DeletePropertyById';
 
 /// Removes a specified element or numeric property from an object.
 type TJS_DeleteElement = function (cx: PJSContext; var obj: PJSObject;
   index: uint32; out res: JS_ObjectOpResult): Boolean; cdecl;
-var JS_DeleteElement: TJS_DeleteElement external SpiderMonkeyLib name 'SM_DeleteElement';
+var JS_DeleteElement: TJS_DeleteElement
+  external SpiderMonkeyLib name 'SM_DeleteElement';
 
 /// Get an array of the non-symbol enumerable properties of obj.
 // This function is roughly equivalent to:
@@ -2388,20 +2445,23 @@ type
 // - equivalent of `rval = Reflect.apply(fun, obj, args)`.
 type TJS_CallFunctionValue = function (cx: PJSContext; var obj: PJSObject;
   var val: jsval; var args: JSHandleValueArray; out rval: jsval): Boolean; cdecl;
-var JS_CallFunctionValue: TJS_CallFunctionValue external SpiderMonkeyLib name 'SM_CallFunctionValue';
+var JS_CallFunctionValue: TJS_CallFunctionValue
+  external SpiderMonkeyLib name 'SM_CallFunctionValue';
 
 /// Calls a specified JS function.
 // Function identifies by PJSFunction
 type TJS_CallFunction = function (cx: PJSContext; var obj: PJSObject;
   var fun: PJSFunction; var args: JSHandleValueArray; out rval: jsval): Boolean; cdecl;
-var JS_CallFunction: TJS_CallFunction external SpiderMonkeyLib name 'SM_CallFunction';
+var JS_CallFunction: TJS_CallFunction
+  external SpiderMonkeyLib name 'SM_CallFunction';
 
 /// Calls a specified JS function.
 // Function identifies by ansi string
 // - Perform the method call `rval = obj[name](args)`.
 type TJS_CallFunctionName = function (cx: PJSContext; var obj: PJSObject;
   const name: PCChar; var args: JSHandleValueArray; out rval: jsval): Boolean; cdecl;
-var JS_CallFunctionName: TJS_CallFunctionName external SpiderMonkeyLib name 'SM_CallFunctionName';
+var JS_CallFunctionName: TJS_CallFunctionName
+  external SpiderMonkeyLib name 'SM_CallFunctionName';
 
 /// Invoke a constructor, like the JS expression `new ctor(...args)`. Returns
 // the new object, or null on error.
@@ -2412,24 +2472,28 @@ var JS_New: TJS_New external SpiderMonkeyLib name 'SM_New';
 /// Define multiple properties for a single object.
 type TJS_DefineProperties = function (cx: PJSContext; var obj: PJSObject;
   ps: PJSPropertySpec): boolean; cdecl;
-var JS_DefineProperties: TJS_DefineProperties external SpiderMonkeyLib name 'SM_DefineProperties';
+var JS_DefineProperties: TJS_DefineProperties
+  external SpiderMonkeyLib name 'SM_DefineProperties';
 
 /// Determine whether a property is already physically present on a JSObject.
 // Name indentifies by unicode string
 type TJS_AlreadyHasOwnUCProperty = function (cx: PJSContext; var obj: PJSObject;
     const name: PCChar16; namelen: size_t; var foundp: Boolean): Boolean; cdecl;
-var JS_AlreadyHasOwnUCProperty: TJS_AlreadyHasOwnUCProperty external SpiderMonkeyLib name 'SM_AlreadyHasOwnUCProperty';
+var JS_AlreadyHasOwnUCProperty: TJS_AlreadyHasOwnUCProperty
+  external SpiderMonkeyLib name 'SM_AlreadyHasOwnUCProperty';
 
 /// Create a new Array object.
 // Only length passed
 type TJS_NewArrayObject = function (cx: PJSContext; length: size_t): PJSObject; cdecl;
-var JS_NewArrayObject: TJS_NewArrayObject external SpiderMonkeyLib name 'SM_NewArrayObject';
+var JS_NewArrayObject: TJS_NewArrayObject
+  external SpiderMonkeyLib name 'SM_NewArrayObject';
 
 /// Create a new Array object.
 // Content passed
 type TJS_NewArrayObject2 = function (cx: PJSContext;
     const contents: JSHandleValueArray): PJSObject; cdecl;
-var JS_NewArrayObject2: TJS_NewArrayObject2 external SpiderMonkeyLib name 'SM_NewArrayObject2';
+var JS_NewArrayObject2: TJS_NewArrayObject2
+  external SpiderMonkeyLib name 'SM_NewArrayObject2';
 
 /// Returns true and sets |*isArray| indicating whether |obj| is an Array object
 // or a wrapper around one, otherwise returns false on failure.
@@ -2437,7 +2501,8 @@ var JS_NewArrayObject2: TJS_NewArrayObject2 external SpiderMonkeyLib name 'SM_Ne
 // target is an Array, or when passed a revoked proxy.
 type TJS_IsArrayObject = function (cx: PJSContext; var obj: PJSObject;
     out isArray: Boolean): boolean; cdecl;
-var JS_IsArrayObject: TJS_IsArrayObject external SpiderMonkeyLib name 'SM_IsArrayObject';
+var JS_IsArrayObject: TJS_IsArrayObject
+  external SpiderMonkeyLib name 'SM_IsArrayObject';
 
 /// JS_GetArrayLength gets the .length property of obj as though by calling JS_GetProperty
 // and converts it to a 32-bit unsigned integer. If obj is an array (see JS_IsArrayObject),
@@ -2448,7 +2513,8 @@ var JS_IsArrayObject: TJS_IsArrayObject external SpiderMonkeyLib name 'SM_IsArra
 // is undefined.
 type TJS_GetArrayLength = function (cx: PJSContext; var obj: PJSObject;
   out length: uint32): Boolean; cdecl;
-var JS_GetArrayLength: TJS_GetArrayLength external SpiderMonkeyLib name 'SM_GetArrayLength';
+var JS_GetArrayLength: TJS_GetArrayLength
+  external SpiderMonkeyLib name 'SM_GetArrayLength';
 
 /// Read access an object's reserved slots.
 function JS_GetReservedSlot(obj: PJSObject; index: uint32): Int64; cdecl;
@@ -2457,65 +2523,76 @@ function JS_GetReservedSlot(obj: PJSObject; index: uint32): Int64; cdecl;
 /// Write access an object's reserved slots
 type TJS_SetReservedSlot = procedure (obj: PJSObject; index: uint32;
   var v: jsval); cdecl;
-var JS_SetReservedSlot: TJS_SetReservedSlot external SpiderMonkeyLib name 'SM_SetReservedSlot';
+var JS_SetReservedSlot: TJS_SetReservedSlot
+  external SpiderMonkeyLib name 'SM_SetReservedSlot';
 
 /// Create a new JavaScript function that is implemented as a JSNative.
 type TJS_NewFunction = function (cx: PJSContext; call: JSNative; nargs: uintN;
   flags: uintN; name: PCChar): PJSObject; cdecl;
-var JS_NewFunction: TJS_NewFunction external SpiderMonkeyLib name 'SM_NewFunction';
+var JS_NewFunction: TJS_NewFunction
+  external SpiderMonkeyLib name 'SM_NewFunction';
 
 /// Return the function's identifier as a JSString, or null if fun is unnamed.
 // The returned string lives as long as fun, so you don't need to root a saved
 // reference to it if fun is well-connected or rooted, and provided you bound
 // the use of the saved reference by fun's lifetime.
 type TJS_GetFunctionId = function (fun: PJSFunction): PJSString; cdecl;
-var JS_GetFunctionId: TJS_GetFunctionId external SpiderMonkeyLib name 'SM_GetFunctionId';
+var JS_GetFunctionId: TJS_GetFunctionId
+  external SpiderMonkeyLib name 'SM_GetFunctionId';
 
 /// Infallible predicate to test whether obj is a function object (faster than
 // comparing obj's class name to "Function", but equivalent unless someone has
 // overwritten the "Function" identifier with a different constructor and then
 // created instances using that constructor that might be passed in as obj).
-type TJS_ObjectIsFunction = function (cx: PJSContext; obj: PJSObject): boolean; cdecl;
-var JS_ObjectIsFunction: TJS_ObjectIsFunction external SpiderMonkeyLib name 'SM_ObjectIsFunction';
+type TJS_ObjectIsFunction = function (obj: PJSObject): boolean; cdecl;
+var JS_ObjectIsFunction: TJS_ObjectIsFunction
+  external SpiderMonkeyLib name 'SM_ObjectIsFunction';
 
 /// Create zero or more functions and makes them properties (methods)
 // of a specified object, obj, as if by calling JS_DefineFunction repeatedly
 type TJS_DefineFunctions = function (cx: PJSContext; var obj: PJSObject;
   fs: PJSFunctionSpec; behavior: JSPropertyDefinitionBehavior): Boolean; cdecl;
-var JS_DefineFunctions: TJS_DefineFunctions external SpiderMonkeyLib name 'SM_DefineFunctions';
+var JS_DefineFunctions: TJS_DefineFunctions
+  external SpiderMonkeyLib name 'SM_DefineFunctions';
 
 /// Create a native function and assign it as a property to a specified JS object
 type TJS_DefineFunction = function (cx: PJSContext; var obj: PJSObject; name: PCChar;
     call: JSNative; nargs: uintN; attrs: uintN): PJSFunction; cdecl;
-var JS_DefineFunction: TJS_DefineFunction external SpiderMonkeyLib name 'SM_DefineFunction';
+var JS_DefineFunction: TJS_DefineFunction
+  external SpiderMonkeyLib name 'SM_DefineFunction';
 
 /// Unicode version to create a native function
 type TJS_DefineUCFunction = function (cx: PJSContext; var obj: PJSObject;
     name: PCChar16; namelen: size_t; call: JSNative; nargs: uintN;
     attrs: uintN): PJSFunction; cdecl;
-var JS_DefineUCFunction: TJS_DefineUCFunction external SpiderMonkeyLib name 'SM_DefineUCFunction';
+var JS_DefineUCFunction: TJS_DefineUCFunction
+  external SpiderMonkeyLib name 'SM_DefineUCFunction';
 
 /// Compile a script, source, for execution.
 // Ansi version
 type TJS_CompileScript = function (cx: PJSContext; bytes: PCChar; length: size_t;
   options: PJSCompileOptions; out script: PJSScript): boolean; cdecl;
-var JS_CompileScript: TJS_CompileScript external SpiderMonkeyLib name 'SM_CompileScript';
+var JS_CompileScript: TJS_CompileScript
+  external SpiderMonkeyLib name 'SM_CompileScript';
 
 /// Compile a script, source, for execution.
 // Unicode version
 type TJS_CompileUCScript = function (cx: PJSContext; chars: PCChar16;
   length: size_t; options: PJSCompileOptions; out script: PJSScript): boolean; cdecl;
-var JS_CompileUCScript: TJS_CompileUCScript external SpiderMonkeyLib name 'SM_CompileUCScript';
+var JS_CompileUCScript: TJS_CompileUCScript
+  external SpiderMonkeyLib name 'SM_CompileUCScript';
 
 /// Generate the complete source code of a function declaration from a compiled function
-type TJS_DecompileFunction = function (cx: PJSContext; var fun: PJSFunction;
-  indent: uintN): PJSString; cdecl;
-var JS_DecompileFunction: TJS_DecompileFunction external SpiderMonkeyLib name 'SM_DecompileFunction';
+type TJS_DecompileFunction = function (cx: PJSContext; var fun: PJSFunction{;
+  indent: uintN}): PJSString; cdecl;
+var JS_DecompileFunction: TJS_DecompileFunction
+  external SpiderMonkeyLib name 'SM_DecompileFunction';
 
 /// Evaluate a script in the scope of the current global of cx.
 type TJS_ExecuteScript = function (cx: PJSContext; var script: PJSScript;
   out rval: jsval): Boolean; cdecl;
-var JS_ExecuteScript: TJS_ExecuteScript external SpiderMonkeyLib name 'SM_ExecuteScript';
+var JS_ExecuteScript: TJS_ExecuteScript
+  external SpiderMonkeyLib name 'SM_ExecuteScript';
 
 /// These functions allow setting an interrupt callback that will be called
 // from the JS thread some time after any thread triggered the callback using
@@ -2527,70 +2604,84 @@ var JS_ExecuteScript: TJS_ExecuteScript external SpiderMonkeyLib name 'SM_Execut
 // if it re-enters the JS engine. The embedding must ensure that the callback
 // is disconnected before attempting such re-entry.
 type TJS_CheckForInterrupt = function (cx: PJSContext): Boolean; cdecl;
-var JS_CheckForInterrupt: TJS_CheckForInterrupt external SpiderMonkeyLib name 'SM_CheckForInterrupt';
+var JS_CheckForInterrupt: TJS_CheckForInterrupt
+  external SpiderMonkeyLib name 'SM_CheckForInterrupt';
 
 type TJS_AddInterruptCallback = function (cx: PJSContext;
   callback: JSInterruptCallback): Boolean; cdecl;
-var JS_AddInterruptCallback: TJS_AddInterruptCallback external SpiderMonkeyLib name 'SM_AddInterruptCallback';
+var JS_AddInterruptCallback: TJS_AddInterruptCallback
+  external SpiderMonkeyLib name 'SM_AddInterruptCallback';
 
 type TJS_DisableInterruptCallback = function (cx: PJSContext): Boolean; cdecl;
-var JS_DisableInterruptCallback: TJS_DisableInterruptCallback external SpiderMonkeyLib name 'SM_DisableInterruptCallback';
+var JS_DisableInterruptCallback: TJS_DisableInterruptCallback
+  external SpiderMonkeyLib name 'SM_DisableInterruptCallback';
 
 type TJS_ResetInterruptCallback = procedure (cx: PJSContext;
   enable: Boolean); cdecl;
-var JS_ResetInterruptCallback: TJS_ResetInterruptCallback external SpiderMonkeyLib name 'SM_ResetInterruptCallback';
+var JS_ResetInterruptCallback: TJS_ResetInterruptCallback
+  external SpiderMonkeyLib name 'SM_ResetInterruptCallback';
 
 /// Request a callback set using JS_SetInterruptCallback
 type TJS_RequestInterruptCallback = procedure (cx: PJSContext); cdecl;
-var JS_RequestInterruptCallback: TJS_RequestInterruptCallback external SpiderMonkeyLib name 'SM_RequestInterruptCallback';
+var JS_RequestInterruptCallback: TJS_RequestInterruptCallback
+  external SpiderMonkeyLib name 'SM_RequestInterruptCallback';
 
 /// Indicates whether or not a script or function is currently executing in a given context.
-type TJS_IsRunning = function (cx: PJSContext): Boolean; cdecl;
-var JS_IsRunning: TJS_IsRunning external SpiderMonkeyLib name 'SM_IsRunning';
+// REMOVED: https://bugzilla.mozilla.org/show_bug.cgi?id=981201
+//function JS_IsRunning(cx: PJSContext): Boolean; cdecl;
+//  external SpiderMonkeyLib name 'SM_IsRunning';
 
 /// Allocate space for a JavaScript string and its underlying storage,
 // and copy n characters from a character array, s, into the new JSString
 // Ansi version
 type TJS_NewStringCopyN = function (cx: PJSContext; s: PCChar;
   n: size_t): PJSString; cdecl;
-var JS_NewStringCopyN: TJS_NewStringCopyN external SpiderMonkeyLib name 'SM_NewStringCopyN';
+var JS_NewStringCopyN: TJS_NewStringCopyN
+  external SpiderMonkeyLib name 'SM_NewStringCopyN';
 
 /// Allocate space for a JavaScript string and its underlying storage,
 // and copy characters from NULL TERMINATED! UTF8 character array
 type TJS_NewStringCopyUTF8Z = function (cx: PJSContext;
   pNullTerminatedUTF8: PUTF8Char): PJSString; cdecl;
-var JS_NewStringCopyUTF8Z: TJS_NewStringCopyUTF8Z external SpiderMonkeyLib name 'SM_NewStringCopyUTF8Z';
+var JS_NewStringCopyUTF8Z: TJS_NewStringCopyUTF8Z
+  external SpiderMonkeyLib name 'SM_NewStringCopyUTF8Z';
 
 /// Returns the empty JSString as a JS value
 type TJS_GetEmptyStringValue = function (cx: PJSContext): jsval; cdecl;
-var JS_GetEmptyStringValue: TJS_GetEmptyStringValue external SpiderMonkeyLib name 'SM_GetEmptyStringValue';
+var JS_GetEmptyStringValue: TJS_GetEmptyStringValue
+  external SpiderMonkeyLib name 'SM_GetEmptyStringValue';
 
 /// Allocate space for a JavaScript string and its underlying storage,
 // and copy n characters from a character array, s, into the new JSString
 // Unicode version
 type TJS_NewUCStringCopyN = function (cx: PJSContext; s: PCChar16;
   n: size_t): PJSString; cdecl;
-var JS_NewUCStringCopyN: TJS_NewUCStringCopyN external SpiderMonkeyLib name 'SM_NewUCStringCopyN';
+var JS_NewUCStringCopyN: TJS_NewUCStringCopyN
+  external SpiderMonkeyLib name 'SM_NewUCStringCopyN';
 
 /// Return the length of a JavaScript string.
 type TJS_GetStringLength = function (str: PJSString): size_t; cdecl;
-var JS_GetStringLength: TJS_GetStringLength external SpiderMonkeyLib name 'SM_GetStringLength';
+var JS_GetStringLength: TJS_GetStringLength
+  external SpiderMonkeyLib name 'SM_GetStringLength';
 
 /// Return true if the string's characters are stored as Latin1.
 type TJS_StringHasLatin1Chars = function (str: PJSString): boolean; cdecl;
-var JS_StringHasLatin1Chars: TJS_StringHasLatin1Chars external SpiderMonkeyLib name 'SM_StringHasLatin1Chars';
+var JS_StringHasLatin1Chars: TJS_StringHasLatin1Chars
+  external SpiderMonkeyLib name 'SM_StringHasLatin1Chars';
 
 /// Return a pointer to the string, and store the length to *length
 // Use it when characters are stored as Latin1.
 type TJS_GetLatin1StringCharsAndLength = function (cx: PJSContext;
-  nogc: PJSAutoCheckCannotGC; str: PJSString; plength: psize_t):PCChar; cdecl;
-var JS_GetLatin1StringCharsAndLength: TJS_GetLatin1StringCharsAndLength external SpiderMonkeyLib name 'SM_GetLatin1StringCharsAndLength';
+  nogc: PJSAutoRequireNoGC; str: PJSString; plength: psize_t):PCChar; cdecl;
+var JS_GetLatin1StringCharsAndLength: TJS_GetLatin1StringCharsAndLength
+  external SpiderMonkeyLib name 'SM_GetLatin1StringCharsAndLength';
 
 /// Return a pointer to the string, and store the length to *length
 // Use it when characters are stored as Unicode
 type TJS_GetTwoByteStringCharsAndLength = function (cx: PJSContext;
-  nogc: PJSAutoCheckCannotGC; str: PJSString; plength: psize_t): PCChar16; cdecl;
-var JS_GetTwoByteStringCharsAndLength: TJS_GetTwoByteStringCharsAndLength external SpiderMonkeyLib name 'SM_GetTwoByteStringCharsAndLength';
+  nogc: PJSAutoRequireNoGC; str: PJSString; plength: psize_t): PCChar16; cdecl;
+var JS_GetTwoByteStringCharsAndLength: TJS_GetTwoByteStringCharsAndLength
+  external SpiderMonkeyLib name 'SM_GetTwoByteStringCharsAndLength';
 
 /// converts a value to JSON, optionally replacing values if a replacer
 // function is specified, or optionally including only the specified properties
@@ -2610,7 +2701,8 @@ var JS_ParseJSON: TJS_ParseJSON external SpiderMonkeyLib name 'SM_ParseJSON';
 // The callback must then return JS_FALSE to cause the exception to be propagated
 // to the calling script.
 type TJS_ReportError = procedure (cx: PJSContext; const format: PCChar); cdecl; varargs;
-var JS_ReportError: TJS_ReportError external SpiderMonkeyLib name 'SM_ReportErrorASCII';
+var JS_ReportError: TJS_ReportError
+  external SpiderMonkeyLib name 'SM_ReportErrorASCII';
 
 /// Report an error with an application-defined error code.
 // - varargs is Additional arguments for the error message.
@@ -2619,12 +2711,14 @@ var JS_ReportError: TJS_ReportError external SpiderMonkeyLib name 'SM_ReportErro
 // message, which is determined by the errorCallback
 type TJS_ReportErrorNumberUC = procedure (cx: PJSContext; errorCallback: JSErrorCallback;
   userRef: pointer; const erroNubmer: uintN); cdecl; varargs;
-var JS_ReportErrorNumberUC: TJS_ReportErrorNumberUC external SpiderMonkeyLib name 'SM_ReportErrorNumberUC';
+var JS_ReportErrorNumberUC: TJS_ReportErrorNumberUC
+  external SpiderMonkeyLib name 'SM_ReportErrorNumberUC';
 
 type TJS_ReportErrorNumberUTF8 = procedure (cx: PJSContext;
   errorCallback: JSErrorCallback; userRef: pointer;
   const erroNubmer: uintN); cdecl; varargs;
-var JS_ReportErrorNumberUTF8: TJS_ReportErrorNumberUTF8 external SpiderMonkeyLib name 'SM_ReportErrorNumberUTF8';
+var JS_ReportErrorNumberUTF8: TJS_ReportErrorNumberUTF8
+  external SpiderMonkeyLib name 'SM_ReportErrorNumberUTF8';
 
 /// Reports a memory allocation error
 // - Call JS_ReportOutOfMemory to report that an operation failed because the
@@ -2632,21 +2726,25 @@ var JS_ReportErrorNumberUTF8: TJS_ReportErrorNumberUTF8 external SpiderMonkeyLib
 // - When the JavaScript engine tries to allocate memory and allocation fails,
 // it reports an error as though by calling this function
 type TJS_ReportOutOfMemory = procedure (cx: PJSContext); cdecl;
-var JS_ReportOutOfMemory: TJS_ReportOutOfMemory external SpiderMonkeyLib name 'SM_ReportOutOfMemory';
+var JS_ReportOutOfMemory: TJS_ReportOutOfMemory
+  external SpiderMonkeyLib name 'SM_ReportOutOfMemory';
 
 /// Get the warning reporting mechanism for an application. It is not working for errors.
 type TJS_GetWarningReporter = function (cx: PJSContext): JSWarningReporter; cdecl;
-var JS_GetWarningReporter: TJS_GetWarningReporter external SpiderMonkeyLib name 'SM_GetWarningReporter';
+var JS_GetWarningReporter: TJS_GetWarningReporter
+  external SpiderMonkeyLib name 'SM_GetWarningReporter';
 
 /// Specify the warning reporting mechanism for an application.  It is not working for errors.
 type TJS_SetWarningReporter = function (cx: PJSContext;
   reporter: JSWarningReporter): JSWarningReporter; cdecl;
-var JS_SetWarningReporter: TJS_SetWarningReporter external SpiderMonkeyLib name 'SM_SetWarningReporter';
+var JS_SetWarningReporter: TJS_SetWarningReporter
+  external SpiderMonkeyLib name 'SM_SetWarningReporter';
 
 /// Create a new JavaScript date object
 type TJS_NewDateObject = function (cx: PJSContext;
   year, mon, mday, hour, min, sec: int32): PJSObject; cdecl;
-var JS_NewDateObject: TJS_NewDateObject external SpiderMonkeyLib name 'SM_NewDateObject';
+var JS_NewDateObject: TJS_NewDateObject
+  external SpiderMonkeyLib name 'SM_NewDateObject';
 
 /// Create a new JavaScript date object from the Unix millisecond elapsed since EPOC
 function JS_NewDateObjectMsec(cx: PJSContext; msec: double): PJSObject; cdecl;
@@ -2658,24 +2756,29 @@ function JS_NewDateObjectMsec(cx: PJSContext; msec: double): PJSObject; cdecl;
 // target is a Date, or when passed a revoked proxy.
 type TJS_ObjectIsDate = function (cx: PJSContext; var obj: PJSObject;
   out isDate: boolean): boolean; cdecl;
-var JS_ObjectIsDate: TJS_ObjectIsDate external SpiderMonkeyLib name 'SM_ObjectIsDate';
+var JS_ObjectIsDate: TJS_ObjectIsDate
+  external SpiderMonkeyLib name 'SM_ObjectIsDate';
 
 /// Determine whether an exception is pending in the JS engine.
 type TJS_IsExceptionPending = function (cx: PJSContext): Boolean; cdecl;
-var JS_IsExceptionPending: TJS_IsExceptionPending external SpiderMonkeyLib name 'SM_IsExceptionPending';
+var JS_IsExceptionPending: TJS_IsExceptionPending
+  external SpiderMonkeyLib name 'SM_IsExceptionPending';
 
 /// Get the current pending exception for a given JSContext.
 type TJS_GetPendingException = function (cx: PJSContext;
   out vp: jsval): Boolean; cdecl;
-var JS_GetPendingException: TJS_GetPendingException external SpiderMonkeyLib name 'SM_GetPendingException';
+var JS_GetPendingException: TJS_GetPendingException
+  external SpiderMonkeyLib name 'SM_GetPendingException';
 
 /// Sets the current exception being thrown within a context.
 type TJS_SetPendingException = procedure (cx: PJSContext; var vp: jsval); cdecl;
-var JS_SetPendingException: TJS_SetPendingException external SpiderMonkeyLib name 'SM_SetPendingException';
+var JS_SetPendingException: TJS_SetPendingException
+  external SpiderMonkeyLib name 'SM_SetPendingException';
 
 /// Clear the currently pending exception in a context.
 type TJS_ClearPendingException = procedure (cx: PJSContext); cdecl;
-var JS_ClearPendingException: TJS_ClearPendingException external SpiderMonkeyLib name 'SM_ClearPendingException';
+var JS_ClearPendingException: TJS_ClearPendingException
+  external SpiderMonkeyLib name 'SM_ClearPendingException';
 
 /// If the given object is an exception object, the exception will have (or be
 // able to lazily create) an error report struct, and this function will return
@@ -2684,7 +2787,8 @@ var JS_ClearPendingException: TJS_ClearPendingException external SpiderMonkeyLib
 // lifetime of the exception object.
 type TJS_ErrorFromException = function (cx: PJSContext;
   var obj: PJSObject): PJSErrorReport; cdecl;
-var JS_ErrorFromException: TJS_ErrorFromException external SpiderMonkeyLib name 'SM_ErrorFromException';
+var JS_ErrorFromException: TJS_ErrorFromException
+  external SpiderMonkeyLib name 'SM_ErrorFromException';
 
 /// Get options of context
 function JS_GetContextOptions(cx: PJSContext): PJSContextOptions; cdecl;
@@ -2714,25 +2818,30 @@ function JS_NewCompileOptions(cx: PJSContext): PJSCompileOptions; cdecl;
   external SpiderMonkeyLib name 'SM_NewCompileOptions';
 
 /// expose to Pascal
-// JS::CompileOptions.setFileAndLine + setUTF8
-procedure JS_SetCompileOptionsFileLineAndUtf8(co: PJSCompileOptions;
-  const f: PChar; l: cardinal; isUtf8: boolean); cdecl;
-  external SpiderMonkeyLib name 'SM_SetCompileOptionsFileLineAndUtf8';
+// JS::CompileOptions.setFileAndLine
+procedure JS_SetCompileOptionsFileAndLine(co: PJSCompileOptions;
+  const f: PChar; l: cardinal); cdecl;
+  external SpiderMonkeyLib name 'SM_SetCompileOptionsFileAndLine';
 
 /// Free Compile Options
 procedure JS_FreeCompileOptions(opt: PJSCompileOptions); cdecl;
   external SpiderMonkeyLib name 'SM_FreeCompileOptions';
 ///////////////////
 
-type TJS_EvaluateScript = function (cx: PJSContext;
-   options: PJSCompileOptions; bytes: PCChar; length: size_t;
-   out rval: jsval): Boolean; cdecl;
-var JS_EvaluateScript: TJS_EvaluateScript external SpiderMonkeyLib name 'SM_EvaluateScript';
+function JS_EvaluateScript(cx: PJSContext;
+  options: PJSCompileOptions; bytes: PCChar; length: size_t;
+  out rval: jsval): Boolean; cdecl;
+  external SpiderMonkeyLib name 'SM_EvaluateScript';
 
-type TJS_EvaluateUCScript = function (cx: PJSContext;
-   options: PJSCompileOptions; chars: PCChar16; length: size_t;
-   out rval: jsval): Boolean; cdecl;
-var JS_EvaluateUCScript: TJS_EvaluateUCScript external SpiderMonkeyLib name 'SM_EvaluateUCScript';
+function JS_EvaluateUTF8Script(cx: PJSContext;
+  options: PJSCompileOptions; utf8chars: PUTF8Char; length: size_t;
+  out rval: jsval): Boolean; cdecl;
+  external SpiderMonkeyLib name 'SM_EvaluateUTF8Script';
+
+function  JS_EvaluateUCScript(cx: PJSContext;
+  options: PJSCompileOptions; chars: PCChar16; length: size_t;
+  out rval: jsval): Boolean; cdecl;
+  external SpiderMonkeyLib name 'SM_EvaluateUCScript';
 
 /// Compute |this| for the |vp| inside a JSNative, either boxing primitives or
 // replacing with the global object as necessary.
@@ -2742,7 +2851,7 @@ var JS_EvaluateUCScript: TJS_EvaluateUCScript external SpiderMonkeyLib name 'SM_
 // the value is some other primitive, use |JS_ValueToObject| to box it.
 // - low-level API used by JS_THIS() macro.
 //function JS_ComputeThis(cx: PJSContext; var vp: jsval): jsval; cdecl; external SpiderMonkeyLib;
-type TJS_ComputeThis = function (cx: PJSContext; var vp: jsval): Int64; cdecl;
+type TJS_ComputeThis = function (cx: PJSContext; var vp: jsval; var this: Pointer): Boolean; cdecl;
 var JS_ComputeThis: TJS_ComputeThis external SpiderMonkeyLib name 'SM_ComputeThis';
 
 procedure strFinalizeOp(fin: PJSStringFinalizer; chars: PCChar16); cdecl;
@@ -2757,55 +2866,64 @@ const
 // - will fill the newly created array with zeros
 type TJS_NewInt8Array = function (cx: PJSContext;
   nelements: uint32): PJSObject; cdecl;
-var JS_NewInt8Array: TJS_NewInt8Array external SpiderMonkeyLib name 'SM_NewInt8Array';
+var JS_NewInt8Array: TJS_NewInt8Array
+  external SpiderMonkeyLib name 'SM_NewInt8Array';
 
 /// Create a new unsigned 8 bit integer (byte) typed array with nelements elements
 // - will fill the newly created array with zeros
 type TJS_NewUint8Array = function (cx: PJSContext;
   nelements: uint32): PJSObject; cdecl;
-var JS_NewUint8Array: TJS_NewUint8Array external SpiderMonkeyLib name 'SM_NewUint8Array';
+var JS_NewUint8Array: TJS_NewUint8Array
+  external SpiderMonkeyLib name 'SM_NewUint8Array';
 
 /// Create a new 8 bit integer typed array with nelements elements
 // - will fill the newly created array with zeros
 type TJS_NewUint8ClampedArray = function (cx: PJSContext;
   nelements: uint32): PJSObject; cdecl;
-var JS_NewUint8ClampedArray: TJS_NewUint8ClampedArray external SpiderMonkeyLib name 'SM_NewUint8ClampedArray';
+var JS_NewUint8ClampedArray: TJS_NewUint8ClampedArray
+  external SpiderMonkeyLib name 'SM_NewUint8ClampedArray';
 
 /// Create a new signed 16 bit integer typed array with nelements elements
 // - will fill the newly created array with zeros
 type TJS_NewInt16Array = function (cx: PJSContext;
   nelements: uint32): PJSObject; cdecl;
-var JS_NewInt16Array: TJS_NewInt16Array external SpiderMonkeyLib name 'SM_NewInt16Array';
+var JS_NewInt16Array: TJS_NewInt16Array
+  external SpiderMonkeyLib name 'SM_NewInt16Array';
 
 /// Create a new unsigned 16 bit integer typed array with nelements elements
 // - will fill the newly created array with zeros
 type TJS_NewUint16Array = function (cx: PJSContext;
   nelements: uint32): PJSObject; cdecl;
-var JS_NewUint16Array: TJS_NewUint16Array external SpiderMonkeyLib name 'SM_NewUint16Array';
+var JS_NewUint16Array: TJS_NewUint16Array
+  external SpiderMonkeyLib name 'SM_NewUint16Array';
 
 /// Create a new signed 32 bit integer typed array with nelements elements
 // - will fill the newly created array with zeros
 type TJS_NewInt32Array = function (cx: PJSContext;
   nelements: uint32): PJSObject; cdecl;
-var JS_NewInt32Array: TJS_NewInt32Array external SpiderMonkeyLib name 'SM_NewInt32Array';
+var JS_NewInt32Array: TJS_NewInt32Array
+  external SpiderMonkeyLib name 'SM_NewInt32Array';
 
 /// Create a new unsigned 32 bit integer typed array with nelements elements
 // - will fill the newly created array with zeros
 type TJS_NewUint32Array = function (cx: PJSContext;
   nelements: uint32): PJSObject; cdecl;
-var JS_NewUint32Array: TJS_NewUint32Array external SpiderMonkeyLib name 'SM_NewUint32Array';
+var JS_NewUint32Array: TJS_NewUint32Array
+  external SpiderMonkeyLib name 'SM_NewUint32Array';
 
 /// Create a new signed 32 bit float (single) typed array with nelements elements
 // - will fill the newly created array with zeros
 type TJS_NewFloat32Array = function (cx: PJSContext;
   nelements: uint32): PJSObject; cdecl;
-var JS_NewFloat32Array: TJS_NewFloat32Array external SpiderMonkeyLib name 'SM_NewFloat32Array';
+var JS_NewFloat32Array: TJS_NewFloat32Array
+  external SpiderMonkeyLib name 'SM_NewFloat32Array';
 
 /// Create a new signed 64 bit float (double) typed array with nelements elements
 // - will fill the newly created array with zeros
 type TJS_NewFloat64Array = function (cx: PJSContext;
   nelements: uint32): PJSObject; cdecl;
-var JS_NewFloat64Array: TJS_NewFloat64Array external SpiderMonkeyLib name 'SM_NewFloat64Array';
+var JS_NewFloat64Array: TJS_NewFloat64Array
+  external SpiderMonkeyLib name 'SM_NewFloat64Array';
 
 /// Create a new 8 bit signed integer typed array and copy in values
 // from a given object
@@ -2815,7 +2933,8 @@ var JS_NewFloat64Array: TJS_NewFloat64Array external SpiderMonkeyLib name 'SM_Ne
 // conversion to the typed array element type.
 type TJS_NewInt8ArrayFromArray = function (cx: PJSContext;
   var arr: PJSObject): PJSObject; cdecl;
-var JS_NewInt8ArrayFromArray: TJS_NewInt8ArrayFromArray external SpiderMonkeyLib name 'SM_NewInt8ArrayFromArray';
+var JS_NewInt8ArrayFromArray: TJS_NewInt8ArrayFromArray
+  external SpiderMonkeyLib name 'SM_NewInt8ArrayFromArray';
 
 /// Create a new 8 bit unsigned integer typed array and copy in values
 // from a given object
@@ -2825,7 +2944,8 @@ var JS_NewInt8ArrayFromArray: TJS_NewInt8ArrayFromArray external SpiderMonkeyLib
 // conversion to the typed array element type.
 type TJS_NewUint8ArrayFromArray = function (cx: PJSContext;
   var arr: PJSObject): PJSObject; cdecl;
-var JS_NewUint8ArrayFromArray: TJS_NewUint8ArrayFromArray external SpiderMonkeyLib name 'SM_NewUint8ArrayFromArray';
+var JS_NewUint8ArrayFromArray: TJS_NewUint8ArrayFromArray
+  external SpiderMonkeyLib name 'SM_NewUint8ArrayFromArray';
 
 /// Create a new 8 bit unsigned integer typed array and copy in values
 // from a given object
@@ -2835,7 +2955,8 @@ var JS_NewUint8ArrayFromArray: TJS_NewUint8ArrayFromArray external SpiderMonkeyL
 // conversion to the typed array element type.
 type TJS_NewUint8ClampedArrayFromArray = function (cx: PJSContext;
   var arr: PJSObject): PJSObject; cdecl;
-var JS_NewUint8ClampedArrayFromArray: TJS_NewUint8ClampedArrayFromArray external SpiderMonkeyLib name 'SM_NewUint8ClampedArrayFromArray';
+var JS_NewUint8ClampedArrayFromArray: TJS_NewUint8ClampedArrayFromArray
+  external SpiderMonkeyLib name 'SM_NewUint8ClampedArrayFromArray';
 
 /// Create a new 16 bit signed integer typed array and copy in values
 // from a given object
@@ -2845,7 +2966,8 @@ var JS_NewUint8ClampedArrayFromArray: TJS_NewUint8ClampedArrayFromArray external
 // conversion to the typed array element type.
 type TJS_NewInt16ArrayFromArray = function (cx: PJSContext;
   var arr: PJSObject): PJSObject; cdecl;
-var JS_NewInt16ArrayFromArray: TJS_NewInt16ArrayFromArray external SpiderMonkeyLib name 'SM_NewInt16ArrayFromArray';
+var JS_NewInt16ArrayFromArray: TJS_NewInt16ArrayFromArray
+  external SpiderMonkeyLib name 'SM_NewInt16ArrayFromArray';
 
 /// Create a new 16 bit unsigned integer typed array and copy in values
 // from a given object
@@ -2855,7 +2977,8 @@ var JS_NewInt16ArrayFromArray: TJS_NewInt16ArrayFromArray external SpiderMonkeyL
 // conversion to the typed array element type.
 type TJS_NewUint16ArrayFromArray = function (cx: PJSContext;
   var arr: PJSObject): PJSObject; cdecl;
-var JS_NewUint16ArrayFromArray: TJS_NewUint16ArrayFromArray external SpiderMonkeyLib name 'SM_NewUint16ArrayFromArray';
+var JS_NewUint16ArrayFromArray: TJS_NewUint16ArrayFromArray
+  external SpiderMonkeyLib name 'SM_NewUint16ArrayFromArray';
 
 /// Create a new 32 bit signed integer typed array and copy in values
 // from a given object
@@ -2865,7 +2988,8 @@ var JS_NewUint16ArrayFromArray: TJS_NewUint16ArrayFromArray external SpiderMonke
 // conversion to the typed array element type.
 type TJS_NewInt32ArrayFromArray = function (cx: PJSContext;
   var arr: PJSObject): PJSObject; cdecl;
-var JS_NewInt32ArrayFromArray: TJS_NewInt32ArrayFromArray external SpiderMonkeyLib name 'SM_NewInt32ArrayFromArray';
+var JS_NewInt32ArrayFromArray: TJS_NewInt32ArrayFromArray
+  external SpiderMonkeyLib name 'SM_NewInt32ArrayFromArray';
 
 /// Create a new 32 bit unsigned integer typed array and copy in values
 // from a given object
@@ -2875,7 +2999,8 @@ var JS_NewInt32ArrayFromArray: TJS_NewInt32ArrayFromArray external SpiderMonkeyL
 // conversion to the typed array element type.
 type TJS_NewUint32ArrayFromArray = function (cx: PJSContext;
   var arr: PJSObject): PJSObject; cdecl;
-var JS_NewUint32ArrayFromArray: TJS_NewUint32ArrayFromArray external SpiderMonkeyLib name 'SM_NewUint32ArrayFromArray';
+var JS_NewUint32ArrayFromArray: TJS_NewUint32ArrayFromArray
+  external SpiderMonkeyLib name 'SM_NewUint32ArrayFromArray';
 
 /// Create a new 32 bit float (single) typed array and copy in values
 // from a given object
@@ -2885,7 +3010,8 @@ var JS_NewUint32ArrayFromArray: TJS_NewUint32ArrayFromArray external SpiderMonke
 // conversion to the typed array element type.
 type TJS_NewFloat32ArrayFromArray = function (cx: PJSContext;
   var arr: PJSObject): PJSObject; cdecl;
-var JS_NewFloat32ArrayFromArray: TJS_NewFloat32ArrayFromArray external SpiderMonkeyLib name 'SM_NewFloat32ArrayFromArray';
+var JS_NewFloat32ArrayFromArray: TJS_NewFloat32ArrayFromArray
+  external SpiderMonkeyLib name 'SM_NewFloat32ArrayFromArray';
 
 /// Create a new 64 bit float (double) typed array and copy in values
 // from a given object
@@ -2895,7 +3021,8 @@ var JS_NewFloat32ArrayFromArray: TJS_NewFloat32ArrayFromArray external SpiderMon
 // conversion to the typed array element type.
 type TJS_NewFloat64ArrayFromArray = function (cx: PJSContext;
   var arr: PJSObject): PJSObject; cdecl;
-var JS_NewFloat64ArrayFromArray: TJS_NewFloat64ArrayFromArray external SpiderMonkeyLib name 'SM_NewFloat64ArrayFromArray';
+var JS_NewFloat64ArrayFromArray: TJS_NewFloat64ArrayFromArray
+  external SpiderMonkeyLib name 'SM_NewFloat64ArrayFromArray';
 
 /// Create a new 8 bit signed integer typed array using the given
 // ArrayBuffer for storage
@@ -2903,7 +3030,8 @@ var JS_NewFloat64ArrayFromArray: TJS_NewFloat64ArrayFromArray external SpiderMon
 // remainder of the byte array is used as the default value
 type TJS_NewInt8ArrayWithBuffer = function (cx: PJSContext;
   var arrayBuffer: PJSObject; byteOffset: uint32; length: int32): PJSObject; cdecl;
-var JS_NewInt8ArrayWithBuffer: TJS_NewInt8ArrayWithBuffer external SpiderMonkeyLib name 'SM_NewInt8ArrayWithBuffer';
+var JS_NewInt8ArrayWithBuffer: TJS_NewInt8ArrayWithBuffer
+  external SpiderMonkeyLib name 'SM_NewInt8ArrayWithBuffer';
 
 /// Create a new 8 bit unsigned integer typed array using the given
 // ArrayBuffer for storage
@@ -2911,7 +3039,8 @@ var JS_NewInt8ArrayWithBuffer: TJS_NewInt8ArrayWithBuffer external SpiderMonkeyL
 // remainder of the byte array is used as the default value
 type TJS_NewUint8ArrayWithBuffer = function (cx: PJSContext;
   var arrayBuffer: PJSObject; byteOffset: uint32; length: int32): PJSObject; cdecl;
-var JS_NewUint8ArrayWithBuffer: TJS_NewUint8ArrayWithBuffer external SpiderMonkeyLib name 'SM_NewUint8ArrayWithBuffer';
+var JS_NewUint8ArrayWithBuffer: TJS_NewUint8ArrayWithBuffer
+  external SpiderMonkeyLib name 'SM_NewUint8ArrayWithBuffer';
 
 /// Create a new 8 bit unsigned integer typed array using the given
 // ArrayBuffer for storage
@@ -2919,7 +3048,8 @@ var JS_NewUint8ArrayWithBuffer: TJS_NewUint8ArrayWithBuffer external SpiderMonke
 // remainder of the byte array is used as the default value
 type TJS_NewUint8ClampedArrayWithBuffer = function (cx: PJSContext;
   var arrayBuffer: PJSObject; byteOffset: uint32; length: int32): PJSObject; cdecl;
-var JS_NewUint8ClampedArrayWithBuffer: TJS_NewUint8ClampedArrayWithBuffer external SpiderMonkeyLib name 'SM_NewUint8ClampedArrayWithBuffer';
+var JS_NewUint8ClampedArrayWithBuffer: TJS_NewUint8ClampedArrayWithBuffer
+  external SpiderMonkeyLib name 'SM_NewUint8ClampedArrayWithBuffer';
 
 /// Create a new 16 bit signed integer typed array using the given
 // ArrayBuffer for storage
@@ -2927,7 +3057,8 @@ var JS_NewUint8ClampedArrayWithBuffer: TJS_NewUint8ClampedArrayWithBuffer extern
 // remainder of the byte array is used as the default value
 type TJS_NewInt16ArrayWithBuffer = function (cx: PJSContext;
   var arrayBuffer: PJSObject; byteOffset: uint32; length: int32): PJSObject; cdecl;
-var JS_NewInt16ArrayWithBuffer: TJS_NewInt16ArrayWithBuffer external SpiderMonkeyLib name 'SM_NewInt16ArrayWithBuffer';
+var JS_NewInt16ArrayWithBuffer: TJS_NewInt16ArrayWithBuffer
+  external SpiderMonkeyLib name 'SM_NewInt16ArrayWithBuffer';
 
 /// Create a new 16 bit unsigned integer typed array using the given
 // ArrayBuffer for storage
@@ -2935,7 +3066,8 @@ var JS_NewInt16ArrayWithBuffer: TJS_NewInt16ArrayWithBuffer external SpiderMonke
 // remainder of the byte array is used as the default value
 type TJS_NewUint16ArrayWithBuffer = function (cx: PJSContext;
   var arrayBuffer: PJSObject; byteOffset: uint32; length: int32): PJSObject; cdecl;
-var JS_NewUint16ArrayWithBuffer: TJS_NewUint16ArrayWithBuffer external SpiderMonkeyLib name 'SM_NewUint16ArrayWithBuffer';
+var JS_NewUint16ArrayWithBuffer: TJS_NewUint16ArrayWithBuffer
+  external SpiderMonkeyLib name 'SM_NewUint16ArrayWithBuffer';
 
 /// Create a new 32 bit signed integer typed array using the given
 // ArrayBuffer for storage
@@ -2943,7 +3075,8 @@ var JS_NewUint16ArrayWithBuffer: TJS_NewUint16ArrayWithBuffer external SpiderMon
 // remainder of the byte array is used as the default value
 type TJS_NewInt32ArrayWithBuffer = function (cx: PJSContext;
   var arrayBuffer: PJSObject; byteOffset: uint32; length: int32): PJSObject; cdecl;
-var JS_NewInt32ArrayWithBuffer: TJS_NewInt32ArrayWithBuffer external SpiderMonkeyLib name 'SM_NewInt32ArrayWithBuffer';
+var JS_NewInt32ArrayWithBuffer: TJS_NewInt32ArrayWithBuffer
+  external SpiderMonkeyLib name 'SM_NewInt32ArrayWithBuffer';
 
 /// Create a new 32 bit unsigned integer typed array using the given
 // ArrayBuffer for storage
@@ -2951,7 +3084,8 @@ var JS_NewInt32ArrayWithBuffer: TJS_NewInt32ArrayWithBuffer external SpiderMonke
 // remainder of the byte array is used as the default value
 type TJS_NewUint32ArrayWithBuffer = function (cx: PJSContext;
   var arrayBuffer: PJSObject; byteOffset: uint32; length: int32): PJSObject; cdecl;
-var JS_NewUint32ArrayWithBuffer: TJS_NewUint32ArrayWithBuffer external SpiderMonkeyLib name 'SM_NewUint32ArrayWithBuffer';
+var JS_NewUint32ArrayWithBuffer: TJS_NewUint32ArrayWithBuffer
+  external SpiderMonkeyLib name 'SM_NewUint32ArrayWithBuffer';
 
 /// Create a new 32 bit float (single) typed array using the given
 // ArrayBuffer for storage
@@ -2959,7 +3093,8 @@ var JS_NewUint32ArrayWithBuffer: TJS_NewUint32ArrayWithBuffer external SpiderMon
 // remainder of the byte array is used as the default value
 type TJS_NewFloat32ArrayWithBuffer = function (cx: PJSContext;
   var arrayBuffer: PJSObject; byteOffset: uint32; length: int32): PJSObject; cdecl;
-var JS_NewFloat32ArrayWithBuffer: TJS_NewFloat32ArrayWithBuffer external SpiderMonkeyLib name 'SM_NewFloat32ArrayWithBuffer';
+var JS_NewFloat32ArrayWithBuffer: TJS_NewFloat32ArrayWithBuffer
+  external SpiderMonkeyLib name 'SM_NewFloat32ArrayWithBuffer';
 
 /// Create a new 64 bit float (double) typed array using the given
 // ArrayBuffer for storage
@@ -2967,17 +3102,20 @@ var JS_NewFloat32ArrayWithBuffer: TJS_NewFloat32ArrayWithBuffer external SpiderM
 // remainder of the byte array is used as the default value
 type TJS_NewFloat64ArrayWithBuffer = function (cx: PJSContext;
   var arrayBuffer: PJSObject; byteOffset: uint32; length: int32): PJSObject; cdecl;
-var JS_NewFloat64ArrayWithBuffer: TJS_NewFloat64ArrayWithBuffer external SpiderMonkeyLib name 'SM_NewFloat64ArrayWithBuffer';
+var JS_NewFloat64ArrayWithBuffer: TJS_NewFloat64ArrayWithBuffer
+  external SpiderMonkeyLib name 'SM_NewFloat64ArrayWithBuffer';
 
 /// Create a new SharedArrayBuffer with the given byte length.
 type TJS_NewSharedArrayBuffer = function (cx: PJSContext;
   nbytes: uint32): PJSObject; cdecl;
-var JS_NewSharedArrayBuffer: TJS_NewSharedArrayBuffer external SpiderMonkeyLib name 'SM_NewSharedArrayBuffer';
+var JS_NewSharedArrayBuffer: TJS_NewSharedArrayBuffer
+  external SpiderMonkeyLib name 'SM_NewSharedArrayBuffer';
 
 /// Create a new ArrayBuffer with the given byte length.
 type TJS_NewArrayBuffer = function (cx: PJSContext;
   nbytes: uint32): PJSObject; cdecl;
-var JS_NewArrayBuffer: TJS_NewArrayBuffer external SpiderMonkeyLib name 'SM_NewArrayBuffer';
+var JS_NewArrayBuffer: TJS_NewArrayBuffer
+  external SpiderMonkeyLib name 'SM_NewArrayBuffer';
 
 /// Check whether obj supports JS_GetTypedArray* APIs
 // - Note that this may return false if a security wrapper is encountered that
@@ -2985,7 +3123,8 @@ var JS_NewArrayBuffer: TJS_NewArrayBuffer external SpiderMonkeyLib name 'SM_NewA
 // - if this test or one of the JS_Is*Array tests succeeds, then it is safe to call
 // the dedicated accessor JSAPI calls
 type TJS_IsTypedArrayObject = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsTypedArrayObject: TJS_IsTypedArrayObject external SpiderMonkeyLib name 'SM_IsTypedArrayObject';
+var JS_IsTypedArrayObject: TJS_IsTypedArrayObject
+  external SpiderMonkeyLib name 'SM_IsTypedArrayObject';
 
 /// Check whether obj supports JS_GetArrayBufferView* APIs
 // - Note that this may return false if a security wrapper is encountered that
@@ -2993,43 +3132,53 @@ var JS_IsTypedArrayObject: TJS_IsTypedArrayObject external SpiderMonkeyLib name 
 // - if this test or one of the JS_Is*Array tests succeeds, then it is safe to call
 // the dedicated ArrayBufferView accessor JSAPI calls
 type TJS_IsArrayBufferViewObject = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsArrayBufferViewObject: TJS_IsArrayBufferViewObject external SpiderMonkeyLib name 'SM_IsArrayBufferViewObject';
+var JS_IsArrayBufferViewObject: TJS_IsArrayBufferViewObject
+  external SpiderMonkeyLib name 'SM_IsArrayBufferViewObject';
 
 /// Test for specific 8 bit signed integer typed array types (ArrayBufferView subtypes)
 type TJS_IsInt8Array = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsInt8Array: TJS_IsInt8Array external SpiderMonkeyLib name 'SM_IsInt8Array';
+var JS_IsInt8Array: TJS_IsInt8Array
+  external SpiderMonkeyLib name 'SM_IsInt8Array';
 
 /// Test for specific 8 bit unsigned integer typed array types (ArrayBufferView subtypes)
 type TJS_IsUint8Array = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsUint8Array: TJS_IsUint8Array external SpiderMonkeyLib name 'SM_IsUint8Array';
+var JS_IsUint8Array: TJS_IsUint8Array
+  external SpiderMonkeyLib name 'SM_IsUint8Array';
 
 /// Test for specific 8 bit unsigned integer typed array types (ArrayBufferView subtypes)
 type TJS_IsUint8ClampedArray = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsUint8ClampedArray: TJS_IsUint8ClampedArray external SpiderMonkeyLib name 'SM_IsUint8ClampedArray';
+var JS_IsUint8ClampedArray: TJS_IsUint8ClampedArray
+  external SpiderMonkeyLib name 'SM_IsUint8ClampedArray';
 
 /// Test for specific 16 bit signed integer typed array types (ArrayBufferView subtypes)
 type TJS_IsInt16Array = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsInt16Array: TJS_IsInt16Array external SpiderMonkeyLib name 'SM_IsInt16Array';
+var JS_IsInt16Array: TJS_IsInt16Array
+  external SpiderMonkeyLib name 'SM_IsInt16Array';
 
 /// Test for specific 16 bit unsigned integer typed array types (ArrayBufferView subtypes)
 type TJS_IsUint16Array = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsUint16Array: TJS_IsUint16Array external SpiderMonkeyLib name 'SM_IsUint16Array';
+var JS_IsUint16Array: TJS_IsUint16Array
+  external SpiderMonkeyLib name 'SM_IsUint16Array';
 
 /// Test for specific 32 bit signed integer typed array types (ArrayBufferView subtypes)
 type TJS_IsInt32Array = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsInt32Array: TJS_IsInt32Array external SpiderMonkeyLib name 'SM_IsInt32Array';
+var JS_IsInt32Array: TJS_IsInt32Array
+  external SpiderMonkeyLib name 'SM_IsInt32Array';
 
 /// Test for specific 32 bit unsigned integer typed array types (ArrayBufferView subtypes)
 type TJS_IsUint32Array = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsUint32Array: TJS_IsUint32Array external SpiderMonkeyLib name 'SM_IsUint32Array';
+var JS_IsUint32Array: TJS_IsUint32Array
+  external SpiderMonkeyLib name 'SM_IsUint32Array';
 
 /// Test for specific 32 bit float (single) typed array types (ArrayBufferView subtypes)
 type TJS_IsFloat32Array = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsFloat32Array: TJS_IsFloat32Array external SpiderMonkeyLib name 'SM_IsFloat32Array';
+var JS_IsFloat32Array: TJS_IsFloat32Array
+  external SpiderMonkeyLib name 'SM_IsFloat32Array';
 
 /// Test for specific 64 bit float (double) typed array types (ArrayBufferView subtypes)
 type TJS_IsFloat64Array = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsFloat64Array: TJS_IsFloat64Array external SpiderMonkeyLib name 'SM_IsFloat64Array';
+var JS_IsFloat64Array: TJS_IsFloat64Array
+  external SpiderMonkeyLib name 'SM_IsFloat64Array';
 
 /// Return the isShared flag of a typed array, which denotes whether
 // the underlying buffer is a SharedArrayBuffer.
@@ -3038,21 +3187,24 @@ var JS_IsFloat64Array: TJS_IsFloat64Array external SpiderMonkeyLib name 'SM_IsFl
 // be known that it would pass such a test: it is a typed array or a wrapper of
 // a typed array, and the unwrapping will succeed.
 type TJS_GetTypedArraySharedness = function (obj: PJSObject): Boolean; cdecl;
-var JS_GetTypedArraySharedness: TJS_GetTypedArraySharedness external SpiderMonkeyLib name 'SM_GetTypedArraySharedness';
+var JS_GetTypedArraySharedness: TJS_GetTypedArraySharedness
+  external SpiderMonkeyLib name 'SM_GetTypedArraySharedness';
 
 /// Unwrap 8 bit signed integer typed array into direct memory buffer
 // - Return nil without throwing any exception if the object cannot be viewed as the
 // correct typed array, or the typed array object on success, filling both out parameters
 type TJS_GetObjectAsInt8Array = function (obj: PJSObject; out length: uint32;
   out isSharedMemory:Boolean; out Data: Pint8Vector): PJSObject; cdecl;
-var JS_GetObjectAsInt8Array: TJS_GetObjectAsInt8Array external SpiderMonkeyLib name 'SM_GetObjectAsInt8Array';
+var JS_GetObjectAsInt8Array: TJS_GetObjectAsInt8Array
+  external SpiderMonkeyLib name 'SM_GetObjectAsInt8Array';
 
 /// Unwrap 8 bit unsigned integer typed array into direct memory buffer
 // - Return nil without throwing any exception if the object cannot be viewed as the
 // correct typed array, or the typed array object on success, filling both out parameters
 type TJS_GetObjectAsUint8Array = function (obj: PJSObject; out length: uint32;
   out isSharedMemory:Boolean; out  Data: Puint8Vector): PJSObject; cdecl;
-var JS_GetObjectAsUint8Array: TJS_GetObjectAsUint8Array external SpiderMonkeyLib name 'SM_GetObjectAsUint8Array';
+var JS_GetObjectAsUint8Array: TJS_GetObjectAsUint8Array
+  external SpiderMonkeyLib name 'SM_GetObjectAsUint8Array';
 
 /// Unwrap 8 bit unsigned integer typed array into direct memory buffer
 // - Return nil without throwing any exception if the object cannot be viewed as the
@@ -3060,7 +3212,8 @@ var JS_GetObjectAsUint8Array: TJS_GetObjectAsUint8Array external SpiderMonkeyLib
 type TJS_GetObjectAsUint8ClampedArray = function (obj: PJSObject;
   out length: uint32; out isSharedMemory:Boolean;
   out  Data: Puint8Vector): PJSObject; cdecl;
-var JS_GetObjectAsUint8ClampedArray: TJS_GetObjectAsUint8ClampedArray external SpiderMonkeyLib name 'SM_GetObjectAsUint8ClampedArray';
+var JS_GetObjectAsUint8ClampedArray: TJS_GetObjectAsUint8ClampedArray
+  external SpiderMonkeyLib name 'SM_GetObjectAsUint8ClampedArray';
 
 /// Unwrap 16 bit signed integer typed array into direct memory buffer
 // - Return nil without throwing any exception if the object cannot be viewed as the
@@ -3068,42 +3221,48 @@ var JS_GetObjectAsUint8ClampedArray: TJS_GetObjectAsUint8ClampedArray external S
 type TJS_GetObjectAsInt16Array = function (obj: PJSObject;
   out length: uint32; out isSharedMemory:Boolean;
   out  Data: Pint16Vector): PJSObject; cdecl;
-var JS_GetObjectAsInt16Array: TJS_GetObjectAsInt16Array external SpiderMonkeyLib name 'SM_GetObjectAsInt16Array';
+var JS_GetObjectAsInt16Array: TJS_GetObjectAsInt16Array
+  external SpiderMonkeyLib name 'SM_GetObjectAsInt16Array';
 
 /// Unwrap 16 bit unsigned integer typed array into direct memory buffer
 // - Return nil without throwing any exception if the object cannot be viewed as the
 // correct typed array, or the typed array object on success, filling both out parameters
 type TJS_GetObjectAsUint16Array = function (obj: PJSObject; out length: uint32;
   out isSharedMemory:Boolean; out  Data: Puint16Vector): PJSObject; cdecl;
-var JS_GetObjectAsUint16Array: TJS_GetObjectAsUint16Array external SpiderMonkeyLib name 'SM_GetObjectAsUint16Array';
+var JS_GetObjectAsUint16Array: TJS_GetObjectAsUint16Array
+  external SpiderMonkeyLib name 'SM_GetObjectAsUint16Array';
 
 /// Unwrap 32 bit signed integer typed array into direct memory buffer
 // - Return nil without throwing any exception if the object cannot be viewed as the
 // correct typed array, or the typed array object on success, filling both out parameters
 type TJS_GetObjectAsInt32Array = function (obj: PJSObject; out length: uint32;
   out isSharedMemory:Boolean; out  Data: Pint32Vector): PJSObject; cdecl;
-var JS_GetObjectAsInt32Array: TJS_GetObjectAsInt32Array external SpiderMonkeyLib name 'SM_GetObjectAsInt32Array';
+var JS_GetObjectAsInt32Array: TJS_GetObjectAsInt32Array
+  external SpiderMonkeyLib name 'SM_GetObjectAsInt32Array';
 
 /// Unwrap 32 bit unsigned integer typed array into direct memory buffer
 // - Return nil without throwing any exception if the object cannot be viewed as the
 // correct typed array, or the typed array object on success, filling both out parameters
 type TJS_GetObjectAsUint32Array = function (obj: PJSObject; out length: uint32;
   out isSharedMemory:Boolean; out  Data: Puint32Vector): PJSObject; cdecl;
-var JS_GetObjectAsUint32Array: TJS_GetObjectAsUint32Array external SpiderMonkeyLib name 'SM_GetObjectAsUint32Array';
+var JS_GetObjectAsUint32Array: TJS_GetObjectAsUint32Array
+  external SpiderMonkeyLib name 'SM_GetObjectAsUint32Array';
 
 /// Unwrap 32 bit float (single) typed array into direct memory buffer
 // - Return nil without throwing any exception if the object cannot be viewed as the
 // correct typed array, or the typed array object on success, filling both out parameters
 type TJS_GetObjectAsFloat32Array = function (obj: PJSObject; out length: uint32;
   out isSharedMemory:Boolean; out  Data: Pfloat32Vector): PJSObject; cdecl;
-var JS_GetObjectAsFloat32Array: TJS_GetObjectAsFloat32Array external SpiderMonkeyLib name 'SM_GetObjectAsFloat32Array';
+var JS_GetObjectAsFloat32Array: TJS_GetObjectAsFloat32Array
+  external SpiderMonkeyLib name 'SM_GetObjectAsFloat32Array';
 
 /// Unwrap 64 bit float (double) typed array into direct memory buffer
 // - Return nil without throwing any exception if the object cannot be viewed as the
 // correct typed array, or the typed array object on success, filling both out parameters
 type TJS_GetObjectAsFloat64Array = function (obj: PJSObject; out length: uint32;
   out isSharedMemory:Boolean; out  Data: Pfloat64Vector): PJSObject; cdecl;
-var JS_GetObjectAsFloat64Array: TJS_GetObjectAsFloat64Array external SpiderMonkeyLib name 'SM_GetObjectAsFloat64Array';
+var JS_GetObjectAsFloat64Array: TJS_GetObjectAsFloat64Array
+  external SpiderMonkeyLib name 'SM_GetObjectAsFloat64Array';
 
 /// Unwrap an object as its raw binary memory buffer
 // - Return nil without throwing any exception if the object cannot be viewed as the
@@ -3111,40 +3270,47 @@ var JS_GetObjectAsFloat64Array: TJS_GetObjectAsFloat64Array external SpiderMonke
 type TJS_GetObjectAsArrayBufferView = function (obj: PJSObject;
   out length: uint32; out isSharedMemory:Boolean;
   out  Data: Puint8Vector): PJSObject; cdecl;
-var JS_GetObjectAsArrayBufferView: TJS_GetObjectAsArrayBufferView external SpiderMonkeyLib name 'SM_GetObjectAsArrayBufferView';
+var JS_GetObjectAsArrayBufferView: TJS_GetObjectAsArrayBufferView
+  external SpiderMonkeyLib name 'SM_GetObjectAsArrayBufferView';
 
 /// Unwrap an object as its raw binary memory buffer
 // - Return nil without throwing any exception if the object cannot be viewed as the
 // correct typed array, or the typed array object on success, filling both out parameters
 type TJS_GetObjectAsArrayBuffer = function (obj: PJSObject; out length: uint32;
   out Data: Puint8Vector): PJSObject; cdecl;
-var JS_GetObjectAsArrayBuffer: TJS_GetObjectAsArrayBuffer external SpiderMonkeyLib name 'SM_GetObjectAsArrayBuffer';
+var JS_GetObjectAsArrayBuffer: TJS_GetObjectAsArrayBuffer
+  external SpiderMonkeyLib name 'SM_GetObjectAsArrayBuffer';
 
   /// Get the type of elements in a typed array, or jsabTYPE_DATAVIEW if a DataView
 type TJS_GetArrayBufferViewType = function (
   obj: PJSObject): JSArrayBufferViewType; cdecl;
-var JS_GetArrayBufferViewType: TJS_GetArrayBufferViewType external SpiderMonkeyLib name 'SM_GetArrayBufferViewType';
+var JS_GetArrayBufferViewType: TJS_GetArrayBufferViewType
+  external SpiderMonkeyLib name 'SM_GetArrayBufferViewType';
 
 /// Check whether obj supports the JS_GetArrayBuffer* APIs
 // - Note that this may return false if a security wrapper is encountered that denies the
 // unwrapping
 // - If this test succeeds, then it is safe to call the various accessor JSAPI calls
 type TJS_IsArrayBufferObject = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsArrayBufferObject: TJS_IsArrayBufferObject external SpiderMonkeyLib name 'SM_IsArrayBufferObject';
+var JS_IsArrayBufferObject: TJS_IsArrayBufferObject
+  external SpiderMonkeyLib name 'SM_IsArrayBufferObject';
 
 type TJS_IsSharedArrayBufferObject = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsSharedArrayBufferObject: TJS_IsSharedArrayBufferObject external SpiderMonkeyLib name 'SM_IsSharedArrayBufferObject';
+var JS_IsSharedArrayBufferObject: TJS_IsSharedArrayBufferObject
+  external SpiderMonkeyLib name 'SM_IsSharedArrayBufferObject';
 
 /// Return the available byte length of an array buffer
 // - obj must have passed a JS_IsArrayBufferObject test, or somehow be known
 // that it would pass such a test: it is an ArrayBuffer or a wrapper of an
 // ArrayBuffer, and the unwrapping will succeed
 type TJS_GetArrayBufferByteLength = function (obj: PJSObject): uint32; cdecl;
-var JS_GetArrayBufferByteLength: TJS_GetArrayBufferByteLength external SpiderMonkeyLib name 'SM_GetArrayBufferByteLength';
+var JS_GetArrayBufferByteLength: TJS_GetArrayBufferByteLength
+  external SpiderMonkeyLib name 'SM_GetArrayBufferByteLength';
 
 type TJS_GetSharedArrayBufferByteLength = function (
   obj: PJSObject): uint32; cdecl;
-var JS_GetSharedArrayBufferByteLength: TJS_GetSharedArrayBufferByteLength external SpiderMonkeyLib name 'SM_GetSharedArrayBufferByteLength';
+var JS_GetSharedArrayBufferByteLength: TJS_GetSharedArrayBufferByteLength
+  external SpiderMonkeyLib name 'SM_GetSharedArrayBufferByteLength';
 
 /// Return true if the arrayBuffer contains any data. This will return false for
 // ArrayBuffer.prototype and neutered ArrayBuffers.
@@ -3153,7 +3319,8 @@ var JS_GetSharedArrayBufferByteLength: TJS_GetSharedArrayBufferByteLength extern
 // that it would pass such a test: it is an ArrayBuffer or a wrapper of an
 // ArrayBuffer, and the unwrapping will succeed.
 type TJS_ArrayBufferHasData = function (obj: PJSObject): Boolean; cdecl;
-var JS_ArrayBufferHasData: TJS_ArrayBufferHasData external SpiderMonkeyLib name 'SM_ArrayBufferHasData';
+var JS_ArrayBufferHasData: TJS_ArrayBufferHasData
+  external SpiderMonkeyLib name 'SM_ArrayBufferHasData';
 
 /// Return a pointer to an array buffer's data
 // - The buffer is still owned by the array buffer object, and should not
@@ -3163,21 +3330,24 @@ var JS_ArrayBufferHasData: TJS_ArrayBufferHasData external SpiderMonkeyLib name 
 // ArrayBuffer, and the unwrapping will succeed.
 type TJS_GetArrayBufferData = function (obj: PJSObject;
   out isSharedMemory: Boolean;
-  nogc: PJSAutoCheckCannotGC{Not used in SM code}): Puint8Vector; cdecl;
-var JS_GetArrayBufferData: TJS_GetArrayBufferData external SpiderMonkeyLib name 'SM_GetArrayBufferData';
+  nogc: PJSAutoRequireNoGC{Not used in SM code}): Puint8Vector; cdecl;
+var JS_GetArrayBufferData: TJS_GetArrayBufferData
+  external SpiderMonkeyLib name 'SM_GetArrayBufferData';
 
 /// Check whether the obj is ArrayBufferObject and memory mapped. Note that this
 // may return false if a security wrapper is encountered that denies the
 // unwrapping.
 type TJS_IsMappedArrayBufferObject = function (obj: PJSObject): Boolean; cdecl;
-var JS_IsMappedArrayBufferObject: TJS_IsMappedArrayBufferObject external SpiderMonkeyLib name 'SM_IsMappedArrayBufferObject';
+var JS_IsMappedArrayBufferObject: TJS_IsMappedArrayBufferObject
+  external SpiderMonkeyLib name 'SM_IsMappedArrayBufferObject';
 
 /// Return the number of elements in a typed array
 // - obj must have passed a JS_IsTypedArrayObject/JS_Is*Array test, or somehow
 // be known that it would pass such a test: it is a typed array or a wrapper of
 // a typed array, and the unwrapping will succeed.
 type TJS_GetTypedArrayLength = function (obj: PJSObject): uint32; cdecl;
-var JS_GetTypedArrayLength: TJS_GetTypedArrayLength external SpiderMonkeyLib name 'SM_GetTypedArrayLength';
+var JS_GetTypedArrayLength: TJS_GetTypedArrayLength
+  external SpiderMonkeyLib name 'SM_GetTypedArrayLength';
 
 /// Return the byte offset from the start of an array buffer to the start of a
 // typed array view
@@ -3185,18 +3355,21 @@ var JS_GetTypedArrayLength: TJS_GetTypedArrayLength external SpiderMonkeyLib nam
 // be known that it would pass such a test: it is a typed array or a wrapper of
 // a typed array, and the unwrapping will succeed.
 type TJS_GetTypedArrayByteOffset = function (obj: PJSObject): uint32; cdecl;
-var JS_GetTypedArrayByteOffset: TJS_GetTypedArrayByteOffset external SpiderMonkeyLib name 'SM_GetTypedArrayByteOffset';
+var JS_GetTypedArrayByteOffset: TJS_GetTypedArrayByteOffset
+  external SpiderMonkeyLib name 'SM_GetTypedArrayByteOffset';
 
 /// Return the byte length of a typed array
 // - obj must have passed a JS_IsTypedArrayObject/JS_Is*Array test, or somehow
 // be known that it would pass such a test: it is a typed array or a wrapper of
 // a typed array, and the unwrapping will succeed
 type TJS_GetTypedArrayByteLength = function (obj: PJSObject): uint32; cdecl;
-var JS_GetTypedArrayByteLength: TJS_GetTypedArrayByteLength external SpiderMonkeyLib name 'SM_GetTypedArrayByteLength';
+var JS_GetTypedArrayByteLength: TJS_GetTypedArrayByteLength
+  external SpiderMonkeyLib name 'SM_GetTypedArrayByteLength';
 
 /// More generic name for JS_GetTypedArrayByteLength to cover DataViews as well
 type TJS_GetArrayBufferViewByteLength = function (obj: PJSObject): uint32; cdecl;
-var JS_GetArrayBufferViewByteLength: TJS_GetArrayBufferViewByteLength external SpiderMonkeyLib name 'SM_GetArrayBufferViewByteLength';
+var JS_GetArrayBufferViewByteLength: TJS_GetArrayBufferViewByteLength
+  external SpiderMonkeyLib name 'SM_GetArrayBufferViewByteLength';
 
 /// Return a pointer to the start of the data referenced by a typed 8 bit signed integer array
 // - The data is still owned by the typed array, and should not be modified on
@@ -3205,8 +3378,9 @@ var JS_GetArrayBufferViewByteLength: TJS_GetArrayBufferViewByteLength external S
 // pass such a test: it is a typed array or a wrapper of a typed array, and the
 // unwrapping will succeed
 type TJS_GetInt8ArrayData = function (obj: PJSObject;
-  out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Pint8Vector; cdecl;
-var JS_GetInt8ArrayData: TJS_GetInt8ArrayData external SpiderMonkeyLib name 'SM_GetInt8ArrayData';
+  out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Pint8Vector; cdecl;
+var JS_GetInt8ArrayData: TJS_GetInt8ArrayData
+  external SpiderMonkeyLib name 'SM_GetInt8ArrayData';
 
 /// Return a pointer to the start of the data referenced by a typed 8 bit unsigned integer array
 // - The data is still owned by the typed array, and should not be modified on
@@ -3215,8 +3389,9 @@ var JS_GetInt8ArrayData: TJS_GetInt8ArrayData external SpiderMonkeyLib name 'SM_
 // pass such a test: it is a typed array or a wrapper of a typed array, and the
 // unwrapping will succeed
 type TJS_GetUint8ArrayData = function (obj: PJSObject;
-  out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Puint8Vector; cdecl;
-var JS_GetUint8ArrayData: TJS_GetUint8ArrayData external SpiderMonkeyLib name 'SM_GetUint8ArrayData';
+  out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Puint8Vector; cdecl;
+var JS_GetUint8ArrayData: TJS_GetUint8ArrayData
+  external SpiderMonkeyLib name 'SM_GetUint8ArrayData';
 
 /// Return a pointer to the start of the data referenced by a typed 8 bit unsigned integer array
 // - The data is still owned by the typed array, and should not be modified on
@@ -3225,8 +3400,9 @@ var JS_GetUint8ArrayData: TJS_GetUint8ArrayData external SpiderMonkeyLib name 'S
 // pass such a test: it is a typed array or a wrapper of a typed array, and the
 // unwrapping will succeed
 type TJS_GetUint8ClampedArrayData = function (obj: PJSObject;
-  out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Puint8Vector; cdecl;
-var JS_GetUint8ClampedArrayData: TJS_GetUint8ClampedArrayData external SpiderMonkeyLib name 'SM_GetUint8ClampedArrayData';
+  out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Puint8Vector; cdecl;
+var JS_GetUint8ClampedArrayData: TJS_GetUint8ClampedArrayData
+  external SpiderMonkeyLib name 'SM_GetUint8ClampedArrayData';
 
 /// Return a pointer to the start of the data referenced by a typed 16 bit signed integer array
 // - The data is still owned by the typed array, and should not be modified on
@@ -3235,8 +3411,9 @@ var JS_GetUint8ClampedArrayData: TJS_GetUint8ClampedArrayData external SpiderMon
 // pass such a test: it is a typed array or a wrapper of a typed array, and the
 // unwrapping will succeed
 type TJS_GetInt16ArrayData = function (obj: PJSObject;
-  out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Pint16Vector; cdecl;
-var JS_GetInt16ArrayData: TJS_GetInt16ArrayData external SpiderMonkeyLib name 'SM_GetInt16ArrayData';
+  out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Pint16Vector; cdecl;
+var JS_GetInt16ArrayData: TJS_GetInt16ArrayData
+  external SpiderMonkeyLib name 'SM_GetInt16ArrayData';
 
 /// Return a pointer to the start of the data referenced by a typed 16 bit unsigned integer array
 // - The data is still owned by the typed array, and should not be modified on
@@ -3245,8 +3422,9 @@ var JS_GetInt16ArrayData: TJS_GetInt16ArrayData external SpiderMonkeyLib name 'S
 // pass such a test: it is a typed array or a wrapper of a typed array, and the
 // unwrapping will succeed
 type TJS_GetUint16ArrayData = function (obj: PJSObject;
-  out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Puint16Vector; cdecl;
-var JS_GetUint16ArrayData: TJS_GetUint16ArrayData external SpiderMonkeyLib name 'SM_GetUint16ArrayData';
+  out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Puint16Vector; cdecl;
+var JS_GetUint16ArrayData: TJS_GetUint16ArrayData
+  external SpiderMonkeyLib name 'SM_GetUint16ArrayData';
 
 /// Return a pointer to the start of the data referenced by a typed 32 bit signed integer array
 // - The data is still owned by the typed array, and should not be modified on
@@ -3255,8 +3433,9 @@ var JS_GetUint16ArrayData: TJS_GetUint16ArrayData external SpiderMonkeyLib name 
 // pass such a test: it is a typed array or a wrapper of a typed array, and the
 // unwrapping will succeed
 type TJS_GetInt32ArrayData = function (obj: PJSObject;
-  out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Pint32Vector; cdecl;
-var JS_GetInt32ArrayData: TJS_GetInt32ArrayData external SpiderMonkeyLib name 'SM_GetInt32ArrayData';
+  out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Pint32Vector; cdecl;
+var JS_GetInt32ArrayData: TJS_GetInt32ArrayData
+  external SpiderMonkeyLib name 'SM_GetInt32ArrayData';
 
 /// Return a pointer to the start of the data referenced by a typed 32 bit unsigned integer array
 // - The data is still owned by the typed array, and should not be modified on
@@ -3265,8 +3444,9 @@ var JS_GetInt32ArrayData: TJS_GetInt32ArrayData external SpiderMonkeyLib name 'S
 // pass such a test: it is a typed array or a wrapper of a typed array, and the
 // unwrapping will succeed
 type TJS_GetUint32ArrayData = function (obj: PJSObject;
-  out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Puint32Vector; cdecl;
-var JS_GetUint32ArrayData: TJS_GetUint32ArrayData external SpiderMonkeyLib name 'SM_GetUint32ArrayData';
+  out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Puint32Vector; cdecl;
+var JS_GetUint32ArrayData: TJS_GetUint32ArrayData
+  external SpiderMonkeyLib name 'SM_GetUint32ArrayData';
 
 /// Return a pointer to the start of the data referenced by a typed 32 bit float (single) array
 // - The data is still owned by the typed array, and should not be modified on
@@ -3275,8 +3455,9 @@ var JS_GetUint32ArrayData: TJS_GetUint32ArrayData external SpiderMonkeyLib name 
 // pass such a test: it is a typed array or a wrapper of a typed array, and the
 // unwrapping will succeed
 type TJS_GetFloat32ArrayData = function (obj: PJSObject;
-  out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Pfloat32Vector; cdecl;
-var JS_GetFloat32ArrayData: TJS_GetFloat32ArrayData external SpiderMonkeyLib name 'SM_GetFloat32ArrayData';
+  out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Pfloat32Vector; cdecl;
+var JS_GetFloat32ArrayData: TJS_GetFloat32ArrayData
+  external SpiderMonkeyLib name 'SM_GetFloat32ArrayData';
 
 /// Return a pointer to the start of the data referenced by a typed 64 bit float (double) array
 // - The data is still owned by the typed array, and should not be modified on
@@ -3285,8 +3466,9 @@ var JS_GetFloat32ArrayData: TJS_GetFloat32ArrayData external SpiderMonkeyLib nam
 // pass such a test: it is a typed array or a wrapper of a typed array, and the
 // unwrapping will succeed
 type TJS_GetFloat64ArrayData = function (obj: PJSObject;
-  out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Pfloat64Vector; cdecl;
-var JS_GetFloat64ArrayData: TJS_GetFloat64ArrayData external SpiderMonkeyLib name 'SM_GetFloat64ArrayData';
+  out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Pfloat64Vector; cdecl;
+var JS_GetFloat64ArrayData: TJS_GetFloat64ArrayData
+  external SpiderMonkeyLib name 'SM_GetFloat64ArrayData';
 
 /// Return a pointer to the start of the data referenced by any typed array
 // - The data is still owned by the typed array, and should not be modified on
@@ -3296,30 +3478,34 @@ var JS_GetFloat64ArrayData: TJS_GetFloat64ArrayData external SpiderMonkeyLib nam
 // unwrapping will succeed
 // - Prefer the type-specific versions when possible
 type TJS_GetArrayBufferViewData = function (obj: PJSObject;
-  out isSharedMemory: Boolean; nogc: PJSAutoCheckCannotGC): Pointer; cdecl;
-var JS_GetArrayBufferViewData: TJS_GetArrayBufferViewData external SpiderMonkeyLib name 'SM_GetArrayBufferViewData';
+  out isSharedMemory: Boolean; nogc: PJSAutoRequireNoGC): Pointer; cdecl;
+var JS_GetArrayBufferViewData: TJS_GetArrayBufferViewData
+  external SpiderMonkeyLib name 'SM_GetArrayBufferViewData';
 
 /// Return the ArrayBuffer underlying an ArrayBufferView
 // - If the buffer has been neutered, this will still return the neutered buffer.
 // - obj must be an object that would return true for JS_IsArrayBufferViewObject()
 type TJS_GetArrayBufferViewBuffer = function (cx: PJSContext;
   var obj: PJSObject; out isSharedMemory: Boolean): PJSObject; cdecl;
-var JS_GetArrayBufferViewBuffer: TJS_GetArrayBufferViewBuffer external SpiderMonkeyLib name 'SM_GetArrayBufferViewBuffer';
+var JS_GetArrayBufferViewBuffer: TJS_GetArrayBufferViewBuffer
+  external SpiderMonkeyLib name 'SM_GetArrayBufferViewBuffer';
 
 ////modules
 
 /// Initialize modeles classes next 2 functions cannot work without calling this function                !!! EMPTY !!!
-function JS_InitModuleClasses(cx: PJSContext; var obj: PJSObject): boolean; cdecl; external SpiderMonkeyLib name 'SM_InitModuleClasses';
+function JS_InitModuleClasses(cx: PJSContext; var obj: PJSObject): boolean;
+  cdecl; external SpiderMonkeyLib name 'SM_InitModuleClasses';
 
 /// Compile script as module
 function JS_CompileModule(cx: PJSContext;
-   var obj: PJSObject;
-   options: PJSCompileOptions;
-   chars: PCChar16; length: size_t): PJSObject; cdecl; external SpiderMonkeyLib name 'SM_CompileModule';
+  var obj: PJSObject;
+  options: PJSCompileOptions;
+  chars: PCChar16; length: size_t): PJSObject; cdecl;
+  external SpiderMonkeyLib name 'SM_CompileModule';
 
 /// Set handler for module resolving
-type TJS_SetModuleResolveHook = procedure (cx: PJSContext; var hook: PJSFunction); cdecl;
-var JS_SetModuleResolveHook: TJS_SetModuleResolveHook external SpiderMonkeyLib name 'SM_SetModuleResolveHook';
+procedure JS_SetModuleResolveHook(cx: PJSContext; var hook: PJSFunction); cdecl;
+  external SpiderMonkeyLib name 'SM_SetModuleResolveHook';
 
 type
   pjsval = ^jsval;
@@ -3431,10 +3617,9 @@ end;
 
 { JSCompileOptions }
 
-procedure JSCompileOptions.SetFileLineAndUtf8(const f: PChar; l: cardinal;
-  isUtf8: boolean);
+procedure JSCompileOptions.SetFileAndLine(const f: PChar; l: cardinal);
 begin
-  JS_SetCompileOptionsFileLineAndUtf8(@Self, f, l, isUtf8);
+  JS_SetCompileOptionsFileAndLine(@Self, f, l);
 end;
 
 { JSString }
@@ -3634,9 +3819,9 @@ begin
   JS_DestroyContext(@self);
 end;
 
-function JSContext.EnterCompartment(target: PJSObject): PJSCompartment;
+function JSContext.EnterRealm(target: PJSObject): PJSRealm;
 begin
-  Result := JS_EnterCompartment(@self, target);
+  Result := JS_EnterRealm(@self, target);
 end;
 
 function JSContext.GetPendingException(out rv: jsval): boolean;
@@ -3654,9 +3839,9 @@ begin
   Result := JS_IdToValue(@Self, id, v);
 end;
 
-function JSContext.InitStandardClasses(var obj: PJSObject): boolean;
+function JSContext.InitRealmStandardClasses({var obj: PJSObject}): boolean;
 begin
-  Result := JS_InitStandardClasses(@Self, obj);
+  Result := JS_InitRealmStandardClasses(@Self{, obj});
 end;
 
 procedure JSContext.SetModuleResolveHook(var hook: PJSFunction);
@@ -3669,9 +3854,9 @@ begin
   Result := JS_NewDateObjectMsec(@Self, msec);
 end;
 
-procedure JSContext.LeaveCompartment(oldCompartment: PJSCompartment);
+procedure JSContext.LeaveRealm(oldRealm: PJSRealm);
 begin
-  JS_LeaveCompartment(@Self, oldCompartment);
+  JS_LeaveRealm(@Self, oldRealm);
 end;
 
 procedure JSContext.MaybeGC;
@@ -3684,18 +3869,18 @@ begin
   Result := JS_NewDateObject(@Self, year, mon, mday, hour, min, sec);
 end;
 
-function JS_NewCompartmentOptions(): PJS_CompartmentOptions; cdecl;
-  external SpiderMonkeyLib name 'SM_NewCompartmentOptions';
-procedure JS_FreeCompartmentOptions(opt: PJS_CompartmentOptions); cdecl;
-  external SpiderMonkeyLib name 'SM_FreeCompartmentOptions';
+function JS_NewRealmOptions(): PJS_RealmOptions; cdecl;
+  external SpiderMonkeyLib name 'SM_NewRealmOptions';
+procedure JS_FreeRealmOptions(opt: PJS_RealmOptions); cdecl;
+  external SpiderMonkeyLib name 'SM_FreeRealmOptions';
 
 function JSContext.NewGlobalObject(clasp: PJSClass; hookOption: OnNewGlobalHookOption): PJSObject;
 var
-  Opt: PJS_CompartmentOptions;
+  Opt: PJS_RealmOptions;
 begin
-  Opt := JS_NewCompartmentOptions;
+  Opt := JS_NewRealmOptions();
   Result := JS_NewGlobalObject(@Self, clasp, nil, hookOption, Opt);
-  JS_FreeCompartmentOptions(Opt);
+  JS_FreeRealmOptions(Opt);
 end;
 
 function JSContext.NewInt16Array(nelements: uint32): PJSObject;
@@ -3818,12 +4003,12 @@ end;
 
 procedure JSContext.BeginRequest;
 begin
-  JS_BeginRequest(@self);
+//  JS_BeginRequest(@self);
 end;
 
 procedure JSContext.EndRequest;
 begin
-  JS_EndRequest(@self);
+//  JS_EndRequest(@self);
 end;
 
 function JSContext.GetArrayBufferViewBuffer(var obj: PJSObject;
@@ -3841,7 +4026,7 @@ end;
 
 function JSContext.GetIsRunning: boolean;
 begin
-  result := JS_IsRunning(@self);
+  result := true;//JS_IsRunning(@self);
 end;
 
 procedure JSContext.FreeCompileOptions(opt: PJSCompileOptions);
@@ -4034,14 +4219,20 @@ begin
   Result := JS_CompileUCScript(@Self, chars, length, opts, script);
 end;
 
-function JSContext.EvaluateScript(opts: PJSCompileOptions; bytes: PCChar; length: size_t;
-  out rval: jsval): Boolean;
+function JSContext.EvaluateScript(opts: PJSCompileOptions;
+  bytes: PCChar; length: size_t; out rval: jsval): Boolean;
 begin
   Result := JS_EvaluateScript(@Self, opts, bytes, length, rval);
 end;
 
-function JSContext.EvaluateUCScript(opts: PJSCompileOptions; chars: PCChar16; length: size_t;
-  out rval: jsval): Boolean;
+function JSContext.EvaluateUTF8Script(opts: PJSCompileOptions;
+  utf8chars: PUTF8Char; length: size_t; out rval: jsval): Boolean;
+begin
+  Result := JS_EvaluateUTF8Script(@Self, opts, utf8chars, length, rval);
+end;
+
+function JSContext.EvaluateUCScript(opts: PJSCompileOptions;
+  chars: PCChar16; length: size_t; out rval: jsval): Boolean;
 begin
   Result := JS_EvaluateUCScript(@Self, opts, chars, length, rval);
 end;
@@ -4053,7 +4244,7 @@ end;
 
 function JSContext.New(var ctor: PJSObject; argc: uintN; argv: PjsvalVector): PJSObject;
 var
-    args: JSHandleValueArray;
+  args: JSHandleValueArray;
 begin
   args.length := argc;
   args.elements_ := argv;
@@ -4079,12 +4270,12 @@ function JSContext.NewArrayObject(length: size_t): PJSObject;
 begin
   Result := JS_NewArrayObject(@Self, length);
 end;
-
+{$IFDEF JS_HAS_CTYPES}
 function JSContext.InitCTypesClass(var obj: PJSObject): boolean;
 begin
   Result := JS_InitCTypesClass(@Self, obj);
 end;
-
+{$ENDIF}
 function JSContext.InitReflectParse(var obj: PJSObject): boolean;
 begin
   Result := JS_InitReflectParse(@Self, obj);
@@ -4144,10 +4335,10 @@ begin
   Result := JS_Now;
 end;
 
-class function JSContext.CreateNew(maxbytes: uint32; maxNurseryBytes: uint32; parentContext: PJSContext): PJSContext;
+class function JSContext.CreateNew(maxbytes: uint32; maxNurseryBytes: uint32; parentRuntime: PJSRuntime): PJSContext;
 begin
   with TSynFPUException.ForLibraryCode do begin
-    Result := JS_NewContext(maxbytes, maxNurseryBytes, parentContext);
+    Result := JS_NewContext(maxbytes, maxNurseryBytes, parentRuntime);
     InitSelfHostedCode(Result);
   end;
 end;
@@ -4222,9 +4413,9 @@ begin
   result := JS_IsFloat64Array(@self);
 end;
 
-function JSObject.isFunction(cx: PJSContext): Boolean;
+function JSObject.isFunction: Boolean;
 begin
-  Result := JS_ObjectIsFunction(cx, @Self);
+  Result := JS_ObjectIsFunction(@Self);
 end;
 
 function JSObject.IsInt16Array: Boolean;
@@ -4278,7 +4469,7 @@ begin
 end;
 
 function JSObject.GetArrayBufferViewData(out isSharedMemory: Boolean;
-  nogc: PJSAutoCheckCannotGC): Pointer;
+  nogc: PJSAutoRequireNoGC): Pointer;
 begin
   result := JS_GetArrayBufferViewData(@self, isSharedMemory, nogc);
 end;
@@ -4310,19 +4501,19 @@ begin
 end;
 
 function JSObject.GetInt16ArrayData(out isSharedMemory: Boolean;
-  nogc: PJSAutoCheckCannotGC): Pint16Vector;
+  nogc: PJSAutoRequireNoGC): Pint16Vector;
 begin
   result := JS_GetInt16ArrayData(@self, isSharedMemory, nogc);
 end;
 
 function JSObject.GetInt32ArrayData(out isSharedMemory: Boolean;
-  nogc: PJSAutoCheckCannotGC): Pint32Vector;
+  nogc: PJSAutoRequireNoGC): Pint32Vector;
 begin
   result := JS_GetInt32ArrayData(@self, isSharedMemory, nogc);
 end;
 
 function JSObject.GetInt8ArrayData(out isSharedMemory: Boolean;
-  nogc: PJSAutoCheckCannotGC): Pint8Vector;
+  nogc: PJSAutoRequireNoGC): Pint8Vector;
 begin
   result := JS_GetInt8ArrayData(@self, isSharedMemory, nogc);
 end;
@@ -4514,21 +4705,21 @@ begin
   args.elements_ := argv;
   Result := JS_CallFunctionValue(cx, obj, val, args, rval);
 end;
-
+(*
 const
   /// API extension: OR this into indent to avoid pretty-printing the decompiled
   // source resulting from JS_DecompileFunction{,Body}.
   JS_DONT_PRETTY_PRINT = $8000;
   prettyPrintAr: array[boolean] of uintN = (JS_DONT_PRETTY_PRINT, 0);
-function JSObject.DecompileFunction(cx: PJSContext;
-  PrettyPrint: Boolean): PJSString;
+function JSObject.DecompileFunction(cx: PJSContext{;
+  PrettyPrint: Boolean}): PJSString;
 var
   fun: PJSFunction;
 begin
   fun := @self;
-  Result := JS_DecompileFunction(cx, fun, prettyPrintAr[PrettyPrint]);
+  Result := JS_DecompileFunction(cx, fun{, prettyPrintAr[PrettyPrint]});
 end;
-
+*)
 function JSObject.DefineFunction(cx: PJSContext; name: PCChar; call: JSNative;
   nargs, attrs: uintN): PJSFunction;
 var obj: PJSObject;
@@ -4558,7 +4749,10 @@ function JSObject.DefineProperty(cx: PJSContext; const name: PCChar;
 var obj: PJSObject;
 begin
   obj := @Self;
-  result := JS_DefineProperty(cx, obj, name, pjsval(@value)^, attrs, getter, setter)
+  if Assigned(getter) or Assigned(setter) then
+    result := JS_DefinePropertyNative(cx, obj, name, getter, setter, attrs)
+  else
+    result := JS_DefineProperty(cx, obj, name, pjsval(@value)^, attrs)
 end;
 
 function JSObject.DefinePropertyById(cx: PJSContext; var id: jsid;
@@ -4566,7 +4760,10 @@ function JSObject.DefinePropertyById(cx: PJSContext; var id: jsid;
 var obj: PJSObject;
 begin
   obj := @Self;
-  result := JS_DefinePropertyById(cx, obj, id, pjsval(@value)^, attrs, getter, setter)
+  if Assigned(getter) or Assigned(setter) then
+    result := JS_DefinePropertyByIdNative(cx, obj, id, getter, setter, attrs)
+  else
+    result := JS_DefinePropertyById(cx, obj, id, pjsval(@value)^, attrs)
 end;
 
 function JSObject.DefineUCFunction(cx: PJSContext; name: PCChar16;
@@ -4582,7 +4779,10 @@ function JSObject.DefineUCProperty(cx: PJSContext; const name: SynUnicode;
 var obj: PJSObject;
 begin
   obj := @Self;
-  result := JS_DefineUCProperty(cx, obj, Pointer(name), Length(name), pjsval(@value)^, attrs, getter, setter)
+  if Assigned(getter) or Assigned(setter) then
+    result := JS_DefineUCPropertyNative(cx, obj, Pointer(name), Length(name), getter, setter, attrs)
+  else
+    result := JS_DefineUCProperty(cx, obj, Pointer(name), Length(name), pjsval(@value)^, attrs)
 end;
 
 function JSObject.DefineUCProperty(cx: PJSContext; const name: PCChar16;
@@ -4591,7 +4791,10 @@ function JSObject.DefineUCProperty(cx: PJSContext; const name: PCChar16;
 var obj: PJSObject;
 begin
   obj := @Self;
-  result := JS_DefineUCProperty(cx, obj, name, namelen, pjsval(@value)^, attrs, getter, setter)
+  if Assigned(getter) or Assigned(setter) then
+    result := JS_DefineUCPropertyNative(cx, obj, name, namelen, getter, setter, attrs)
+  else
+    result := JS_DefineUCProperty(cx, obj, name, namelen, pjsval(@value)^, attrs)
 end;
 
 function JSObject.DeleteElement(cx: PJSContext; index: uint32;
@@ -4631,19 +4834,19 @@ begin
 end;
 
 function JSObject.GetUint16ArrayData(out isSharedMemory: Boolean;
-  nogc: PJSAutoCheckCannotGC): Puint16Vector;
+  nogc: PJSAutoRequireNoGC): Puint16Vector;
 begin
   result := JS_GetUInt16ArrayData(@self, isSharedMemory, nogc);
 end;
 
 function JSObject.GetUint32ArrayData(out isSharedMemory: Boolean;
-  nogc: PJSAutoCheckCannotGC): Puint32Vector;
+  nogc: PJSAutoRequireNoGC): Puint32Vector;
 begin
   result := JS_GetUint32ArrayData(@self, isSharedMemory, nogc);
 end;
 
 function JSObject.GetUint8ArrayData(out isSharedMemory: Boolean;
-  nogc: PJSAutoCheckCannotGC): Puint8Vector;
+  nogc: PJSAutoRequireNoGC): Puint8Vector;
 begin
   result := JS_GetUInt8ArrayData(@self, isSharedMemory, nogc);
 end;
@@ -4655,7 +4858,7 @@ begin
 end;
 
 function JSObject.GetUint8ClampedArrayData(out isSharedMemory: Boolean;
-  nogc: PJSAutoCheckCannotGC): Puint8Vector;
+  nogc: PJSAutoRequireNoGC): Puint8Vector;
 begin
   result := JS_GetUint8ClampedArrayData(@self, isSharedMemory, nogc);
 end;
@@ -4706,7 +4909,7 @@ begin
 end;
 
 function JSObject.GetArrayBufferData(out isSharedMemory: Boolean;
-  nogc: PJSAutoCheckCannotGC): Puint8Vector;
+  nogc: PJSAutoRequireNoGC): Puint8Vector;
 begin
   result := JS_GetArrayBufferData(@self, isSharedMemory, nogc);
 end;
@@ -4749,13 +4952,13 @@ begin
 end;
 
 function JSObject.GetFloat32ArrayData(out isSharedMemory: Boolean;
-  nogc: PJSAutoCheckCannotGC): Pfloat32Vector;
+  nogc: PJSAutoRequireNoGC): Pfloat32Vector;
 begin
   result := JS_GetFloat32ArrayData(@self, isSharedMemory, nogc);
 end;
 
 function JSObject.GetFloat64ArrayData(out isSharedMemory: Boolean;
-  nogc: PJSAutoCheckCannotGC): Pfloat64Vector;
+  nogc: PJSAutoRequireNoGC): Pfloat64Vector;
 begin
   result := JS_GetFloat64ArrayData(@self, isSharedMemory, nogc);
 end;
@@ -4899,9 +5102,13 @@ begin
 end;
 
 function JSArgRec.getThis(cx: PJSContext): jsval;
+var
+  thisObj: Pointer;
 begin
-  if rec.this.IsPrimitive then
-    result._l.asBits := JS_ComputeThis(cx, rec.calle) else
+  if rec.this.IsPrimitive then begin
+    JS_ComputeThis(cx, rec.calle, thisObj);
+    result._l.asPtr := thisObj;
+  end else
     result := rec.this;
 end;
 

@@ -309,7 +309,7 @@ procedure TSMRemoteDebuggerThread.stopDebugCurrentThread(aEng: TSMEngine);
 var
   i: Integer;
   cx: PJSContext;
-  cmpDbg: PJSCompartment;
+  dbgRealm: PJSRealm;
 
   curThreadID: TThreadID;
   dbgObject: PJSRootedObject;
@@ -322,7 +322,7 @@ begin
         if TSMDebugger(fDebuggers[i]).fSmThreadID = curThreadID then begin
           if aEng<>nil then begin
             cx := aEng.cx;
-            cmpDbg := cx.EnterCompartment(aEng.GlobalObjectDbg.ptr);
+            dbgRealm := cx.EnterRealm(aEng.GlobalObjectDbg.ptr);
             try
               dbgObject := cx.NewRootedObject(aEng.GlobalObjectDbg.ptr.GetPropValue(cx, 'process').asObject.GetPropValue(cx, 'dbg').asObject);
               try
@@ -332,7 +332,7 @@ begin
                 cx.FreeRootedObject(dbgObject);
               end;
             finally
-              cx.LeaveCompartment(cmpDbg);
+              cx.LeaveRealm(dbgRealm);
             end;
             aEng.CancelExecution;
           end else
@@ -654,7 +654,7 @@ end;
 
 function doInterupt(cx: PJSContext): Boolean; cdecl;
 var
-  cmpDbg: PJSCompartment;
+  dbgRealm: PJSRealm;
   debugger: TSMDebugger;
   engine: TSMEngine;
   dbgObject: PJSRootedObject;
@@ -663,7 +663,7 @@ begin
   debugger := engine.PrivateDataForDebugger;
   try
     if (debugger.fMessagesQueue <> nil) and not debugger.fIsPaused and (debugger.fCommunicationThread <> nil) then begin
-      cmpDbg := cx.EnterCompartment(engine.GlobalObjectDbg.ptr);
+      dbgRealm := cx.EnterRealm(engine.GlobalObjectDbg.ptr);
       try
         dbgObject := cx.NewRootedObject(engine.GlobalObjectDbg.ptr.GetPropValue(cx, 'process').asObject.GetPropValue(cx, 'dbg').asObject);
         try
@@ -672,7 +672,7 @@ begin
           cx.FreeRootedObject(dbgObject);
         end;
       finally
-        cx.LeaveCompartment(cmpDbg);
+        cx.LeaveRealm(dbgRealm);
       end;
     end;
   finally
@@ -683,7 +683,7 @@ end;
 procedure TSMDebugger.InitializeDebuggerCompartment(aEng: TSMEngine; aNeedPauseOnFirstStep: boolean);
 var
   cx: PJSContext;
-  cmpDbg: PJSCompartment;
+  dbgRealm: PJSRealm;
   rval: jsval;
   dbgObject: PJSRootedObject;
   res: Boolean;
@@ -693,11 +693,11 @@ begin
 
   cx := aEng.cx;
   cx.BeginRequest;
-  cmpDbg := cx.EnterCompartment(aEng.GlobalObjectDbg.ptr);
+  dbgRealm := cx.EnterRealm(aEng.GlobalObjectDbg.ptr);
   try
     if not aEng.GlobalObjectDbg.ptr.GetProperty(cx, 'Debugger', rval) or rval.isVoid then begin
       aEng.PrivateDataForDebugger := self;
-      res := cx.InitStandardClasses(aEng.GlobalObjectDbg.ptr); Assert(res);
+      res := cx.InitRealmStandardClasses({aEng.GlobalObjectDbg.ptr}); Assert(res);
       res := cx.DefineDebuggerObject(aEng.GlobalObjectDbg.ptr); Assert(res);
       res := cx.InitModuleClasses(aEng.GlobalObjectDbg.ptr); Assert(res);
       aEng.DefineProcessBinding;
@@ -720,7 +720,7 @@ begin
       aEng.cx.AddInterruptCallback(doInterupt);
     end;
   finally
-    cx.LeaveCompartment(cmpDbg);
+    cx.LeaveRealm(dbgRealm);
     cx.EndRequest;
   end;
   fIsJustInited := true;

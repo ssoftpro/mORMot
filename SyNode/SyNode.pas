@@ -134,7 +134,7 @@ type
     fPrivateDataForDebugger: Pointer;
     fNameForDebug: RawUTF8;
     fDoInteruptInOwnThread: TThreadMethod;
-    fcomp: PJSCompartment;
+    frealm: PJSRealm;
     fStringFinalizer: JSStringFinalizer;
 
     fManager: TSMEngineManager;
@@ -252,7 +252,7 @@ type
     /// access to the associated execution context
     property cx: PJSContext read fCx;
     /// access to the associated execution compartment
-    property comp: PJSCompartment read fcomp;
+    property realm: PJSRealm read frealm;
 
     /// internal version number of engine scripts
     // - used in TSMEngine.ThreadSafeEngine to determine if context is up to
@@ -534,18 +534,17 @@ uses
 
 var
   jsGlobal_opt: JSClassOps = (
-    addProperty: nil;
-    delProperty: nil;
-    getProperty: nil;
-    setProperty: nil;
-    enumerate:   nil;
-    resolve:     nil;
-    mayResolve:  nil;
-    finalize:    nil;
-    call:        nil;
-    hasInstance: nil;
-    construct:   nil;
-    trace:       nil;//JS_GlobalObjectTraceHook;
+    addProperty:  nil;
+    delProperty:  nil;
+    enumerate:    nil;
+    newEnumerate: nil;
+    resolve:      nil;
+    mayResolve:   nil;
+    finalize:     nil;
+    call:         nil;
+    hasInstance:  nil;
+    construct:    nil;
+    trace:        nil;//JS_GlobalObjectTraceHook;
   );
   jsglobal_class: JSClass = (
     name: 'global';
@@ -647,7 +646,7 @@ begin
 // this will save up to 20% of RAM - some internal structures of SM Engines will be reused 
 // between threads
 //  if aManager.grandParent <> nil then
-//    fCx := PJSContext(nil).CreateNew(FManager.MaxPerEngineMemory, $01000000, aManager.grandParent.cx)
+//    fCx := PJSContext(nil).CreateNew(FManager.MaxPerEngineMemory, $01000000, -- esr68 change - must be PJSRuntime! -- aManager.grandParent.cx)
 //  else
     fCx := PJSContext(nil).CreateNew(FManager.MaxPerEngineMemory, $01000000, nil);
   if fCx = nil then
@@ -697,11 +696,13 @@ begin
       cx.NewGlobalObject(@jsglobal_class, FireOnNewGlobalHook));
     if FGlobalObject.ptr = nil then
       raise ESMException.Create('Create global object');
-    fcomp := cx.EnterCompartment(FGlobalObject.ptr);
-    if not cx.InitStandardClasses(FGlobalObject.ptr) then
+    frealm := cx.EnterRealm(FGlobalObject.ptr);
+    if not cx.InitRealmStandardClasses({FGlobalObject.ptr}) then
       raise ESMException.Create('InitStandardClasses failure');
+{$IFDEF JS_HAS_CTYPES}
     if not cx.InitCTypesClass(FGlobalObject.ptr) then
       raise ESMException.Create('InitCTypesClass failure');
+{$ENDIF}
   //  if not cx.InitReflectParse(FGlobalObject.ptr) then
   //    raise ESMException.Create('InitReflectParse failure');
     if not cx.InitModuleClasses(FGlobalObject.ptr) then
@@ -718,7 +719,7 @@ begin
 
     EvaluateModule('synode.js');
     FGlobalTimerLoopFunc := cx.NewRootedValue(FGlobalObject.ptr.GetPropValue(cx, '_timerLoop'));
-    if not (FGlobalTimerLoopFunc.ptr.isObject and FGlobalTimerLoopFunc.ptr.asObject.isFunction(cx)) then begin
+    if not (FGlobalTimerLoopFunc.ptr.isObject and FGlobalTimerLoopFunc.ptr.asObject.isFunction) then begin
       cx.FreeRootedValue(FGlobalTimerLoopFunc);
       FGlobalTimerLoopFunc := nil;
     end;
@@ -894,7 +895,7 @@ begin
     if FGlobalObjectDbg <> nil then cx.FreeRootedObject(FGlobalObjectDbg);
     if FGlobalObject <> nil then cx.FreeRootedObject(FGlobalObject);
     with TSynFPUException.ForLibraryCode do begin
-      cx.LeaveCompartment(comp);
+      cx.LeaveRealm(realm);
     end;
   finally
     cx.EndRequest;
@@ -1556,7 +1557,7 @@ begin
     ClearLastError;
     isFirst := not cx.IsRunning;
     opts := cx.NewCompileOptions;
-    opts.SetFileLineAndUtf8(Pointer(ResName), 1, false);
+    opts.SetFileAndLine(Pointer(ResName), 1);
 
     if not getResCharsAndLength(ResName, pScript, scriptLength) then
       raise ESMException.CreateUTF8('Resource "%" not found', [ResName]);
@@ -1582,7 +1583,7 @@ begin
     ClearLastError;
     isFirst := not cx.IsRunning;
     opts := cx.NewCompileOptions;
-    opts.SetFileLineAndUtf8(Pointer(scriptName), 1, false);
+    opts.SetFileAndLine(Pointer(scriptName), 1);
     //opts.filename := Pointer(scriptName);
 
     remChar13FromScript(script);
@@ -1610,10 +1611,10 @@ begin
       ClearLastError;
       isFirst := not cx.IsRunning;
       opts := cx.NewCompileOptions;
-      opts.SetFileLineAndUtf8(Pointer(scriptName), 1, true);
+      opts.SetFileAndLine(Pointer(scriptName), 1);
 
       remChar13FromScriptU(script);
-      r := cx.EvaluateScript(
+      r := cx.EvaluateUTF8Script(
           opts, pointer(script), length(script), result);
       cx.FreeCompileOptions(opts);
       if r and isFirst and GlobalObject.ptr.HasProperty(cx, '_timerLoop') then
@@ -1761,7 +1762,7 @@ begin
     global := cx.NewRootedObject(cx.CurrentGlobalOrNull);
     try
       options := cx.NewCompileOptions;
-      options.SetFileLineAndUtf8(Pointer(FileName), 1, false);
+      options.SetFileAndLine(Pointer(FileName), 1);
       //options.filename := Pointer(FileName);
       res := cx.NewRootedObject(cx.CompileModule(global.ptr, options, Pointer(Script), Length(Script)));
       result := res <> nil;
@@ -1815,7 +1816,7 @@ begin
     global := cx.NewRootedObject(cx.CurrentGlobalOrNull);
     try
       options := cx.NewCompileOptions;
-      options.SetFileLineAndUtf8(Pointer(FileName), 1, false);
+      options.SetFileAndLine(Pointer(FileName), 1);
       //options.filename := Pointer(FileName);
       res := cx.NewRootedObject(cx.CompileModule(global.ptr, options, pScript, scriptLength));
       result := res <> nil;
@@ -1849,7 +1850,7 @@ begin
     if Result then begin
       ro := cx.NewRootedObject(in_argv[0].asObject);
       try
-        Result := ro.ptr.isFunction(cx);
+        Result := ro.ptr.isFunction;
         if Result then
           cx.SetModuleResolveHook(ro.ptr);
       finally
@@ -1891,8 +1892,7 @@ begin
     pScriptString := cx.NewRootedString(in_argv[0].asJSString);
     try
       opts := cx.NewCompileOptions;
-      opts.SetFileLineAndUtf8(Pointer(FileName), 1, false);
-      //opts.filename := Pointer(FileName);
+      opts.SetFileAndLine(Pointer(FileName), 1);
       if pScriptString.ptr.HasLatin1Chars then begin
         pScriptContent := pScriptString.ptr.GetLatin1StringCharsAndLength(cx, scriptLength);
         Result := cx.EvaluateScript(opts, pScriptContent, scriptLength, res);
@@ -1948,7 +1948,7 @@ begin
     cx.BeginRequest;
     try
       opts := cx.NewCompileOptions;
-      opts.SetFileLineAndUtf8(Pointer(FileName), 1, false);
+      opts.SetFileAndLine(Pointer(FileName), 1);
       //opts.filename := Pointer(FileName);
       Result := cx.EvaluateUCScript(opts, pScript, scriptLength, res);
       cx.FreeCompileOptions(opts);

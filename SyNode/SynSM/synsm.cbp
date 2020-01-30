@@ -16,11 +16,11 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
-					<Add directory="../../../gecko-inst/debug/include" />
 				</Compiler>
-				<Linker>
-					<Add option="--whole-file ../../../gecko-inst/debug/lib/libjs_static.a ../../../gecko-inst/debug/lib/libmozglue.a --no-whole-file" />
-				</Linker>
+				<Environment>
+					<Variable name="MOZJS_BUILD_FLDR" value="_DBG.OBJ" />
+					<Variable name="MOZJS_SRC_DIR" value="../../../gecko-dev" />
+				</Environment>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/synsm" prefix_auto="1" extension_auto="1" />
@@ -31,12 +31,14 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add directory="../../../gecko-inst/release/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="--whole-file ../../../gecko-inst/release/lib/libjs_static.a ../../../gecko-inst/release/lib/libmozglue.a --no-whole-file" />
 				</Linker>
+				<Environment>
+					<Variable name="MOZJS_BUILD_FLDR" value="_OPT.OBJ" />
+					<Variable name="MOZJS_SRC_DIR" value="../../../gecko-dev" />
+				</Environment>
 			</Target>
 		</Build>
 		<Compiler>
@@ -66,10 +68,27 @@
 			<Add option="-fno-math-errno" />
 			<Add option="-pthread" />
 			<Add option="-pipe" />
+			<Add directory="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/dist/include" />
 			<Add directory="include" />
 		</Compiler>
 		<Linker>
 			<Add option="-m64" />
+			<Add option="--whole-file $$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/js/src/build/libjs_static.a --no-whole-file" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/memory/build/Unified_cpp_memory_build0.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/memory/mozalloc/mozalloc_abort.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/memory/mozalloc/Unified_cpp_memory_mozalloc0.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/mozglue/misc/AutoProfilerLabel.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/mozglue/misc/ConditionVariable_posix.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/mozglue/misc/Mutex_posix.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/mozglue/misc/Printf.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/mozglue/misc/StackWalk.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/mozglue/misc/TimeStamp.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/mozglue/misc/TimeStamp_posix.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/mfbt/lz4.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/mfbt/Compression.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/mfbt/Decimal.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/mfbt/Unified_cpp_mfbt0.o" />
+			<Add option="$$(MOZJS_SRC_DIR)/js/src/$$(MOZJS_BUILD_FLDR)/mfbt/Unified_cpp_mfbt1.o" />
 		</Linker>
 		<Unit filename="include/synsm.h" />
 		<Unit filename="synsm.cpp" />
