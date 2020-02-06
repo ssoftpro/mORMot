@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <MOZJS_SRC_DIR>$(SolutionDir)..\..\..\gecko-dev</MOZJS_SRC_DIR>
+    <MOZJS_BUILD_FLDR_DBG>_DBG.OBJ</MOZJS_BUILD_FLDR_DBG>
+    <MOZJS_BUILD_FLDR_OPT>_OPT.OBJ</MOZJS_BUILD_FLDR_OPT>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="MOZJS_SRC_DIR">
+      <Value>$(MOZJS_SRC_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="MOZJS_BUILD_FLDR_DBG">
+      <Value>$(MOZJS_BUILD_FLDR_DBG)</Value>
+    </BuildMacro>
+    <BuildMacro Include="MOZJS_BUILD_FLDR_OPT">
+      <Value>$(MOZJS_BUILD_FLDR_OPT)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

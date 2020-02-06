@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -22,32 +14,19 @@
     <ProjectGuid>{9A75DA8B-8AE4-4D11-8B80-F720FA4E2C73}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>synsm</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>ClangCL</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>ClangCL</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -56,44 +35,21 @@
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="synsm.props" />
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="synsm.props" />
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SYNSM_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -101,31 +57,17 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>DEBUG;_DEBUG;_WINDOWS;_USRDLL;SYNSM_EXPORTS;MOZ_HAS_MOZGLUE;EXPORT_JS_API;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>include;..\..\..\gecko-inst\debug\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\dist\include</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>_CRT_NONSTDC_NO_DEPRECATE</UndefinePreprocessorDefinitions>
+      <LanguageStandard>Default</LanguageStandard>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\..\gecko-inst\debug\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>winmm.lib;psapi.lib;dbghelp.lib;nspr4.lib;plc4.lib;plds4.lib;js_static.lib;mozglue.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SYNSM_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\config\external\nspr\libc;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\config\external\nspr\pr;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\config\external\nspr\ds;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\js\src\build</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;psapi.lib;dbghelp.lib;nspr4.lib;plc4.lib;plds4.lib;js_static.lib;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\memory\build\Unified_cpp_memory_build0.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\memory\mozalloc\mozalloc_abort.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\memory\mozalloc\winheap.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\memory\mozalloc\Unified_cpp_memory_mozalloc0.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mozglue\misc\AutoProfilerLabel.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mozglue\misc\ConditionVariable_windows.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mozglue\misc\Mutex_windows.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mozglue\misc\Printf.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mozglue\misc\StackWalk.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mozglue\misc\TimeStamp.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mozglue\misc\TimeStamp_windows.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mozglue\misc\WindowsMapRemoteView.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mozglue\misc\WindowsProcessMitigations.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mfbt\lz4.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mfbt\Compression.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mfbt\Decimal.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mfbt\Unified_cpp_mfbt0.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_DBG)\mfbt\Unified_cpp_mfbt1.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,18 +80,21 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;SYNSM_EXPORTS;NDEBUG=1;TRIMMED=1;MOZ_HAS_MOZGLUE;EXPORT_JS_API;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <ForcedIncludeFiles>%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>include;..\..\..\gecko-inst\release\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\dist\include</AdditionalIncludeDirectories>
       <OmitFramePointers>true</OmitFramePointers>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <UndefinePreprocessorDefinitions>_CRT_NONSTDC_NO_DEPRECATE</UndefinePreprocessorDefinitions>
+      <LanguageStandard>Default</LanguageStandard>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>winmm.lib;psapi.lib;dbghelp.lib;nspr4.lib;plc4.lib;plds4.lib;js_static.lib;mozglue.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\gecko-inst\release\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;psapi.lib;dbghelp.lib;nspr4.lib;plc4.lib;plds4.lib;js_static.lib;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\memory\build\Unified_cpp_memory_build0.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\memory\mozalloc\mozalloc_abort.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\memory\mozalloc\winheap.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\memory\mozalloc\Unified_cpp_memory_mozalloc0.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mozglue\misc\AutoProfilerLabel.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mozglue\misc\ConditionVariable_windows.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mozglue\misc\Mutex_windows.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mozglue\misc\Printf.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mozglue\misc\StackWalk.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mozglue\misc\TimeStamp.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mozglue\misc\TimeStamp_windows.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mozglue\misc\WindowsMapRemoteView.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mozglue\misc\WindowsProcessMitigations.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mfbt\lz4.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mfbt\Compression.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mfbt\Decimal.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mfbt\Unified_cpp_mfbt0.obj;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\mfbt\Unified_cpp_mfbt1.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\config\external\nspr\libc;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\config\external\nspr\pr;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\config\external\nspr\ds;$(MOZJS_SRC_DIR)\js\src\$(MOZJS_BUILD_FLDR_OPT)\js\src\build</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference />
   </ItemDefinitionGroup>
@@ -157,31 +102,17 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\synsm.h" />
-    <ClInclude Include="include\targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="synsm.cpp" />
     <ClCompile Include="dllmain.cpp">
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
